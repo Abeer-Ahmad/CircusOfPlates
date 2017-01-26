@@ -20,6 +20,7 @@ public class Stream {
 			
 			FileOutputStream fileOut = new FileOutputStream(gamePath.toFile());
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			out.writeInt(players.size());
 			for (int i=0;i<players.size();i++){
 				out.writeObject(players.get(i));
 			}
@@ -41,7 +42,8 @@ public class Stream {
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			players = new ArrayList<Player>();
 			shapes = new ArrayList<Shape>();
-			for (int i=0;i<2;i++){
+			int playerSize = in.readInt();
+			for (int i=0;i<playerSize;i++){
 			players.add((Player)in.readObject());
 			}
 			int shapesSize = in.readInt();
@@ -51,7 +53,7 @@ public class Stream {
 			in.close();
 			fileIn.close();
 					} catch (IOException e) {
-			
+			e.printStackTrace();
 			throw new RuntimeException("Error in Loading");
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Class not found");

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import plateGenerator.Belt;
 import plateGenerator.LeftBelt;
+import shapes.CorruptShape;
 import shapes.Shape;
 import system.Player;
 
@@ -32,8 +33,8 @@ public class trial {
       /*shapesWrite.add(new Oval (18,19,100,Color.white));
       shapesWrite.add(new Box (18,19,100,Color.white));
       playerWrite.add (new Player(8,"player1.jpg"));*/
-      playerWrite.add (new Player(19,"player2.jpg"));
-      
+      playerWrite.add (new Player(19,30,"shrouk"));
+      shapesWrite.add(new CorruptShape(40,30,100));
 	  
 	 Path zewPath =Paths.get(System.getProperty("user.home")+File.separator+"Desktop"+File.separator+"trial.txt");
 	 /*FileOutputStream fileOut = new FileOutputStream(zewPath.toFile());
@@ -47,23 +48,10 @@ public class trial {
 	         playerRead = tryz.getPLayers();
 	         shapesRead = tryz.getShapes();
 	         
-	         System.out.println(playerRead.size());
-	         System.out.println(shapesRead.size());
-	         
-	         shapesRead.get(1).update();
-	         System.out.println(shapesRead.get(0).getColor());
-	         
-	         
-	         
-	         
-	         
-	         
-	         
-	         
+	         System.out.println(playerRead.get(0).getName());
+	         System.out.println(shapesRead.get(0).getX());
 	         
 	     
-	        
-	 
 	}
 
 }

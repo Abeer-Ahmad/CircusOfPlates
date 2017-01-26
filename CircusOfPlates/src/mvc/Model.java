@@ -153,6 +153,14 @@ public class Model extends Observable {
 		isRunning = false;
 	}
 
+	public synchronized void newLevel(){
+		shapes.clear();
+		for (Player player : players) {
+			player.newLevel();
+		}
+		isRunning=true;
+		notify();
+	}
 	public synchronized void continueGame() {
 		isRunning = true;
 		notify();
@@ -164,7 +172,9 @@ public class Model extends Observable {
 		updatePlayers();
 		removeExpired();
 		if (scoreManager.isOver()) {
+			System.out.println("game over");
 			isRunning = false;
+			setChanged();
 			notifyObservers(scoreManager.getWinner());
 		}
 	}

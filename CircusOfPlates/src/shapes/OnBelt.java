@@ -31,16 +31,16 @@ public class OnBelt extends State {
 		if (moveSpeed > 0) {
 			return this.x >= beltLength;
 		} else {
-			return this.x <= 1000 - beltLength;
+			return this.x <= 1500 - beltLength;
 		}
 	}
 
 	@Override
 	public void updateSate(Shape shape) {
 		boolean stateChanged = updateCoor(shape.getSpeed(), shape.getX(), shape.getY(), shape.getBeltLength());
-		shape.setCenter(this.getUpdatedX(), this.getUpdatedY());
+		shape.setCenter(x, y);
 		if (stateChanged) {
-			shape.setState(new Falling());
+			shape.setState(new Falling(x, y));
 		}
 	}
 }

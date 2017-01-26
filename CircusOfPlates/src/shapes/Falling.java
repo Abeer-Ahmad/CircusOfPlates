@@ -8,14 +8,18 @@ public class Falling extends State {
 	private int newXCenter;
 	private int newYCenter;
 	
-	public Falling() {
+	public Falling(int x, int y) {
 		this.shapeState = ShapeStates.falling;
+		newXCenter = x;
+		newYCenter = y;
 	}
 
+	@Override
 	public int getUpdatedX() {
 		return newXCenter;
 	}
 
+	@Override
 	public int getUpdatedY() {
 		return newYCenter;
 	}
@@ -25,6 +29,7 @@ public class Falling extends State {
 		return shapeState;
 	}
 	
+	@Override
 	public boolean updateCoor(int moveSpeed, int x, int y, int beltLength) {
 		elaspedT = elaspedT + deltaT;
 		newXCenter = x + (moveSpeed * deltaT);
@@ -35,7 +40,7 @@ public class Falling extends State {
 	@Override
 	public void updateSate(Shape shape) {
 		boolean stateChanged = updateCoor(shape.getSpeed(), shape.getX(), shape.getY(), shape.getBeltLength());
-		shape.setCenter(this.getUpdatedX(), this.getUpdatedY());
+		shape.setCenter(newXCenter, newXCenter);
 		if (stateChanged) {
 			shape.setState(new OnGround());
 		}

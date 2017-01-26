@@ -18,41 +18,33 @@ public class Controller {
 		 this.gameItems = gameItems;
 		 this.viewer = gameGUI;	 
 		 this.viewer.setController(this);
-		 
 	}
 	
-
 	public void movePlayer(PlayerUI playerUI, int step) {
 		gameItems.movePlayer(playerUI.getPlayer(), step);
 	}
 
-
 	public void pauseGame() {
 		gameItems.pauseGame();
 		viewer.setCurrentPanel("pauseMenu");
-		
 	}
-
 
 	public void continueGame() {
 		gameItems.continueGame();
 		viewer.goToGame();
 	}
 
-
 	public void save() {
-		// TODO Auto-generated method stub
+		
 	}
 
-   public void popMessage (JPanel container, JPanel message){
-	  
+   public void popMessage (JPanel container, JPanel message){  
 	   viewer.popMessage(container,message);
    }
 
 	public void changeDisplay(String namePanel) {
 		viewer.setCurrentPanel(namePanel);
 	}
-
 
 	public void startGame(LinkedHashMap<String, Object> settings) {
 		gameItems.startGame(settings);	
@@ -62,6 +54,9 @@ public class Controller {
 		viewer.exitGame();	
 	}
 
-
+	public void newLevel() {
+		gameItems.newLevel();
+	    viewer.goToGame();		
+	}
 	
 }

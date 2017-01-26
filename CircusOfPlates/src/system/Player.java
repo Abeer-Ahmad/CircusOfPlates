@@ -1,13 +1,20 @@
 package system;
 
 import java.awt.Color;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Stack;
 
+import shapes.CorruptShape;
 import shapes.Shape;
 import shapes.ShapeStates;
 
-public class Player {
+public class Player implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8287404754819263243L;
 
 	private static final int LIMIT = 3;
 
@@ -49,6 +56,7 @@ public class Player {
 			int xDistance = shape.getX();
 			int yDistance = yPostion+200 - getHandHeight(rightStack) - shape.getY();
 			if (manageCurrentHand(xDistance, yDistance, rightStart)) {
+				checkCorrupted(shape);
 				shape.setState(ShapeStates.captured);
 				shape.setCenter(rightStart + 40, yPostion+200 - getHandHeight(rightStack) - 10);
 				rightStack.push(shape);
@@ -57,6 +65,7 @@ public class Player {
 			}
 			yDistance = yPostion+200 - getHandHeight(leftStack) - shape.getY();
 			if (manageCurrentHand(xDistance, yDistance, leftStart)) {
+				checkCorrupted(shape);
 				shape.setState(ShapeStates.captured);
 				shape.setCenter(leftStart + 40, yPostion+200 - getHandHeight(leftStack) - 10);
 				leftStack.push(shape);
@@ -65,6 +74,11 @@ public class Player {
 		}
 	}
 
+	private void checkCorrupted(Shape shape) {
+		if (shape instanceof CorruptShape) {
+			score -= 5;
+		}
+	}
 	private void matchPlates(Stack<Shape> currentHand) {
 		int stackSize = currentHand.size();
 		if (stackSize < 3)
@@ -136,5 +150,9 @@ public class Player {
 
 	public String getName() {
 		return name;
+	}
+	
+	public void newLevel(){
+		this.score=0;
 	}
 }

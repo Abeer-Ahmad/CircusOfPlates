@@ -2,15 +2,20 @@ package shapes;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.io.Serializable;
 
 
-public abstract class Shape {
+public abstract class Shape implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8799923820081680740L;
 	protected int beltLength;
-	public int moveSpeed;
-	private State state;
 	protected int xPostion;
 	protected int yPostion;
+	private int moveSpeed;
+	private State state;
 
 	public Shape() { 
 		state = new OnBelt();

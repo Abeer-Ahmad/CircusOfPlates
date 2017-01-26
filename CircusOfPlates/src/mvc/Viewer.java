@@ -1,7 +1,6 @@
 package mvc;
 
 import java.util.ArrayList;
-
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -18,6 +17,7 @@ import gui.MainFrame;
 import gui.MainMenu;
 import gui.PauseMenu;
 import gui.ViewerIF;
+import gui.WinnerView;
 import plateGenerator.Belt;
 import shapes.Shape;
 import system.Player;
@@ -59,9 +59,10 @@ public class Viewer implements Observer{
 	public void goToGame(){
 		mainFrame.changeScene(gameGrid);
 	}
+	
 	@Override
 	public void update(Observable model, Object valueChanged) {
-		
+		System.out.println("in update");
 		if (valueChanged instanceof Boolean){
 			boolean twoPlayers = (boolean) valueChanged;
 			Model gameModel = (Model) model;
@@ -83,12 +84,16 @@ public class Viewer implements Observer{
 		      }
 			} 
 		} else if (valueChanged instanceof Player) {
-			
+			System.out.println("winner notified");
+			WinnerView  winView = new WinnerView((Player)valueChanged);
+			winView.setController(controller);
+			mainFrame.changeScene(winView);
 		}
 		gameGrid.validate();
 		gameGrid.repaint();
 	}
 
+	
 	public void setCurrentPanel(String namePanel) {
 		mainFrame.changeScene(menuPanels.get(namePanel));
 	}

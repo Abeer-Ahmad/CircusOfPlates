@@ -1,7 +1,13 @@
 package shapes;
 
-public abstract class State {
+import java.io.Serializable;
+
+public abstract class State implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 823924900345247275L;
 	protected ShapeStates shapeState;
 
 	public abstract int getUpdatedX();

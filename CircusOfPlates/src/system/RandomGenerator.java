@@ -3,20 +3,24 @@ package system;
 import java.awt.Color;
 import java.util.HashMap;
 
+import shapes.CorruptShape;
 import shapes.Shape;
 
 public class RandomGenerator {
 
 	private Factory shapeFactory;
+	private ShapePool   corruptPool;
 	private HashMap<Integer, Color> colors;
 	private String difficultyLevel;
 	private int minSpeed;
 	private int maxSpeed;
 	private int colorLimit;
-	
+	private int limitCorrupt;
+	private int shapeCounter=0;
 	public RandomGenerator() { // replace that constructor in model, model has the final SHAPE_NAME
 		intializeColors();
 		shapeFactory = new ShapeFactory();
+		corruptPool = CorruptPool.getInstance();
 	}
 	
 	/*public RandomGenerator(final String[] shapeName) {
@@ -26,19 +30,18 @@ public class RandomGenerator {
 	
 	private void intializeColors() {
 		colors = new HashMap<Integer, Color>();
-		colors.put(1, Color.BLUE);
-		colors.put(7, Color.MAGENTA);
+		colors.put(0, Color.BLUE);
+		colors.put(1, Color.MAGENTA);
 		colors.put(2, Color.CYAN);
-		colors.put(3, Color.DARK_GRAY);
-		colors.put(4, Color.GRAY);
-		colors.put(5, Color.GREEN);
-		colors.put(6, Color.LIGHT_GRAY);
-		colors.put(7, Color.MAGENTA);
-		colors.put(8, Color.ORANGE);
-		colors.put(9, Color.PINK);
-		colors.put(10, Color.RED);
-		colors.put(11, Color.YELLOW);
-		colors.put(0, Color.BLACK);
+		colors.put(3, Color.GRAY);
+		colors.put(4, Color.GREEN);
+		colors.put(5, Color.LIGHT_GRAY);
+		colors.put(6, Color.MAGENTA);
+		colors.put(7, Color.ORANGE);
+		colors.put(8, Color.PINK);
+		colors.put(9, Color.RED);
+		colors.put(10, Color.YELLOW);
+		
 	}
 	
 	public void setDifficultyLevel(String difficultyLevel) {
@@ -63,12 +66,15 @@ public class RandomGenerator {
 	private void setColorLimit() {
 		if (difficultyLevel.equals("Easy")) {
 			colorLimit = colors.size() / 2;
+			limitCorrupt= 40;
 		} else if (difficultyLevel.equals("Medium")) {
 			colorLimit = colors.size() * 3 / 4;
+			limitCorrupt= 20;
 		} else if (difficultyLevel.equals("Hard")) {
 			colorLimit = colors.size();
+			limitCorrupt= 5;
 		}
-		if (colorLimit==0) {colorLimit++;}
+		
 	}
 
 	private Color getRandomColor() {
@@ -86,8 +92,17 @@ public class RandomGenerator {
 	}
 
 	public Shape getRandomShape(final int x, final int y, final int beltLength) {
+		shapeCounter++;
 		int randomNum = getRandomNumber();
 		Color shapeColor = getRandomColor();
+		if (shapeCounter==limitCorrupt){
+			
+			Shape temp=corruptPool.pull(x,y,beltLength);
+			if (temp !=null){
+		     shapeCounter=0;
+			return  temp;
+			}
+		}
 		return shapeFactory.getRandomShape(x, y, beltLength, randomNum, shapeColor);
 	}
 

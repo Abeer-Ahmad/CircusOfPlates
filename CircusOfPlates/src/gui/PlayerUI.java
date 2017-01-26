@@ -66,8 +66,22 @@ public class PlayerUI  extends JComponent{
 		int xtopLeft= player.getxPostion()-(image.getWidth()/2);
 		
 		this.setBounds(player.getxPostion(), player.getyPostion(), image.getWidth(), image.getHeight());
-		//System.out.println("playerUI x"+this.getX()+"y"+this.getY());
-		for (Shape shape : player.getRightStack()) {
+		
+		for (int i = 0; i < player.getRightStack().size(); i++) {
+			Shape shape = player.getRightStack().get(i);
+			synchronized (shape) {
+				shape.draw(g);
+			}
+		}
+		
+		for (int i = 0; i < player.getLeftStack().size(); i++) {
+			Shape shape = player.getLeftStack().get(i);
+			synchronized (shape) {
+				shape.draw(g);
+			}
+		}
+		
+		/*for (Shape shape : player.getRightStack()) {
 			synchronized (shape) {
 				shape.draw(g);
 			}
@@ -76,7 +90,7 @@ public class PlayerUI  extends JComponent{
 			synchronized (shape) {
 				shape.draw(g);
 			}
-		}
+		}*/
 		
 	}
 }
