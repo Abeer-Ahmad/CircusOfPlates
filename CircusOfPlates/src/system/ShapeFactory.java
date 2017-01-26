@@ -6,6 +6,7 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 
 
+
 // import shapes.Box;
 // import shapes.Oval;
 // import shapes.Plate;
@@ -65,6 +66,11 @@ public class ShapeFactory extends Factory{
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		return null;
+	}
+
+	@Override
+	public GameStrategy getStrategy(String difficultyLevel) {
 		return null;
 	}
 

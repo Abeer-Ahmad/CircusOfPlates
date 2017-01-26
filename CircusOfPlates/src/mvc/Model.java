@@ -7,6 +7,8 @@ import java.util.LinkedHashMap;
 import java.util.Observable;
 import java.util.Observer;
 
+import Parsers.Memento;
+import Parsers.Stream;
 import collections.Shapes;
 import plateGenerator.Belt;
 import plateGenerator.LeftBelt;
@@ -25,8 +27,9 @@ public class Model extends Observable {
 	private String level;
 	private String firstPlayerTool;
 	private ScoreManager scoreManager;
+	private Stream fileManager;
 	private int laserHeight;
-	
+	private boolean twoPlayers;
 	public Model(Observer gameViewer) {
 		players = new ArrayList<Player>();
 		shapes = new ArrayList<Shape>();
@@ -36,6 +39,7 @@ public class Model extends Observable {
 		addObserver(gameViewer);
 		scoreManager = null;
 		laserHeight = 140;
+		fileManager = new Stream();
 	}
 
 	private void setBelts(int x) {
@@ -122,7 +126,7 @@ public class Model extends Observable {
 
 	public synchronized void startGame(LinkedHashMap<String, Object> settings) {
 		restart();
-		boolean twoPlayers = (boolean) settings.get("twoPlayers");
+		 twoPlayers = (boolean) settings.get("twoPlayers");
 		ArrayList<String> names = (ArrayList<String>) settings.get("names");
 		int xFrame= (int) settings.get("dimX");
 		int yFrame = (int) settings.get("dimY");
@@ -184,5 +188,20 @@ public class Model extends Observable {
 			wait();
 		}
 		return isRunning;
+	}
+	
+	public void saveGame(){
+		fileManager.save(players,shapes,level,twoPlayers,firstPlayerTool,"trial");
+	}
+	
+	public void loadGame(){
+	     Memento temp = fileManager.load("trial");
+	     LinkedHashMap<String,Object> settings = new LinkedHashMap<String,Object>();
+	         settings.put("twoPlayers", temp.getTwoPlayers());
+			settings.put("level",temp.getLevel());		
+			settings.put("tool",temp.getTool());
+			/*settings.put("dimX", xFrame);
+			settings.put("dimY",yFrame);
+			settings.put("names", names.);*/
 	}
 }

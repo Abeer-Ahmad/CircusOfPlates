@@ -148,7 +148,7 @@ private void setInfoOnePlayer(JPanel current){
 	 userName = new JTextField();
 	 userName.setBounds(60,80,250,30);
 	 y = 120;
-	 JLabel tool = new JLabel("How would you like to Play ?"); 
+	 JLabel tool = new JLabel("How would you like to Play?"); 
 	 tool.setBounds(60, 120, 253, 30);
 	 current.add(name);
 	 current.add(userName);
@@ -156,16 +156,16 @@ private void setInfoOnePlayer(JPanel current){
 }
 
 private void setInfoTwoPlayer(JPanel current){
-	JLabel name = new JLabel("Enter Player First Name");
+	JLabel name = new JLabel("Player1, Enter your name");
 	  name.setBounds(60,40,250,30);
 	 userName = new JTextField();
 	 userName.setBounds(60,80,250,30);
-	 JLabel name2 = new JLabel("Enter Player Second Name");
+	 JLabel name2 = new JLabel("Player2, Enter your name");
 	 name2.setBounds(60,120,250,30);
 	  userName2 = new JTextField();
 	 userName2.setBounds(60,160,250,30);
 	 y = 200;
-	 JLabel tool = new JLabel("How would you like to Play ?"); 
+	 JLabel tool = new JLabel(" How would player1 Play?"); 
 	 tool.setBounds(60, 200, 253, 30);
 	 current.add(name);
 	 current.add(userName);

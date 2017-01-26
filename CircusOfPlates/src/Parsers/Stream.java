@@ -1,11 +1,13 @@
 package Parsers;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import shapes.Shape;
@@ -13,21 +15,14 @@ import system.Player;
 
 public class Stream {
  
-	private ArrayList<Player> players;
-	private ArrayList<Shape> shapes;
-	public void save(ArrayList<Shape> shapes, ArrayList<Player> players, Path gamePath){
+	public void save( ArrayList<Player> players,ArrayList<Shape> shapes,
+			String level,boolean twoPlayers, String tool,String game){
 		try {
-			
+			Path gamePath =Paths.get(System.getProperty("user.home")+File.separator+game+".txt");
 			FileOutputStream fileOut = new FileOutputStream(gamePath.toFile());
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
-			out.writeInt(players.size());
-			for (int i=0;i<players.size();i++){
-				out.writeObject(players.get(i));
-			}
-			out.writeInt(shapes.size());
-			for (int i=0;i<shapes.size();i++){
-				out.writeObject(shapes.get(i));
-			}
+			Memento newGame = new Memento(players,shapes,level,twoPlayers,tool);
+			out.writeObject(newGame);
 			out.close();
 			fileOut.close();
 					} catch (IOException e) {
@@ -36,22 +31,15 @@ public class Stream {
 		}
 		       // 
 	}
-	public void load (Path gamePath){
+	public Memento load (String game){
 		try {
+			Path gamePath =Paths.get(System.getProperty("user.home")+File.separator+game+".txt");
 			FileInputStream fileIn = new FileInputStream(gamePath.toFile());
 			ObjectInputStream in = new ObjectInputStream(fileIn);
-			players = new ArrayList<Player>();
-			shapes = new ArrayList<Shape>();
-			int playerSize = in.readInt();
-			for (int i=0;i<playerSize;i++){
-			players.add((Player)in.readObject());
-			}
-			int shapesSize = in.readInt();
-			for (int i=0;i<shapesSize;i++){
-				shapes.add((Shape)in.readObject());
-			}
+			Memento loadedGame = (Memento)in.readObject();
 			in.close();
 			fileIn.close();
+			return loadedGame;
 					} catch (IOException e) {
 			e.printStackTrace();
 			throw new RuntimeException("Error in Loading");
@@ -60,10 +48,5 @@ public class Stream {
 					}
 	}
 	
-  public 	ArrayList<Player> getPLayers(){
-	  return players;
-  }
-  public 	ArrayList<Shape> getShapes(){
-	  return shapes;
-  }
+ 
 }

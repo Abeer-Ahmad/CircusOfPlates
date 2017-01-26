@@ -41,7 +41,7 @@ public class trial {
 	 FileInputStream fileIn = new FileInputStream(zewPath.toFile());
 	 
 	        ObjectOutputStream out = new ObjectOutputStream(fileOut);
-	        ObjectInputStream in = new ObjectInputStream (fileIn);*/
+	        ObjectInputStream in = new ObjectInputStream (fileIn);
 	         Stream tryz = new Stream();
 	         tryz.save(shapesWrite, playerWrite, zewPath);
 	         tryz.load(zewPath);
@@ -49,7 +49,7 @@ public class trial {
 	         shapesRead = tryz.getShapes();
 	         
 	         System.out.println(playerRead.get(0).getName());
-	         System.out.println(shapesRead.get(0).getX());
+	         System.out.println(shapesRead.get(0).getX());*/
 	         
 	     
 	}
