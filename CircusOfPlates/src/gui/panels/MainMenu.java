@@ -37,11 +37,11 @@ public class MainMenu extends JPanel implements ActionListener,IViewer {
 	public MainMenu(int xframe, int yFrame) {
 		// loadImage = new LoadImage();
 		try {
-			backGroundImage = ImageIO.read(new File("newgamef.jpg"));
-			newGameImage = new ImageIcon(ImageIO.read(new File("button.jpg")));
-			loadGameImage = new ImageIcon(ImageIO.read(new File("background.jpg")));
-			importShapeImage = new ImageIcon(ImageIO.read(new File("background.jpg")));
-			exitImage = new ImageIcon(ImageIO.read(new File("background.jpg")));
+			backGroundImage = ImageIO.read(new File("/resources/imgs/newgamef.jpg"));
+			newGameImage = new ImageIcon(ImageIO.read(new File("/resources/imgs/button.jpg")));
+			loadGameImage = new ImageIcon(ImageIO.read(new File("/resources/imgs/background.jpg")));
+			importShapeImage = new ImageIcon(ImageIO.read(new File("/resources/imgs/background.jpg")));
+			exitImage = new ImageIcon(ImageIO.read(new File("/resources/imgs/background.jpg")));
 		} catch (IOException e) {
 			throw new RuntimeException("Image not found");
 		}

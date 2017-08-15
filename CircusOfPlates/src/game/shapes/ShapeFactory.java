@@ -64,10 +64,4 @@ public class ShapeFactory extends IShapeFactory {
 		}
 		return null;
 	}
-
-	@Override
-	public GameStrategy getStrategy(String difficultyLevel) {
-		return null;
-	}
-
 }

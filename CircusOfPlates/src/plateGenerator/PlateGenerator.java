@@ -11,12 +11,13 @@ import game.shapes.Shape;
 import game.shapes.ShapeFactory;
 import game.shapes.ShapePool;
 import game.strategy.GameStrategy;
+import game.strategy.IStrategyFactory;
 import game.strategy.StrategyFactory;
  
 public class PlateGenerator {
  
     private IShapeFactory shapeFactory;
-    private IShapeFactory strategyFactory;
+    private IStrategyFactory strategyFactory;
     private GameStrategy strategy;
     private ShapePool corruptPool;
     private HashMap<Integer, Color> colors;

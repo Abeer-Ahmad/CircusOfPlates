@@ -1,9 +1,3 @@
-/interfaces/
-/mvc/
-/system/
-/gui/
-/Parsers/
-/plateGenerator/
-/shapes/
+/imgs/
+/utilities/
 /game/
-/collections/

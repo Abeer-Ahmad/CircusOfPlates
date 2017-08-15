@@ -1,6 +1,6 @@
 package game.strategy;
 
-public interface IStrategyFactory {
+ public interface IStrategyFactory {
 
-	public abstract GameStrategy getStrategy(String difficultyLevel) ;
+    GameStrategy getStrategy(String difficultyLevel);
 }
