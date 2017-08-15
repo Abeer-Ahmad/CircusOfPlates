@@ -10,8 +10,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import shapes.Shape;
-import system.Player;
+import game.player.Player;
+import game.shapes.Shape;
 
 public class Stream {
  

@@ -1,6 +1,6 @@
 package mvc;
 
-import system.ThreadRunnable;
+import game.GameThread;
 
 public class Application {
 	
@@ -18,7 +18,7 @@ public class Application {
 		gameViewer = new Viewer();
 		gameModel = new Model(gameViewer);
 		gameController = new Controller(gameModel,gameViewer);
-		thread = new Thread(new ThreadRunnable(gameModel));		
+		thread = new Thread(new GameThread(gameModel));		
 		thread.start();
 	}	
 }

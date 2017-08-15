@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import shapes.Shape;
+import game.shapes.Shape;
 public class Shapes  {
 
 	private ArrayList<Shape> shapes;

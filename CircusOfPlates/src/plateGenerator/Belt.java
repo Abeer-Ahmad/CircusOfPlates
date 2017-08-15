@@ -4,14 +4,13 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import shapes.Shape;
-import system.RandomGenerator;
+import game.shapes.Shape;
 
 public abstract class Belt {
 
 	protected Color color;
 	protected int length;
-	protected RandomGenerator randomGenerator;
+	protected PlateGenerator randomGenerator;
 	protected BasicStroke thickness;
 	protected int x;
 	protected int y;
@@ -19,14 +18,14 @@ public abstract class Belt {
 	public Belt() {
 		color = Color.BLACK;
 		thickness = new BasicStroke(5);
-		randomGenerator = new RandomGenerator();
+		randomGenerator = new PlateGenerator();
 	}
 
 	public abstract Shape addShape();
 
 	public abstract void drawBelt(Graphics2D g);
 	
-	public RandomGenerator getRandomGenerator() {
+	public PlateGenerator getRandomGenerator() {
 		return randomGenerator;
 	}
 }

@@ -1,6 +1,9 @@
-/gui/
 /interfaces/
 /mvc/
+/system/
+/gui/
+/Parsers/
 /plateGenerator/
 /shapes/
-/system/
+/game/
+/collections/

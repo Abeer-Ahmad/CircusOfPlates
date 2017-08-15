@@ -2,8 +2,8 @@ package Parsers;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import system.Player;
-import shapes.Shape;
+import game.player.Player;
+import game.shapes.Shape;
 
 public class Memento  implements Serializable{
 

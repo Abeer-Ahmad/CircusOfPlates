@@ -11,16 +11,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import collections.Shapes;
-import gui.ChoosePlayerMenu;
-import gui.GameGrid;
+import game.player.Player;
+import game.shapes.Shape;
 import gui.MainFrame;
-import gui.MainMenu;
-import gui.PauseMenu;
-import gui.ViewerIF;
-import gui.WinnerView;
+import gui.panels.ChoosePlayerMenu;
+import gui.panels.GameGrid;
+import gui.panels.MainMenu;
+import gui.panels.PauseMenu;
+import gui.panels.WinnerView;
 import plateGenerator.Belt;
-import shapes.Shape;
-import system.Player;
 
 public class Viewer implements Observer{
 
@@ -52,7 +51,7 @@ public class Viewer implements Observer{
 		 Iterator itr = menuPanels.entrySet().iterator();
          while (itr.hasNext()) {
              Map.Entry panel = (Map.Entry) itr.next();
-             ((ViewerIF)panel.getValue()).setController(controller);    
+             ((IViewer)panel.getValue()).setController(controller);    
          }
 	}
 	

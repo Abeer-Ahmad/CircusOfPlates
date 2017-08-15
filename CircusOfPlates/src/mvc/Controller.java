@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 
 import javax.swing.JPanel;
 
-import gui.PlayerUI;
+import game.player.PlayerUI;
 
 public class Controller {
 

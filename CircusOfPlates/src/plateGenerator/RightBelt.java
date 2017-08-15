@@ -3,7 +3,7 @@ package plateGenerator;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
-import shapes.Shape;
+import game.shapes.Shape;
 
 public class RightBelt extends Belt {
 

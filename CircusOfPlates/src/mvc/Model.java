@@ -10,12 +10,13 @@ import java.util.Observer;
 import Parsers.Memento;
 import Parsers.Stream;
 import collections.Shapes;
+import game.ScoreManager;
+import game.player.Player;
+import game.shapes.Shape;
+import game.shapes.states.ShapeStates;
 import plateGenerator.Belt;
 import plateGenerator.LeftBelt;
 import plateGenerator.RightBelt;
-import shapes.Shape;
-import shapes.ShapeStates;
-import system.Player;
 
 public class Model extends Observable {
 
