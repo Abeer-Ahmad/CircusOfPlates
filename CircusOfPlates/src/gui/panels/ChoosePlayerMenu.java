@@ -48,9 +48,9 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
 	public ChoosePlayerMenu(int xFrame, int yFrame) {
 		// loadImage = new LoadImage();
 		try {
-			backGroundImage = ImageIO.read(new File("newgamef.jpg"));
-			onePlayerImage = new ImageIcon(ImageIO.read(new File("background.jpg")));
-			twoPlayerImage = new ImageIcon(ImageIO.read(new File("images.png")));
+			backGroundImage = ImageIO.read(new File("resources/imgs/newgamef.jpg"));
+			onePlayerImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
+			twoPlayerImage = new ImageIcon(ImageIO.read(new File("resources/imgs/images.png")));
 		} catch (IOException e) {
 			throw new RuntimeException("Image not found");
 		}

@@ -35,10 +35,10 @@ public class PauseMenu extends JPanel implements ActionListener,IViewer {
 	public PauseMenu(int xFrame,int yFrame) {
 		// loadImage = new LoadImage();
 		try {
-			backGroundImage = ImageIO.read(new File("newgamef.jpg"));
-			continueGameImage = new ImageIcon(ImageIO.read(new File("background.jpg")));
-			saveGameImage = new ImageIcon(ImageIO.read(new File("background.jpg")));
-			mainMenuImage = new ImageIcon(ImageIO.read(new File("background.jpg")));
+			backGroundImage = ImageIO.read(new File("resources/imgs/newgamef.jpg"));
+			continueGameImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
+			saveGameImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
+			mainMenuImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
 		} catch (IOException e) {
 			throw new RuntimeException("Image not found");
 		}
