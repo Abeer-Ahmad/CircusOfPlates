@@ -21,10 +21,4 @@ public class StrategyFactory implements IStrategyFactory {
         	return new Hard();
         return null;
 	}
-
-	@Override
-	public Shape getRandomShape(int x, int y, int beltLength, int randomshape, Color randomColor) {
-		return null;
-	}
-
 }
