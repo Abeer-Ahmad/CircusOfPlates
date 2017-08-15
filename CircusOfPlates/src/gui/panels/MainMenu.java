@@ -37,12 +37,8 @@ public class MainMenu extends JPanel implements ActionListener,IViewer {
 	public MainMenu(int xframe, int yFrame) {
 		// loadImage = new LoadImage();
 		try {
-		    /*File f = new File("newgamef.jpg");
-            System.out.println("here1");
-			backGroundImage = ImageIO.read(f);
-            System.out.println("here2");*/
-            backGroundImage = ImageIO.read(new File("resources/imgs/newgamef.jpg"));
-            newGameImage = new ImageIcon(ImageIO.read(new File("resources/imgs/button.jpg")));
+			backGroundImage = ImageIO.read(new File("resources/imgs/newgamef.jpg"));
+			newGameImage = new ImageIcon(ImageIO.read(new File("resources/imgs/button.jpg")));
 			loadGameImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
 			importShapeImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
 			exitImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
