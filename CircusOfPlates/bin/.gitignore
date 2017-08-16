@@ -1,4 +1,8 @@
-/imgs/
-/utilities/
+/Parsers/
+/collections/
 /game/
 /gui/
+/imgs/
+/mvc/
+/plateGenerator/
+/utilities/

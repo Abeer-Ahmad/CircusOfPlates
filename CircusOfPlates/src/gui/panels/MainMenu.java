@@ -43,6 +43,7 @@ public class MainMenu extends JPanel implements ActionListener,IViewer {
 			importShapeImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
 			exitImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
 		} catch (IOException e) {
+			
 			throw new RuntimeException("Image not found");
 		}
 		this.setLayout(null);
