@@ -47,10 +47,13 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
     private int y;
 	public ChoosePlayerMenu(int xFrame, int yFrame) {
 		// loadImage = new LoadImage();
+		this.setSize(xFrame, yFrame);
+		this.yFrame=yFrame; // needed for?
+		this.xFrame=xFrame; // needed for?
 		try {
-			backGroundImage = ImageIO.read(new File("resources/imgs/newgamef.jpg"));
-			onePlayerImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
-			twoPlayerImage = new ImageIcon(ImageIO.read(new File("resources/imgs/images.png")));
+			backGroundImage = ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "newgame.jpg"));
+			onePlayerImage = new ImageIcon(ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "background.jpg")));
+			twoPlayerImage = new ImageIcon(ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "images.png")));
 		} catch (IOException e) {
 			
 			throw new RuntimeException("Image not found");
@@ -59,15 +62,12 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
 		this.setLayout(null);
 		this.setFocusable(true);
 		setButtons();
-		this.yFrame=yFrame;
-		this.xFrame=xFrame;
 		repaint();
 	}
 
 	public void setController (Controller controller){
 		this.controller= controller;
 		this.menuController = new PlayerMenuController(controller);
-		
 		onePlayer.addActionListener(this.menuController);
 		twoPlayer.addActionListener(this.menuController);
 		
@@ -76,7 +76,7 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
 
 	@Override
 	public void paintComponent(Graphics g) {
-		g.drawImage(backGroundImage, 0, 0, null);
+		g.drawImage(backGroundImage, 0, 0, getWidth(), getHeight(), this);
 	}
 
 	private void setButtons() {
@@ -139,8 +139,6 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
 		settings.put("dimX", xFrame);
 		settings.put("dimY",yFrame);
 		return settings;
-		
-	
 	}
 	
 private void setInfoOnePlayer(JPanel current){

@@ -35,9 +35,10 @@ public class WinnerView extends JPanel implements ActionListener,IViewer {
 	private ImageIcon newGameImage;
 	// private JLabel winner;
 	private Controller controller;
-	public WinnerView(Player player) {
+	public WinnerView(Player player, int xFrame, int yFrame) {
+		this.setSize(xFrame, yFrame);
 		try {
-			backGroundImage = ImageIO.read(new File("resources/imgs/newgamef.jpg"));
+			backGroundImage = ImageIO.read(new File("resources/imgs/newgame.jpg"));
 			newGameImage = new ImageIcon(ImageIO.read(new File("resources/imgs/button.jpg")));
 			loadGameImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
 			exitImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));

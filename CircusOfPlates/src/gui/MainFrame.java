@@ -19,7 +19,6 @@ public class MainFrame extends JFrame {
 	public MainFrame(JPanel start) {
 		panel = start;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// setBounds(0, 0, 1500, 1000); commented lately
 		setContentPane(panel);
 		close = new FrameClose();
 		this.addWindowListener(close);

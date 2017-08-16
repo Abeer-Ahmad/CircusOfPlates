@@ -50,9 +50,10 @@ public class GameGrid extends JPanel {
     private JLabel player1_score;
     private JLabel player2_score;
     
-    public GameGrid(boolean twoPlayers, ArrayList<Player> modelPlayers, String firstPlayerTool) {
+    public GameGrid(boolean twoPlayers, ArrayList<Player> modelPlayers, String firstPlayerTool, int xFrame, int yFrame) {
+        this.setSize(xFrame, yFrame);
         try {
-            backGroundImage = ImageIO.read(new File("resources/imgs/backgroundf.jpg"));
+            backGroundImage = ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "background.jpg"));
         } catch (IOException e) {
             throw new RuntimeException("Image not found");
         }
@@ -64,11 +65,11 @@ public class GameGrid extends JPanel {
         belts= new  ArrayList<Belt>();
         shapes= new ArrayList<Shape>();
         players= new ArrayList<PlayerUI>();
-        players.add(new PlayerUI(modelPlayers.get(0), "resources/imgs/player1.jpg"));
+        players.add(new PlayerUI(modelPlayers.get(0), "resources" + File.separator + "imgs" + File.separator + "player1.jpg"));
         this.add(players.get(0));
         declarePlayer1();
 		if (this.twoPlayers) {
-			players.add(new PlayerUI(modelPlayers.get(1), "resources/imgs/player2.jpg"));
+			players.add(new PlayerUI(modelPlayers.get(1), "resources" + File.separator + "imgs" + File.separator + "player2.jpg"));
 			this.add(players.get(1));
 			declarePlayer2();
 		}     
@@ -198,7 +199,7 @@ public class GameGrid extends JPanel {
     public void paintComponent(Graphics g) {
         super.repaint();
         Graphics2D graphics2d = (Graphics2D) g;
-        graphics2d.drawImage(backGroundImage, 0, 0, null);
+        graphics2d.drawImage(backGroundImage, 0, 0, getWidth(), getHeight(), this);
         leaserBeam.draw(graphics2d);
         drawShapes(graphics2d);
         drawPlayers(graphics2d);

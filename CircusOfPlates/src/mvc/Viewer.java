@@ -66,7 +66,7 @@ public class Viewer implements Observer{
 		if (valueChanged instanceof Boolean){
 			boolean twoPlayers = (boolean) valueChanged;
 			Model gameModel = (Model) model;
-			gameGrid=new GameGrid(twoPlayers,gameModel.getPlayers(),gameModel.getFirstPlayerTool());
+			gameGrid=new GameGrid(twoPlayers,gameModel.getPlayers(),gameModel.getFirstPlayerTool(), xFrame, yFrame);
 			gameGrid.setController(controller);
 			goToGame();			
 		}
@@ -85,7 +85,7 @@ public class Viewer implements Observer{
 			} 
 		} else if (valueChanged instanceof Player) {
 			System.out.println("winner notified");
-			WinnerView  winView = new WinnerView((Player)valueChanged);
+			WinnerView  winView = new WinnerView((Player)valueChanged, xFrame, yFrame);
 			winView.setController(controller);
 			mainFrame.changeScene(winView);
 		}
