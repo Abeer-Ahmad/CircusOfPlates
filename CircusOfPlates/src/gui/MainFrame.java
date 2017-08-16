@@ -6,6 +6,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import mvc.Controller;
 
@@ -18,6 +20,15 @@ public class MainFrame extends JFrame {
 
 	public MainFrame(JPanel start) {
 		panel = start;
+		
+		/**change feel of the button**/
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+			//should log error with UIManager
+			 e.printStackTrace();
+		} 
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(panel);
 		close = new FrameClose();
