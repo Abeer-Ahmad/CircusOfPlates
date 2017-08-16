@@ -34,11 +34,12 @@ public class PauseMenu extends JPanel implements ActionListener,IViewer {
     private Controller controller;
 	public PauseMenu(int xFrame,int yFrame) {
 		// loadImage = new LoadImage();
+		this.setSize(xFrame, yFrame);
 		try {
-			backGroundImage = ImageIO.read(new File("resources/imgs/newgamef.jpg"));
-			continueGameImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
-			saveGameImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
-			mainMenuImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
+			backGroundImage = ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "newgame.jpg"));
+			continueGameImage = new ImageIcon(ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "background.jpg")));
+			saveGameImage = new ImageIcon(ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "background.jpg")));
+			mainMenuImage = new ImageIcon(ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "background.jpg")));
 		} catch (IOException e) {
 			throw new RuntimeException("Image not found");
 		}
@@ -68,7 +69,7 @@ public class PauseMenu extends JPanel implements ActionListener,IViewer {
 
 	@Override
 	public void paintComponent(Graphics g) {
-		g.drawImage(backGroundImage, 0, 0, null);
+		g.drawImage(backGroundImage, 0, 0, getWidth(), getHeight(), this);
 	}
 
 	private void setButtons() {

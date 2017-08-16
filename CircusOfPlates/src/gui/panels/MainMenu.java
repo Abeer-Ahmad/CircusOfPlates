@@ -35,26 +35,20 @@ public class MainMenu extends JPanel implements ActionListener,IViewer {
 	private ImageIcon newGameImage;
 	private Controller controller;
 
-	public MainMenu(int xframe, int yFrame) {
+	public MainMenu(int xFrame, int yFrame) {
 		// loadImage = new LoadImage();
+		this.setSize(xFrame, yFrame);
 		try {
-			this.setSize(xframe, yFrame);
-			System.out.println("xFrame = " + this.getWidth());
-			System.out.println("yFrame = " + this.getHeight());
-			backGroundImage = ImageIO.read(new File("resources/imgs/newgamef.jpg"));
-			/***/
-			backGroundImage.getScaledInstance(this.getWidth(),this.getHeight(), BufferedImage.SCALE_SMOOTH);
-			/***/
-			newGameImage = new ImageIcon(ImageIO.read(new File("resources/imgs/button.jpg")));
-			loadGameImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
-			importShapeImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
-			exitImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
+			backGroundImage = ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "newgame.jpg"));
+			newGameImage = new ImageIcon(ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "button.jpg")));
+			loadGameImage = new ImageIcon(ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "background.jpg")));
+			importShapeImage = new ImageIcon(ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "background.jpg")));
+			exitImage = new ImageIcon(ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "background.jpg")));
 		} catch (IOException e) {
-			
 			throw new RuntimeException("Image not found");
 		}
+		setSize(xFrame, yFrame);
 		this.setLayout(null);
-		setBounds(0, 0, 1000, 1000);
 		this.setFocusable(true);
 		setButtons();
 		repaint();
@@ -79,7 +73,7 @@ public class MainMenu extends JPanel implements ActionListener,IViewer {
 
 	@Override
 	public void paintComponent(Graphics g) {
-		g.drawImage(backGroundImage, 0, 0, null);
+		g.drawImage(backGroundImage, 0, 0, getWidth(), getHeight(), this);
 	}
 
 	private void setButtons() {
