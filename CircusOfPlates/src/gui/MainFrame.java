@@ -11,19 +11,17 @@ import mvc.Controller;
 
 public class MainFrame extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private JPanel panel;
     private FrameClose close;
+
 	public MainFrame(JPanel start) {
 		panel = start;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 1500, 1000);
+		// setBounds(0, 0, 1500, 1000); commented lately
 		setContentPane(panel);
-		close= new FrameClose();
+		close = new FrameClose();
 		this.addWindowListener(close);
 	}
 

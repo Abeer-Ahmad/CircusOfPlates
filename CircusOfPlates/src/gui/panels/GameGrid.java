@@ -52,7 +52,7 @@ public class GameGrid extends JPanel {
     
     public GameGrid(boolean twoPlayers, ArrayList<Player> modelPlayers, String firstPlayerTool) {
         try {
-            backGroundImage = ImageIO.read(new File("backgroundf.jpg"));
+            backGroundImage = ImageIO.read(new File("resources/imgs/backgroundf.jpg"));
         } catch (IOException e) {
             throw new RuntimeException("Image not found");
         }
@@ -64,11 +64,11 @@ public class GameGrid extends JPanel {
         belts= new  ArrayList<Belt>();
         shapes= new ArrayList<Shape>();
         players= new ArrayList<PlayerUI>();
-        players.add(new PlayerUI(modelPlayers.get(0), "player1.jpg"));
+        players.add(new PlayerUI(modelPlayers.get(0), "resources/imgs/player1.jpg"));
         this.add(players.get(0));
         declarePlayer1();
 		if (this.twoPlayers) {
-			players.add(new PlayerUI(modelPlayers.get(1), "player2.jpg"));
+			players.add(new PlayerUI(modelPlayers.get(1), "resources/imgs/player2.jpg"));
 			this.add(players.get(1));
 			declarePlayer2();
 		}     

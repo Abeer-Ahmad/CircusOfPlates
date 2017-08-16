@@ -1,6 +1,6 @@
 package gui.panels;
 
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -34,10 +34,17 @@ public class MainMenu extends JPanel implements ActionListener,IViewer {
 	private JButton newGame;
 	private ImageIcon newGameImage;
 	private Controller controller;
+
 	public MainMenu(int xframe, int yFrame) {
 		// loadImage = new LoadImage();
 		try {
+			this.setSize(xframe, yFrame);
+			System.out.println("xFrame = " + this.getWidth());
+			System.out.println("yFrame = " + this.getHeight());
 			backGroundImage = ImageIO.read(new File("resources/imgs/newgamef.jpg"));
+			/***/
+			backGroundImage.getScaledInstance(this.getWidth(),this.getHeight(), BufferedImage.SCALE_SMOOTH);
+			/***/
 			newGameImage = new ImageIcon(ImageIO.read(new File("resources/imgs/button.jpg")));
 			loadGameImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
 			importShapeImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
