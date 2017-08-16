@@ -31,6 +31,7 @@ public class Model extends Observable {
 	private Stream fileManager;
 	private int laserHeight;
 	private boolean twoPlayers;
+
 	public Model(Observer gameViewer) {
 		players = new ArrayList<Player>();
 		shapes = new ArrayList<Shape>();

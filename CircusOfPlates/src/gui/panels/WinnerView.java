@@ -37,10 +37,10 @@ public class WinnerView extends JPanel implements ActionListener,IViewer {
 	private Controller controller;
 	public WinnerView(Player player) {
 		try {
-			backGroundImage = ImageIO.read(new File("newgamef.jpg"));
-			newGameImage = new ImageIcon(ImageIO.read(new File("button.jpg")));
-			loadGameImage = new ImageIcon(ImageIO.read(new File("background.jpg")));
-			exitImage = new ImageIcon(ImageIO.read(new File("background.jpg")));
+			backGroundImage = ImageIO.read(new File("resources/imgs/newgamef.jpg"));
+			newGameImage = new ImageIcon(ImageIO.read(new File("resources/imgs/button.jpg")));
+			loadGameImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
+			exitImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
 		} catch (IOException e) {
 			throw new RuntimeException("Image not found");
 		}

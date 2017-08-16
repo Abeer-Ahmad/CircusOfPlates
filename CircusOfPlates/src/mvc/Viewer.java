@@ -1,5 +1,6 @@
 package mvc;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -30,16 +31,17 @@ public class Viewer implements Observer{
 	private int xFrame;
 	private int yFrame;
 	 
-	public Viewer ( ){
+	public Viewer () {
 		menuPanels = new LinkedHashMap<String,JPanel>();
-		xFrame= 1500;
-		yFrame= 1000;
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		xFrame= screenSize.width;
+		yFrame= screenSize.height;
 		menuPanels.put("mainMenu",new MainMenu(xFrame, yFrame));
-		menuPanels.put("playerMenu",new ChoosePlayerMenu(xFrame,yFrame));
-		menuPanels.put("pauseMenu",new PauseMenu(xFrame,yFrame)); 
-		 mainFrame = new MainFrame(menuPanels.get("mainMenu"));
-		 mainFrame.setTitle("Circus Of Plates");
-		 mainFrame.setVisible(true);
+		menuPanels.put("playerMenu",new ChoosePlayerMenu(xFrame, yFrame));
+		menuPanels.put("pauseMenu",new PauseMenu(xFrame, yFrame));
+		mainFrame = new MainFrame(menuPanels.get("mainMenu"));
+		mainFrame.setSize(xFrame, yFrame);
+		mainFrame.setVisible(true);
 	}
 	
 	public void  addJPanel (String panelName,JPanel newPanel){
@@ -61,7 +63,6 @@ public class Viewer implements Observer{
 	
 	@Override
 	public void update(Observable model, Object valueChanged) {
-		System.out.println("in update");
 		if (valueChanged instanceof Boolean){
 			boolean twoPlayers = (boolean) valueChanged;
 			Model gameModel = (Model) model;
