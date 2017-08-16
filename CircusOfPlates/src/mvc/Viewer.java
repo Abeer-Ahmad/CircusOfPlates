@@ -37,8 +37,12 @@ public class Viewer implements Observer{
 		xFrame= screenSize.width;
 		yFrame= screenSize.height;
 		menuPanels.put("mainMenu",new MainMenu(xFrame, yFrame));
+		
+		/**can be done using swing utlilty thread**/
 		menuPanels.put("playerMenu",new ChoosePlayerMenu(xFrame, yFrame));
 		menuPanels.put("pauseMenu",new PauseMenu(xFrame, yFrame));
+		
+		
 		mainFrame = new MainFrame(menuPanels.get("mainMenu"));
 		mainFrame.setSize(xFrame, yFrame);
 		mainFrame.setVisible(true);

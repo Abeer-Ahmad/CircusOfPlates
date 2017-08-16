@@ -1,41 +1,57 @@
 package game.shapes;
 
 import java.awt.Color;
+
 import java.io.File;
+import java.io.FileReader;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
-
-import game.strategy.GameStrategy;
+import java.util.Properties;
 import utilities.DynamicLinkage;
 
 public class ShapeFactory extends IShapeFactory {
 	
-	private static final String[] shapeName = {"Box", "Oval", "Plate"}; // remove
+	private static final String configurationFile = "gameConfiguration.properties";
 	
 	private DynamicLinkage loader;
-	// private String[] shapeName;
+	private String[] shapeNames;
 	private HashMap<String, Constructor<?>> shapes;
 	private HashMap<String, Integer> shapeID;
 
-	public ShapeFactory(/*final String[] shapeName*/) {
+	public ShapeFactory() {
 		super();
-		// this.shapeName = shapeName;
+		shapeNames = readConfigurationFiles ();
 		loader = new DynamicLinkage();
 		loadShapes();
 		initializeIDs();
 	}
 	
-	// access to classes files
+	private String[] readConfigurationFiles () {
+		
+		File configFile = new File(configurationFile);
+		String[] shapesLoaded;
+		try {
+			FileReader reader = new FileReader(configFile);
+			Properties prop = new Properties();
+			prop.load(reader);
+			shapesLoaded =  prop.getProperty("Shapes").split("\\s*,\\s*");
+			
+		} catch (Exception e) {
+			throw new RuntimeException("error in configuration file");
+		}
+		return shapesLoaded;
+	}
 	private void loadShapes() {
+		
 		Class<?> shapeClass;
 		Constructor<?> constructor;
 		shapes = new HashMap<String, Constructor<?>>();
-		for (int i = 0; i < shapeName.length; i++) {
+		for (String shapeName : shapeNames) {
 			// shapeClass = loader.loadClass(new File(""), "shapes", shapeName[i]); // different file for each class
-			shapeClass = loader.loadClass("shapes", shapeName[i]); // remove
+			shapeClass = loader.loadClass("game.shapes", shapeName); 
 			try {
 				constructor = shapeClass.getConstructors()[0];
-				shapes.put(shapeName[i], constructor);
+				shapes.put(shapeName, constructor);
 			} catch (Exception e) {
 				System.out.println(e.toString());
 			}
@@ -44,14 +60,14 @@ public class ShapeFactory extends IShapeFactory {
 	
 	private void initializeIDs() {
 		shapeID = new HashMap<String, Integer>();		
-		for (int i = 0; i < shapeName.length; i++) {
-			shapeID.put(shapeName[i], i);
+		for (int i = 0; i < shapeNames.length; i++) {
+			shapeID.put(shapeNames[i], i);
 		}
 	}
 	
 	@Override
 	public Shape getRandomShape(final int x, final int y, final int beltLength, int randomshape, final Color randomColor) {
-		randomshape %= shapeName.length;
+		randomshape %= shapeNames.length;
 		try {
 			if (randomshape == shapeID.get("Plate"))
 				return (Shape) shapes.get("Plate").newInstance(x, y, beltLength, randomColor);

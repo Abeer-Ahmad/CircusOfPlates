@@ -45,6 +45,8 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
     private int yFrame;
     private int xFrame;
     private int y;
+    
+    
 	public ChoosePlayerMenu(int xFrame, int yFrame) {
 		// loadImage = new LoadImage();
 		try {
@@ -55,7 +57,7 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
 			
 			throw new RuntimeException("Image not found");
 		}
-		//this.setBorder(new EmptyBorder(15, 15, 15, 15));
+		
 		this.setLayout(null);
 		this.setFocusable(true);
 		setButtons();
@@ -92,7 +94,7 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
 	}
 	
 	private JPanel setPlayerInfoPanel(boolean twoPlayers) {
-	     JPanel playerInfo = new JPanel();
+	    JPanel playerInfo = new JPanel();
 		playerInfo.setLayout(null);
 		playerInfo.setPreferredSize(new Dimension(400, 400));
 		if (twoPlayers)
@@ -176,7 +178,7 @@ private void setInfoTwoPlayer(JPanel current){
 }
 
 
-private class PlayerMenuController implements ActionListener{
+private class PlayerMenuController implements ActionListener {
 
 	private Controller controller;
 	public PlayerMenuController (Controller controller){
@@ -195,7 +197,7 @@ private class PlayerMenuController implements ActionListener{
 	}	
 }
 
-	private class infoMenuController implements ActionListener {
+private class infoMenuController implements ActionListener {
 
 		private Controller controller;
 

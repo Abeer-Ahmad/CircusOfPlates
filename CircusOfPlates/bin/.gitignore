@@ -1,8 +1,5 @@
-/Parsers/
-/collections/
+/jars/
 /game/
-/gui/
-/imgs/
-/mvc/
-/plateGenerator/
 /utilities/
+/mvc/
+/shapes/
