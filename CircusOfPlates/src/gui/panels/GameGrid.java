@@ -41,12 +41,12 @@ public class GameGrid extends JPanel {
     private MouseHandler mouseHandler;
     private Controller controller;
     private ArrayList<Belt> belts;
-    private ArrayList<PlayerUI> players;
+    private ArrayList<PlayerUI> playersUI;
     private ArrayList<Shape> shapes;
     private boolean twoPlayers;
     private String firstPlayerTool;
-    private JLabel player1;
-    private JLabel player2;
+    private JLabel player1Name;
+    private JLabel player2Name;
     private JLabel player1_score;
     private JLabel player2_score;
     
@@ -64,43 +64,44 @@ public class GameGrid extends JPanel {
         leaserBeam = new LaserBeam(1500);  
         belts= new  ArrayList<Belt>();
         shapes= new ArrayList<Shape>();
-        players= new ArrayList<PlayerUI>();
-        players.add(new PlayerUI(modelPlayers.get(0), "resources" + File.separator + "imgs" + File.separator + "player1.jpg"));
-        this.add(players.get(0));
+        playersUI= new ArrayList<PlayerUI>();
+        playersUI.add(new PlayerUI(modelPlayers.get(0), -1, xFrame, yFrame, "resources" + File.separator + "imgs" + File.separator + "player1.jpg"));
+        this.add(playersUI.get(0));
         declarePlayer1();
 		if (this.twoPlayers) {
-			players.add(new PlayerUI(modelPlayers.get(1), "resources" + File.separator + "imgs" + File.separator + "player2.jpg"));
-			this.add(players.get(1));
+			playersUI.add(new PlayerUI(modelPlayers.get(1), 1, xFrame, yFrame, "resources" + File.separator + "imgs" + File.separator + "player2.jpg"));
+			this.add(playersUI.get(1));
 			declarePlayer2();
 		}     
     }
  
     private void declarePlayer1() {
-    	 player1 = new JLabel(players.get(0).getPlayer().getName());
-    	 player1.setFont(player1.getFont().deriveFont(22.0f));
-    	 player1.setBounds(30, 150, 200, 50);
+    	 player1Name = new JLabel(playersUI.get(0).getPlayer().getName());
+    	 player1Name.setFont(player1Name.getFont().deriveFont(22.0f));
+    	 player1Name.setBounds(30, 150, 200, 50);
     	 
-    	 player1_score = new JLabel(Integer.toString(players.get(0).getPlayer().getScore()));
-    	 player1_score.setFont(player1.getFont().deriveFont(22.0f));
+    	 player1_score = new JLabel(Integer.toString(playersUI.get(0).getPlayer().getScore()));
+    	 player1_score.setFont(player1Name.getFont().deriveFont(22.0f));
     	 player1_score.setBounds(30, 180, 150, 50);
     	 
-         this.add(player1);
+         this.add(player1Name);
          this.add(player1_score);
     }
     
     private void declarePlayer2() {
-		player2 = new JLabel(players.get(1).getPlayer().getName());
-		player2.setFont(player1.getFont().deriveFont(22.0f));
-		player2.setBounds(1300, 150, 200, 50);
+		player2Name = new JLabel(playersUI.get(1).getPlayer().getName());
+		player2Name.setFont(player1Name.getFont().deriveFont(22.0f));
+		player2Name.setBounds(1300, 150, 200, 50);
 		
-		player2_score = new JLabel(Integer.toString(players.get(1).getPlayer().getScore()));
-   	 	player2_score.setFont(player1.getFont().deriveFont(22.0f));
+		player2_score = new JLabel(Integer.toString(playersUI.get(1).getPlayer().getScore()));
+   	 	player2_score.setFont(player1Name.getFont().deriveFont(22.0f));
    	 	player2_score.setBounds(1300, 180, 150, 50);
    	 	
-   	 	this.add(player2);
+   	 	this.add(player2Name);
    	 	this.add(player2_score);
 	}
     
+    /* move to keyboard handler */
     private void setkeyBoardController(final Controller controller,final PlayerUI keyPlayer){
         /*KeyBoardHandler keyBoardHandler = new KeyBoardHandler(controller,keyPlayer);
         keyPlayer.requestFocus();
@@ -153,15 +154,15 @@ public class GameGrid extends JPanel {
         this.controller= controller;
         this.addKeyListener(new KeyBoardHandler(controller));
         if (firstPlayerTool.equals("KeyBoard")){
-         setkeyBoardController(controller,players.get(0));
+         setkeyBoardController(controller,playersUI.get(0));
           if (twoPlayers){
-                setMouseController(controller,players.get(1));
+                setMouseController(controller,playersUI.get(1));
           }
         }  
         else if (firstPlayerTool.equals("Mouse")){
-            setMouseController(controller,players.get(0));
+            setMouseController(controller,playersUI.get(0));
             if (twoPlayers){
-                setkeyBoardController(controller,players.get(1));
+                setkeyBoardController(controller,playersUI.get(1));
             }
           } 
        }
@@ -179,7 +180,7 @@ public class GameGrid extends JPanel {
  
     private void drawPlayers(Graphics2D graphics2d ) {
        
-        for (PlayerUI player : players) {
+        for (PlayerUI player : playersUI) {
             player.draw(graphics2d);
         }
     }
@@ -227,7 +228,7 @@ public class GameGrid extends JPanel {
    
     public void updatePlayers(ArrayList<Player> players) {
         int i = 0;
-        for (PlayerUI player : this.players) {
+        for (PlayerUI player : this.playersUI) {
             player.updatePLayerModel(players.get(i++));
             showScore();
         }             
@@ -235,7 +236,7 @@ public class GameGrid extends JPanel {
     
     private void showScore() {
     	if (twoPlayers)
-    		player2_score.setText(Integer.toString(players.get(1).getPlayer().getScore()));
-    	player1_score.setText(Integer.toString(players.get(0).getPlayer().getScore()));
+    		player2_score.setText(Integer.toString(playersUI.get(1).getPlayer().getScore()));
+    	player1_score.setText(Integer.toString(playersUI.get(0).getPlayer().getScore()));
     }
 }

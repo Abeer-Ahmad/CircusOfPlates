@@ -51,11 +51,11 @@ public class Model extends Observable {
 		belts.add(new RightBelt(x, 100, 250));
 	}
 
-	public void setPlayers(boolean twoPlayers, ArrayList<String> names,int xFrame, int yFrame) {
+	public void setPlayers(boolean twoPlayers, ArrayList<String> names) {
 
-		players.add(new Player(0,yFrame, names.get(0)));
+		players.add(new Player(names.get(0)));
 		if (twoPlayers) {
-			players.add(new Player(xFrame-200,yFrame, names.get(1)));
+			players.add(new Player(names.get(1)));
 		}
 	}
 
@@ -133,7 +133,7 @@ public class Model extends Observable {
 		int xFrame= (int) settings.get("dimX");
 		int yFrame = (int) settings.get("dimY");
 		firstPlayerTool = (String) settings.get("tool");
-		setPlayers(twoPlayers, names,xFrame,yFrame);
+		setPlayers(twoPlayers, names);
 		setChanged();
 		Boolean twoBPlayers = new Boolean(twoPlayers);
 		notifyObservers(twoBPlayers);

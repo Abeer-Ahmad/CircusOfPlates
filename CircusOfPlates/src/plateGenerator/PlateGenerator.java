@@ -108,7 +108,7 @@ public class PlateGenerator {
         int randomNum = 10;
         while (randomNum <= 10) {
             randomNum = getRandomNumber();
-            randomNum %= 60;
+            randomNum %= 30;
         }
         /* int randomNum = minSpeed;
         while (randomNum == minSpeed) {

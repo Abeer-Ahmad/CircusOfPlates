@@ -16,8 +16,8 @@ public abstract class Shape implements Serializable{
 	 */
 	private static final long serialVersionUID = 8799923820081680740L;
 	protected int beltLength;
-	protected int xPostion;
-	protected int yPostion;
+	protected int xPostion;  //center of shape
+	protected int yPostion;  //center of shape
 	private int moveSpeed;
 	private State state;
 

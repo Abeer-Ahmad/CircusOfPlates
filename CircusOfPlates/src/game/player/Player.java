@@ -1,7 +1,6 @@
 package game.player;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Stack;
 
@@ -13,24 +12,28 @@ public class Player {
 	private static final int LIMIT = 3;
 
 	private Stack<Shape> leftStack;
-	private int leftStart;
 	private Stack<Shape> rightStack;
-	private int rightStart;
+	private int leftHandCenter;
+	private int rightHandCenter;
 	private int score;
-	private int xPostion;
-	private int yPostion;
-	private int height;
+	private int xCenter; // center of clown
+	private int yCenter; // center of clown
+	private int height; // height of image
 	private String name;
 
-	public Player(int x, int y,String name) {
+	public Player(String name) {
 
 		this.name = name;
-		this.xPostion = x;
-		this.yPostion = y-200;
-		this.leftStart = x;
-		this.rightStart = x + 120;
 		rightStack = new Stack<Shape>();
 		leftStack = new Stack<Shape>();
+	}
+
+	protected void setDimensions(int xCenter, int yCenter, int leftHandCenter, int rightHandCenter, int height) {
+		this.xCenter = xCenter;
+		this.yCenter = yCenter;
+		this.leftHandCenter = leftHandCenter;
+		this.rightHandCenter = rightHandCenter;
+		this.height = height;
 	}
 
 	private boolean manageCurrentHand(int xDistance, int yDistance, int start) {
@@ -48,18 +51,18 @@ public class Player {
 				continue;
 			}
 			int xDistance = shape.getX();
-			int yDistance = yPostion+200 - getHandHeight(rightStack) - shape.getY();
-			if (manageCurrentHand(xDistance, yDistance, rightStart)) {
+			int yDistance = yCenter + 200 - getHandHeight(rightStack) - shape.getY();
+			if (manageCurrentHand(xDistance, yDistance, rightHandCenter)) {
 				shape.setState(ShapeStates.captured);
-				shape.setCenter(rightStart + 40, yPostion+200 - getHandHeight(rightStack) - 10);
+				shape.setCenter(rightHandCenter + 40, yCenter + 200 - getHandHeight(rightStack) - 10);
 				rightStack.push(shape);
 				matchPlates(rightStack);
 				continue;
 			}
-			yDistance = yPostion+200 - getHandHeight(leftStack) - shape.getY();
-			if (manageCurrentHand(xDistance, yDistance, leftStart)) {
+			yDistance = yCenter + 200 - getHandHeight(leftStack) - shape.getY();
+			if (manageCurrentHand(xDistance, yDistance, leftHandCenter)) {
 				shape.setState(ShapeStates.captured);
-				shape.setCenter(leftStart + 40, yPostion+200 - getHandHeight(leftStack) - 10);
+				shape.setCenter(leftHandCenter + 40, yCenter + 200 - getHandHeight(leftStack) - 10);
 				leftStack.push(shape);
 				matchPlates(leftStack);
 			}
@@ -83,27 +86,23 @@ public class Player {
 	}
 
 	public void move(int step) {
-		xPostion += step;
-		xPostion += 1350;
-		xPostion %= 1350;
-		rightStart = xPostion + 120;
-		leftStart = xPostion;
+		xCenter += step;
+		xCenter += 1350;
+		xCenter %= 1350;
+		rightHandCenter = xCenter + 120;
+		leftHandCenter = xCenter;
 		for (Shape shape : rightStack) {
-			shape.setCenter(rightStart + 40, shape.getY());
+			shape.setCenter(rightHandCenter + 40, shape.getY());
 		}
 		for (Shape shape : leftStack) {
-			shape.setCenter(leftStart + 40, shape.getY());
+			shape.setCenter(leftHandCenter + 40, shape.getY());
 		}
 	}
 
 	private void updateScore() {
 		score += 5;
 	}
-	
-	public void setHeight(int height) {
-		this.height = height;
-	}
-	
+
 	public Stack<Shape> getLeftStack() {
 		return leftStack;
 	}
@@ -128,11 +127,11 @@ public class Player {
 	}
 
 	public int getxPostion() {
-		return xPostion;
+		return xCenter;
 	}
 
 	public int getyPostion() {
-		return yPostion;
+		return yCenter;
 	}
 
 	public String getName() {
@@ -141,6 +140,6 @@ public class Player {
 
 	public void newLevel() {
 		// TODO Auto-generated method stub
-		this.score=0;
+		this.score = 0;
 	}
 }
