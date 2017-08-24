@@ -76,7 +76,7 @@ public class WinnerView extends JPanel implements ActionListener,IViewer {
 
 	@Override
 	public void paintComponent(Graphics g) {
-		g.drawImage(backGroundImage, 0, 0, null);
+		g.drawImage(backGroundImage, 0, 0, getWidth(), getHeight(), this);
 	}
 
 	private void setButtons() {

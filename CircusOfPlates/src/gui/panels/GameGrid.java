@@ -114,11 +114,11 @@ public class GameGrid extends JPanel {
                 "pressedL");
         AbstractAction  pressedActionL = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-        			controller.movePlayer(keyPlayer, -40);	
+        			controller.movePlayer(keyPlayer, -40, getWidth());
             }};
         AbstractAction  pressedActionR = new AbstractAction() {
         	 public void actionPerformed(ActionEvent e) {
-        			controller.movePlayer(keyPlayer, 40);
+        			controller.movePlayer(keyPlayer, 40, getWidth());
         		}};
         
             
@@ -140,11 +140,11 @@ public class GameGrid extends JPanel {
          AbstractAction  pressedActionL = new AbstractAction() {
              public void actionPerformed(ActionEvent e) {
              System.out.println("uikey"+mousePlayer.getPlayer().getName());
-         			controller.movePlayer(mousePlayer, -40);	
+         			controller.movePlayer(mousePlayer, -40, getWidth());
              }};
          AbstractAction  pressedActionR = new AbstractAction() {
          	 public void actionPerformed(ActionEvent e) {
-         			controller.movePlayer(mousePlayer, 40);
+         			controller.movePlayer(mousePlayer, 40, getWidth());
          		}};    
         mousePlayer.getActionMap().put("pressedL",pressedActionL);
         mousePlayer.getActionMap().put("pressedR",pressedActionR);

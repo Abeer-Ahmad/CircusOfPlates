@@ -74,34 +74,28 @@ public class Player {
 		if (stackSize < 3)
 			return;
 		Color[] topColors = new Color[LIMIT];
-		for (int i = 1; i < 4; i++) {
+		for (int i = 1; i < 4; i++)
 			topColors[i - 1] = currentHand.get(stackSize - i).getColor();
-		}
 		if (topColors[0].equals(topColors[1]) && topColors[0].equals(topColors[2])) {
-			for (int i = 1; i < 4; i++) {
+			for (int i = 1; i < 4; i++)
 				currentHand.remove(stackSize - i);
-			}
 			updateScore();
 		}
 	}
 
-	public void move(int step) {
+	public void move(int step, int range) {
 		xCenter += step;
-		xCenter += 1350;
-		xCenter %= 1350;
-		rightHandCenter = xCenter + 120;
+		xCenter += range;
+		xCenter %= range;
+		rightHandCenter = xCenter + 120; // dynamic
 		leftHandCenter = xCenter;
-		for (Shape shape : rightStack) {
+		for (Shape shape : rightStack)
 			shape.setCenter(rightHandCenter + 40, shape.getY());
-		}
-		for (Shape shape : leftStack) {
+		for (Shape shape : leftStack)
 			shape.setCenter(leftHandCenter + 40, shape.getY());
-		}
 	}
 
-	private void updateScore() {
-		score += 5;
-	}
+	private void updateScore() { score += 5; }
 
 	public Stack<Shape> getLeftStack() {
 		return leftStack;
@@ -114,8 +108,7 @@ public class Player {
 	public int getMaxHeight() {
 		int rightHeight = getHandHeight(rightStack);
 		int leftHeight = getHandHeight(leftStack);
-		int maxHeight = rightHeight > leftHeight ? rightHeight : leftHeight;
-		return maxHeight;
+		return rightHeight > leftHeight ? rightHeight : leftHeight;
 	}
 
 	private int getHandHeight(Stack<Shape> currentHand) {
@@ -139,7 +132,6 @@ public class Player {
 	}
 
 	public void newLevel() {
-		// TODO Auto-generated method stub
 		this.score = 0;
 	}
 }

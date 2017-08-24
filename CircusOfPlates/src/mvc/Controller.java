@@ -20,8 +20,8 @@ public class Controller {
 		 this.viewer.setController(this);
 	}
 	
-	public void movePlayer(PlayerUI playerUI, int step) {
-		gameItems.movePlayer(playerUI.getPlayer(), step);
+	public void movePlayer(PlayerUI playerUI, int step, int range) {
+		gameItems.movePlayer(playerUI.getPlayer(), step, range);
 	}
 
 	public void pauseGame() {
