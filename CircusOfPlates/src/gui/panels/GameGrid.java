@@ -26,7 +26,6 @@ import game.player.Player;
 import game.player.PlayerUI;
 import game.shapes.LaserBeam;
 import game.shapes.Shape;
-import game.shapes.states.ShapeStates;
 import gui.handlers.KeyBoardHandler;
 import gui.handlers.MouseHandler;
 import mvc.Controller;

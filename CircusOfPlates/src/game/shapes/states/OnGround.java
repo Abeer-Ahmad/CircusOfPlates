@@ -5,7 +5,7 @@ import game.shapes.Shape;
 public class OnGround extends State {
 
 	public OnGround() {
-		this.shapeState = ShapeStates.onGround;
+
 	}
 
 	@Override
@@ -16,11 +16,6 @@ public class OnGround extends State {
 	@Override
 	public int getUpdatedY() {
 		return 0;
-	}
-
-	@Override
-	public ShapeStates getState() {
-		return null;
 	}
 	
 	@Override

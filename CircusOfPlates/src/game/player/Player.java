@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Stack;
 
 import game.shapes.Shape;
-import game.shapes.states.ShapeStates;
+import game.shapes.states.*;
 
 public class Player {
 
@@ -46,21 +46,21 @@ public class Player {
 		if (shapes.equals(null))
 			return;
 		for (Shape shape : shapes) {
-			if (shape.getShapeState() == ShapeStates.onGround || shape.getShapeState() == ShapeStates.captured)
+            if (shape.getState() instanceof OnGround || shape.getState() instanceof Captured)
 				continue;
 			int xDistance = shape.getX();
 			int yDistance = yCenter + 200 - getHandHeight(rightStack) - shape.getY();
 			if (manageCurrentHand(xDistance, yDistance, rightHandCenter)) {
-				shape.setState(ShapeStates.captured);
+                shape.setState(new Captured());
 				System.out.println("Right hand caught a " + shape.getColor() + " shape");
 				shape.setCenter(rightHandCenter + 40, yCenter + 200 - getHandHeight(rightStack) - 10);
 				rightStack.push(shape);
 				matchPlates(rightStack);
-				// continue;
+				continue;
 			}
 			yDistance = yCenter + 200 - getHandHeight(leftStack) - shape.getY();
 			if (manageCurrentHand(xDistance, yDistance, leftHandCenter)) {
-				shape.setState(ShapeStates.captured);
+                shape.setState(new Captured());
 				System.out.println("Left hand caught a " + shape.getColor() + " shape");
 				shape.setCenter(leftHandCenter + 40, yCenter + 200 - getHandHeight(leftStack) - 10);
 				leftStack.push(shape);

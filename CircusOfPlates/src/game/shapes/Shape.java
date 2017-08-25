@@ -5,14 +5,9 @@ import java.awt.Graphics2D;
 import java.io.Serializable;
 
 import game.shapes.states.OnBelt;
-import game.shapes.states.ShapeStates;
 import game.shapes.states.State;
 
-import static game.Properties.*;
-
 public abstract class Shape implements Serializable{
-
-	int w = screenWidth();
 
 	private static final long serialVersionUID = 8799923820081680740L;
 	protected int beltLength;
@@ -43,16 +38,12 @@ public abstract class Shape implements Serializable{
 		this.state = state;
 	}
 
-	public void setState(ShapeStates state) {
-		this.state.setState(state);
-	}
-	
 	public int getBeltLength() {
 		return beltLength;
 	}
-	
-	public ShapeStates getShapeState() {
-		return state.getState();
+
+	public State getState () {
+		return state;
 	}
 
 	public int getX() {

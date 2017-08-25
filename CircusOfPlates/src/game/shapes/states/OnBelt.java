@@ -4,45 +4,38 @@ import game.shapes.Shape;
 
 public class OnBelt extends State {
 	
-	private int x; // x_center
-	private int y; // y_center
+	private int xCenter; // x_center
+	private int yCenter; // y_center
 	
 	public OnBelt() {
-		this.shapeState = ShapeStates.onBelt;
+
 	}
 
 	@Override
 	public int getUpdatedX() {
-		return x;
+		return xCenter;
 	}
 
 	@Override
 	public int getUpdatedY() {
-		return y;
-	}
-	
-	@Override
-	public ShapeStates getState() {
-		return shapeState;
+		return yCenter;
 	}
 	
 	@Override
 	public boolean updateCoor(int moveSpeed, int x, int y, int beltLength) {
-		this.x = x + moveSpeed;
-		this.y = y;
-		if (moveSpeed > 0) {
-			return this.x >= beltLength;
-		} else {
-			return this.x <= 1500 - beltLength;
-		}
+		this.xCenter = x + moveSpeed;
+		this.yCenter = y;
+		if (moveSpeed > 0)
+			return this.xCenter >= beltLength;
+		else
+			return this.xCenter <= 1500 - beltLength; // change 1500 to frame width
 	}
 
 	@Override
 	public void updateSate(Shape shape) {
 		boolean stateChanged = updateCoor(shape.getSpeed(), shape.getX(), shape.getY(), shape.getBeltLength());
-		shape.setCenter(x, y);
-		if (stateChanged) {
-			shape.setState(new Falling(x, y));
-		}
+		shape.setCenter(xCenter, yCenter);
+		if (stateChanged)
+			shape.setState(new Falling(xCenter, yCenter));
 	}
 }

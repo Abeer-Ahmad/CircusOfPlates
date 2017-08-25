@@ -13,7 +13,9 @@ import collections.Shapes;
 import game.ScoreManager;
 import game.player.Player;
 import game.shapes.Shape;
-import game.shapes.states.ShapeStates;
+import game.shapes.states.Captured;
+import game.shapes.states.OnGround;
+import game.shapes.states.State;
 import plateGenerator.Belt;
 import plateGenerator.LeftBelt;
 import plateGenerator.RightBelt;
@@ -102,8 +104,8 @@ public class Model extends Observable {
 		int size = shapes.size();
 		for (int i = size - 1; i >= 0; --i) {
 			Shape shape = shapes.get(i);
-			ShapeStates state = shape.getShapeState();
-			if ((state == ShapeStates.onGround) || (state == ShapeStates.captured)) {
+			State state = shape.getState();
+			if ((state instanceof OnGround) || (state instanceof Captured)) {
 				shapes.remove(i);
 			}
 		}
