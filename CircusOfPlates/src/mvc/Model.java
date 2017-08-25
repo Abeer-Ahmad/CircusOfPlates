@@ -134,20 +134,21 @@ public class Model extends Observable {
 		restart();
 		 twoPlayers = (boolean) settings.get("twoPlayers");
 		ArrayList<String> names = (ArrayList<String>) settings.get("names");
-		int xFrame= (int) settings.get("dimX");
-		int yFrame = (int) settings.get("dimY");
+		int frameWidth= (int) settings.get("dimX");
+		int frameHeight = (int) settings.get("dimY");
 		firstPlayerTool = (String) settings.get("tool");
 		setPlayers(twoPlayers, names);
 		setChanged();
 		Boolean twoBPlayers = new Boolean(twoPlayers);
 		notifyObservers(twoBPlayers);
 		/* after game grid is intialized*/
-		setBelts(xFrame);
+		setBelts(frameWidth);
 		setChanged();
 		notifyObservers(belts);
 		/* should be called after belts set*/
 		setLevel((String) settings.get("level"));
-		scoreManager =ScoreManager.getInstance(players, yFrame- laserHeight);
+		scoreManager =ScoreManager.getInstance(players, frameHeight- laserHeight);
+		//framewidth
 		updateGameItems();
 		isRunning = true;
 		notify();

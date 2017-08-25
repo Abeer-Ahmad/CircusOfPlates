@@ -12,7 +12,7 @@ public class CorruptShape extends Shape{
 	private int width;
 	private int height;
 	
-	public CorruptShape(final int x, final int y, final int beltLengt) {
+	public CorruptShape(final int x, final int y, final int beltLength) {
 		super();
 		this.color = Color.BLACK;
 		this.width = 80;
@@ -22,13 +22,13 @@ public class CorruptShape extends Shape{
 		super.beltLength = beltLength;
 	}
 	
-	public void setObject (final int x, final int y, final int beltLengt){
+	public void setObject (final int x, final int y, final int beltLength){
         this.setState(new OnBelt());
 		this.width = 80;
 		this.height = 20;
 		super.xPostion = x;
 		super.yPostion = y;
-		super.beltLength = beltLengt;
+		super.beltLength = beltLength;
 	}
 	@Override
 	public Color getColor() {
