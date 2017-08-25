@@ -30,6 +30,7 @@ public class MainFrame extends JFrame {
 		} 
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setUndecorated(true);
 		setContentPane(panel);
 		close = new FrameClose();
 		this.addWindowListener(close);

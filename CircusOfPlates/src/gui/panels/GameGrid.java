@@ -65,11 +65,11 @@ public class GameGrid extends JPanel {
         belts= new  ArrayList<Belt>();
         shapes= new ArrayList<Shape>();
         playersUI= new ArrayList<PlayerUI>();
-        playersUI.add(new PlayerUI(modelPlayers.get(0), -1, xFrame, yFrame, "resources" + File.separator + "imgs" + File.separator + "player1.jpg"));
+        playersUI.add(new PlayerUI(modelPlayers.get(0), -1, xFrame, yFrame, "resources" + File.separator + "imgs" + File.separator + "player1.png"));
         this.add(playersUI.get(0));
         declarePlayer1();
 		if (this.twoPlayers) {
-			playersUI.add(new PlayerUI(modelPlayers.get(1), 1, xFrame, yFrame, "resources" + File.separator + "imgs" + File.separator + "player2.jpg"));
+			playersUI.add(new PlayerUI(modelPlayers.get(1), 1, xFrame, yFrame, "resources" + File.separator + "imgs" + File.separator + "player2.png"));
 			this.add(playersUI.get(1));
 			declarePlayer2();
 		}     

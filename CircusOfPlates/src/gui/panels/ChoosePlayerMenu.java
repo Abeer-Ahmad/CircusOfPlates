@@ -42,16 +42,16 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
     private boolean twoPLayers;
     private String dataLevel;
     private String tool;
-    private int yFrame;
-    private int xFrame;
+    private int frameHeight;
+    private int frameWidth;
     private int y;
     
     
 	public ChoosePlayerMenu(int xFrame, int yFrame) {
 		// loadImage = new LoadImage();
 		this.setSize(xFrame, yFrame);
-		this.yFrame=yFrame; // needed for?
-		this.xFrame=xFrame; // needed for?
+		this.frameHeight=yFrame; // needed for?
+		this.frameWidth=xFrame; // needed for?
 		try {
 			backGroundImage = ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "newgame.jpg"));
 			onePlayerImage = new ImageIcon(ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "background.jpg")));
@@ -138,8 +138,8 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
 		settings.put("level",dataLevel);
 		settings.put("names", names);
 		settings.put("tool",tool);
-		settings.put("dimX", xFrame);
-		settings.put("dimY",yFrame);
+		settings.put("dimX", frameWidth);
+		settings.put("dimY",frameHeight);
 		return settings;
 	}
 	

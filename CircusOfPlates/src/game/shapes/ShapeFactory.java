@@ -47,7 +47,6 @@ public class ShapeFactory extends IShapeFactory {
 		Constructor<?> constructor;
 		shapes = new HashMap<String, Constructor<?>>();
 		for (String shapeName : shapeNames) {
-			// shapeClass = loader.loadClass(new File(""), "shapes", shapeName[i]); // different file for each class
 			shapeClass = loader.loadClass("game.shapes", shapeName); 
 			try {
 				constructor = shapeClass.getConstructors()[0];

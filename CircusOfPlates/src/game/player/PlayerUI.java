@@ -65,9 +65,10 @@ public class PlayerUI  extends JComponent{
 	}
    
 	public void draw(Graphics2D g) {
-		g.drawImage(img, player.getxPostion(), player.getyPostion(), null);
-		
-		this.setBounds(player.getxPostion(), player.getyPostion(), image.getWidth(), image.getHeight());
+		int topLeftXCoor = player.getxPostion() - (image.getWidth()/2);
+		int topLeftYCoor = player.getyPostion() - (image.getHeight()/2);
+		g.drawImage(img, topLeftXCoor, topLeftYCoor , null);	
+		this.setBounds(topLeftXCoor, topLeftYCoor, image.getWidth(), image.getHeight());
 		
 		for (int i = 0; i < player.getRightStack().size(); i++) {
 			Shape shape = player.getRightStack().get(i);
