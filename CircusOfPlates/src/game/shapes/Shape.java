@@ -8,12 +8,12 @@ import game.shapes.states.OnBelt;
 import game.shapes.states.ShapeStates;
 import game.shapes.states.State;
 
+import static game.Properties.*;
 
 public abstract class Shape implements Serializable{
 
-	/**
-	 * 
-	 */
+	int w = screenWidth();
+
 	private static final long serialVersionUID = 8799923820081680740L;
 	protected int beltLength;
 	protected int xPostion;  //center of shape
