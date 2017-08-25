@@ -52,14 +52,16 @@ public class Player {
 			int yDistance = yCenter + 200 - getHandHeight(rightStack) - shape.getY();
 			if (manageCurrentHand(xDistance, yDistance, rightHandCenter)) {
 				shape.setState(ShapeStates.captured);
+				System.out.println("Right hand caught a " + shape.getColor() + " shape");
 				shape.setCenter(rightHandCenter + 40, yCenter + 200 - getHandHeight(rightStack) - 10);
 				rightStack.push(shape);
 				matchPlates(rightStack);
-				continue;
+				// continue;
 			}
 			yDistance = yCenter + 200 - getHandHeight(leftStack) - shape.getY();
 			if (manageCurrentHand(xDistance, yDistance, leftHandCenter)) {
 				shape.setState(ShapeStates.captured);
+				System.out.println("Left hand caught a " + shape.getColor() + " shape");
 				shape.setCenter(leftHandCenter + 40, yCenter + 200 - getHandHeight(leftStack) - 10);
 				leftStack.push(shape);
 				matchPlates(leftStack);
