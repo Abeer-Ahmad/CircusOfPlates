@@ -75,7 +75,7 @@ public class Viewer implements Observer{
 			goToGame();			
 		}
 		else if (valueChanged instanceof ArrayList){
-			if (((ArrayList) valueChanged).size()>0){
+			if (((ArrayList) valueChanged).size() > 0){
 		      if(((ArrayList) valueChanged).get(0)instanceof Shape){
 		    	  gameGrid.updateShapes((ArrayList<Shape>) valueChanged); 
 		      }

@@ -121,6 +121,10 @@ public class Model extends Observable {
 	private void updatePlayers() {
 		for (Player player : players) {
 			player.manageStack(shapes);
+			/**added**/
+			setChanged();
+			notifyObservers(shapes);
+			/**done**/
 		}
 		setChanged();
 		notifyObservers(players);

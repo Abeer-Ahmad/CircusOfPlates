@@ -1,6 +1,6 @@
 package game.player;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.Collection;
 import java.util.Stack;
 
@@ -22,10 +22,9 @@ public class Player {
 	private String name;
 
 	public Player(String name) {
-
 		this.name = name;
-		rightStack = new Stack<Shape>();
-		leftStack = new Stack<Shape>();
+		rightStack = new Stack<>();
+		leftStack = new Stack<>();
 	}
 
 	protected void setDimensions(int xCenter, int yCenter, int leftHandCenter, int rightHandCenter, int height) {
@@ -47,9 +46,8 @@ public class Player {
 		if (shapes.equals(null))
 			return;
 		for (Shape shape : shapes) {
-			if (shape.getShapeState() == ShapeStates.onGround || shape.getShapeState() == ShapeStates.captured) {
+			if (shape.getShapeState() == ShapeStates.onGround || shape.getShapeState() == ShapeStates.captured)
 				continue;
-			}
 			int xDistance = shape.getX();
 			int yDistance = yCenter + 200 - getHandHeight(rightStack) - shape.getY();
 			if (manageCurrentHand(xDistance, yDistance, rightHandCenter)) {
