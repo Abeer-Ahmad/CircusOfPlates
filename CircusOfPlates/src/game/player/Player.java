@@ -41,7 +41,7 @@ public class Player {
 		this.leftHandXCenter = xCenter - Properties.shiftHandFromXCenter;
 		this.rightHandXCenter = xCenter + Properties.shiftHandFromXCenter;
 		this.height = height;
-		this.handYCenter = (Properties.frameHeight() - yCenter - Properties.shiftHandFromYCenter); 
+		this.handYCenter = yCenter - Properties.shiftHandFromYCenter; 
 	}
 
 
