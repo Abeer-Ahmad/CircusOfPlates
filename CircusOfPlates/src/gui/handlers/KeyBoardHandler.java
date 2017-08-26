@@ -9,7 +9,6 @@ import mvc.Controller;
 
 public class KeyBoardHandler implements KeyListener {
 
-	int turn = 0;
 	Controller gridController;
     PlayerUI playerUI;
     public KeyBoardHandler (Controller controller){
@@ -18,7 +17,6 @@ public class KeyBoardHandler implements KeyListener {
 	public KeyBoardHandler(Controller controller,PlayerUI player) {
 		gridController= controller;
 		playerUI=player;
-		System.out.println("const"+playerUI.getPlayer().getName());
 	}
 
 	@Override

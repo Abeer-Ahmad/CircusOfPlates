@@ -76,9 +76,8 @@ public class Model extends Observable {
 		return firstPlayerTool;
 	}
 
-	public void movePlayer(Player player, int step, int range) {
-		
-		player.move(step, range);
+	public void movePlayer(Player player, int step) {
+		player.move(step);
 		setChanged();
 		notifyObservers(players);
 		player.manageStack(shapes);
