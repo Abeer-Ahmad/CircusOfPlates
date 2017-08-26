@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 import game.player.Player;
 import mvc.Controller;
 import mvc.IViewer;
+import static utilities.Properties.*;
 
 public class WinnerView extends JPanel implements ActionListener,IViewer {
 
@@ -26,33 +27,21 @@ public class WinnerView extends JPanel implements ActionListener,IViewer {
 
 	private BufferedImage backGroundImage;
 	private JButton exit;
-	private ImageIcon exitImage;
-	private JButton importNewShape;
-	private ImageIcon importShapeImage;
-	private ImageIcon loadGameImage;
 	private JButton continueGame;
 	private JButton newGame;
-	private ImageIcon newGameImage;
-	// private JLabel winner;
 	private Controller controller;
-	public WinnerView(Player player, int xFrame, int yFrame) {
-		this.setSize(xFrame, yFrame);
+	public WinnerView(Player player) {
+		setSize(frameWidth(), frameHeight());
 		try {
-			backGroundImage = ImageIO.read(new File("resources/imgs/newgame.jpg"));
-			newGameImage = new ImageIcon(ImageIO.read(new File("resources/imgs/button.jpg")));
-			loadGameImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
-			exitImage = new ImageIcon(ImageIO.read(new File("resources/imgs/background.jpg")));
+			backGroundImage = ImageIO.read(new File(NEW_GAME));
 		} catch (IOException e) {
-			throw new RuntimeException("Image not found");
+			throw new RuntimeException("Image Not Found!");
 		}
 		this.setLayout(null);
-		setBounds(0, 0, 1000, 1000);
 		this.setFocusable(true);
 		JOptionPane.showMessageDialog(null, player.getName() + " wins with "
 				+ Integer.toString(player.getScore()) + " points", "Warning",
 				JOptionPane.PLAIN_MESSAGE);
-		// winner = new JLabel(player.getName() + " wins with " + Integer.toString(player.getScore()) + " points");
-		// winner.setBounds(200, 200, 500, 50);
 		setButtons();
 		repaint();
 	}
@@ -63,15 +52,12 @@ public class WinnerView extends JPanel implements ActionListener,IViewer {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == newGame) {
+		if (e.getSource() == newGame)
 			controller.changeDisplay("playerMenu");
-		}
-		if (e.getSource() == continueGame) {
+		if (e.getSource() == continueGame)
 			controller.newLevel();
-		}
-		if (e.getSource() == exit) {
+		if (e.getSource() == exit)
 			controller.exitGame();
-		}
 	}
 
 	@Override
@@ -79,20 +65,19 @@ public class WinnerView extends JPanel implements ActionListener,IViewer {
 		g.drawImage(backGroundImage, 0, 0, getWidth(), getHeight(), this);
 	}
 
-	private void setButtons() {
+	private void setButtons() { // remove static dimensions!!!
 		newGame = new JButton("New Game");
 		newGame.setBounds(250, 50, 500, 100);
 		newGame.addActionListener(this);
 		this.add(newGame);
-		continueGame = new JButton("PlayAgain");
+		continueGame = new JButton("Play Again");
 		continueGame.setBounds(250, 200, 500, 100);
 		continueGame.addActionListener(this);
 		this.add(continueGame);
-		exit = new JButton("Exit Program");
+		exit = new JButton("Quit");
 		exit.setBounds(250, 350, 500, 100);
 		exit.addActionListener(this);
 		this.add(exit);
 	}
-
 }
 

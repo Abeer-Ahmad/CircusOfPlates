@@ -21,9 +21,8 @@ public class ScoreManager {
     }
    
     public static ScoreManager getInstance (ArrayList<Player> players, int laserHeight){
-    	if (scoreManager==null){
+    	if (scoreManager == null)
     		scoreManager = new ScoreManager(players,laserHeight);
-    	}
     	return scoreManager;
     }
     

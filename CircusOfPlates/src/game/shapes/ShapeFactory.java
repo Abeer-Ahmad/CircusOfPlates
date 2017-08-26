@@ -37,7 +37,7 @@ public class ShapeFactory extends IShapeFactory {
 			shapesLoaded =  prop.getProperty("Shapes").split("\\s*,\\s*");
 			
 		} catch (Exception e) {
-			throw new RuntimeException("error in configuration file");
+			throw new RuntimeException("Error in Configuration File!");
 		}
 		return shapesLoaded;
 	}
@@ -45,7 +45,7 @@ public class ShapeFactory extends IShapeFactory {
 		
 		Class<?> shapeClass;
 		Constructor<?> constructor;
-		shapes = new HashMap<String, Constructor<?>>();
+		shapes = new HashMap<>();
 		for (String shapeName : shapeNames) {
 			shapeClass = loader.loadClass("game.shapes", shapeName); 
 			try {
@@ -69,11 +69,14 @@ public class ShapeFactory extends IShapeFactory {
 		randomshape %= shapeNames.length;
 		try {
 			if (randomshape == shapeID.get("Plate"))
-				return (Shape) shapes.get("Plate").newInstance(x, y, beltLength, randomColor);
+				// return (Shape) shapes.get("Plate").newInstance(x, y, beltLength, randomColor);
+				return new Plate(x, y, beltLength, randomColor);
 			if (randomshape == shapeID.get("Box"))
-				return (Shape) shapes.get("Box").newInstance(x, y, beltLength, randomColor);
+				// return (Shape) shapes.get("Box").newInstance(x, y, beltLength, randomColor);
+				return new Box(x, y, beltLength, randomColor);
 			if (randomshape == shapeID.get("Oval"))
-				return (Shape) shapes.get("Oval").newInstance(x, y, beltLength, randomColor);
+				// return (Shape) shapes.get("Oval").newInstance(x, y, beltLength, randomColor);
+				return new Oval(x, y, beltLength, randomColor);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

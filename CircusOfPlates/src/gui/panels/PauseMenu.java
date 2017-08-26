@@ -15,35 +15,25 @@ import javax.swing.border.EmptyBorder;
 
 import mvc.Controller;
 import mvc.IViewer;
+import static utilities.Properties.*;
 
 public class PauseMenu extends JPanel implements ActionListener,IViewer {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private BufferedImage backGroundImage;
 	private JButton continueGame;
-	private ImageIcon continueGameImage;
 	private JButton mainMenu;
-	private ImageIcon mainMenuImage;
-	// private LoadImage loadImage;
 	private JButton saveGame;
-	private ImageIcon saveGameImage;
     private Controller controller;
-	public PauseMenu(int xFrame,int yFrame) {
-		// loadImage = new LoadImage();
-		this.setSize(xFrame, yFrame);
+	public PauseMenu() {
+		this.setSize(frameWidth(), frameHeight());
 		try {
-			backGroundImage = ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "newgame.jpg"));
-			continueGameImage = new ImageIcon(ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "background.jpg")));
-			saveGameImage = new ImageIcon(ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "background.jpg")));
-			mainMenuImage = new ImageIcon(ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "background.jpg")));
+			backGroundImage = ImageIO.read(new File(NEW_GAME));
 		} catch (IOException e) {
-			throw new RuntimeException("Image not found");
+			throw new RuntimeException("Image Not Found!");
 		}
-		this.setBorder(new EmptyBorder(15, 15, 15, 15));
+		this.setBorder(new EmptyBorder(15, 15, 15, 15)); // remove static dimensions!!!
 		this.setLayout(null);
 		this.setFocusable(true);
 		setButtons();
@@ -51,20 +41,17 @@ public class PauseMenu extends JPanel implements ActionListener,IViewer {
 	}
 	
 	public void setController (Controller controller){
-		this.controller= controller;
+		this.controller = controller;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == continueGame) {
+		if (e.getSource() == continueGame)
 			controller.continueGame();
-		}
-		if (e.getSource() == saveGame) {
+		if (e.getSource() == saveGame)
 			controller.save();
-		}
-		if (e.getSource() == mainMenu) {
-			controller.changeDisplay("mainMenu");;
-		}
+		if (e.getSource() == mainMenu)
+			controller.changeDisplay("mainMenu");
 	}
 
 	@Override
@@ -72,19 +59,18 @@ public class PauseMenu extends JPanel implements ActionListener,IViewer {
 		g.drawImage(backGroundImage, 0, 0, getWidth(), getHeight(), this);
 	}
 
-	private void setButtons() {
-		continueGame = new JButton("continueGame");
+	private void setButtons() { // remove static dimensions!!!
+		continueGame = new JButton("Continue");
 		continueGame.setBounds(250, 100, 500, 100);
 		continueGame.addActionListener(this);
 		this.add(continueGame);
-		saveGame = new JButton("saveGame");
+		saveGame = new JButton("Save");
 		saveGame.setBounds(250, 300, 500, 100);
 		saveGame.addActionListener(this);
 		this.add(saveGame);
-		mainMenu = new JButton("mainMenu");
+		mainMenu = new JButton("Main Menu");
 		mainMenu.setBounds(250, 500, 500, 100);
 		mainMenu.addActionListener(this);
 		this.add(mainMenu);
 	}
-
 }

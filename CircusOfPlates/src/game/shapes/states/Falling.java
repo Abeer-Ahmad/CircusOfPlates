@@ -1,12 +1,13 @@
 package game.shapes.states;
 
 import game.shapes.Shape;
-
+import static utilities.Properties.frameWidth;
+import static utilities.Properties.frameHeight;
 public class Falling extends State {
 
+	private int g = 3;
 	private int deltaT = 1;
 	private int elaspedT = 0;
-	private int g = 3;
 	private int newXCenter;
 	private int newYCenter;
 	
@@ -30,7 +31,7 @@ public class Falling extends State {
 		elaspedT = elaspedT + deltaT;
 		newXCenter = x + (moveSpeed * deltaT);
 		newYCenter = y + (int) (0.5 * g * deltaT * (2 * elaspedT + 1));
-		return (newYCenter > 1000 || newXCenter > 1500 || newXCenter < 0); // change 1500 to frame width
+		return (newYCenter > frameHeight() || newXCenter > frameWidth() || newXCenter < 0);
 	}
 
 	@Override
