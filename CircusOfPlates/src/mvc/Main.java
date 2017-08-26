@@ -15,11 +15,8 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
 					 Application app =new Application();
 					 app.run();
-					
-						
 				} catch (Exception e) {
 					e.printStackTrace(System.out);
 					System.err.println("Error Running the Program");
@@ -27,5 +24,4 @@ public class Main {
 			}
 		});
 	}
-
 }

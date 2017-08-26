@@ -1,11 +1,12 @@
 package game.shapes.states;
 
 import game.shapes.Shape;
+import static utilities.Properties.frameWidth;
 
 public class OnBelt extends State {
 	
-	private int xCenter; // x_center
-	private int yCenter; // y_center
+	private int xCenter;
+	private int yCenter;
 	
 	public OnBelt() {
 
@@ -28,7 +29,7 @@ public class OnBelt extends State {
 		if (moveSpeed > 0)
 			return this.xCenter >= beltLength;
 		else
-			return this.xCenter <= 1500 - beltLength; // change 1500 to frame width
+			return this.xCenter <= frameWidth() - beltLength;
 	}
 
 	@Override

@@ -9,8 +9,8 @@ public class LeftBelt extends Belt {
 
 	public LeftBelt(final int x, final int y, final int length) {
 		super();
-		this.x = x;
-		this.y = y;
+		super.x = x;
+		super.y = y;
 		this.length = length;
 	}
 

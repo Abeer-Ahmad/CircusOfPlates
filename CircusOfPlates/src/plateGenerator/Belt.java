@@ -9,11 +9,11 @@ import game.shapes.Shape;
 public abstract class Belt {
 
 	protected Color color;
-	protected int length;
-	protected PlateGenerator randomGenerator;
 	protected BasicStroke thickness;
+	protected PlateGenerator randomGenerator;
 	protected int x;
 	protected int y;
+	protected int length;
 
 	public Belt() {
 		color = Color.BLACK;

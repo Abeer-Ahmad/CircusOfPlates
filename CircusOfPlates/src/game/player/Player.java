@@ -8,6 +8,8 @@ import game.shapes.Shape;
 import game.shapes.states.*;
 import utilities.Properties;
 
+import static utilities.Properties.*;
+
 public class Player {
 
 	private static final int LIMIT = 3;
@@ -21,9 +23,9 @@ public class Player {
 	private int rightHandXCenter;
 	private int handYCenter;
 	private int score;
-	private int xCenter; // center of clown
-	private int yCenter; // center of clown
-	private int height; // height of image
+	private int xCenter;
+	private int yCenter;
+	private int height;
 	private String name;
 
 
@@ -39,8 +41,9 @@ public class Player {
 		this.leftHandXCenter = xCenter - Properties.shiftHandFromXCenter;
 		this.rightHandXCenter = xCenter + Properties.shiftHandFromXCenter;
 		this.height = height;
-		this.handYCenter = (Properties.screenHeight() - yCenter - Properties.shiftHandFromYCenter); 
+		this.handYCenter = (Properties.frameHeight() - yCenter - Properties.shiftHandFromYCenter); 
 	}
+
 
 	private boolean manageCurrentHand(int shapeXCenter, int shapeYCenter,int handSide) {
 		int stackXCenter;
@@ -54,10 +57,10 @@ public class Player {
 		}
 		boolean xEpsilon = (shapeXCenter <= stackXCenter + xEPSILON) && (shapeXCenter >= stackXCenter - xEPSILON);
 		boolean yEpsilon = (shapeYCenter <= stackYCenter + yEPSILON) && (shapeYCenter >= stackYCenter - yEPSILON);
-		return (xEpsilon && yEpsilon);
+		return xEpsilon && yEpsilon;
 	}
-
-	public void manageStack(Collection<Shape> shapes) {
+	
+	public void manageStack(Collection<Shape> shapes) { // remove static dimensions!!
 		if (shapes.equals(null))
 			return;
 		for (Shape shape : shapes) {
@@ -84,11 +87,11 @@ public class Player {
 	}
 	
 	private int getRightHandHeight () {
-		return handYCenter - (rightStack.size() * Properties.shapeHeight) - Properties.shapeHeight / 2 ;
+		return handYCenter - (rightStack.size() * Properties.SHAPE_HEIGHT) - Properties.SHAPE_HEIGHT / 2;
 	}
 	
 	private int getLeftHandHeight () {
-		return handYCenter - (leftStack.size() * Properties.shapeHeight) - Properties.shapeHeight / 2 ;
+		return handYCenter - (leftStack.size() * Properties.SHAPE_HEIGHT) - Properties.SHAPE_HEIGHT / 2;
 	}
 	private void matchPlates(Stack<Shape> currentHand) {
 		int stackSize = currentHand.size();
@@ -108,15 +111,17 @@ public class Player {
 		xCenter += step;
 		xCenter += range;
 		xCenter %= range;
+
 		rightHandXCenter = xCenter + Properties.shiftHandFromXCenter; 
 		leftHandXCenter = xCenter - Properties.shiftHandFromXCenter;
+
 		for (Shape shape : rightStack)
-			shape.setCenter(rightHandXCenter + 40, shape.getY());
+			shape.setCenter(rightHandXCenter , shape.getY());
 		for (Shape shape : leftStack)
-			shape.setCenter(leftHandXCenter + 40, shape.getY());
+			shape.setCenter(leftHandXCenter , shape.getY());
 	}
 
-	private void updateScore() { score += 5; }
+	private void updateScore() { score += EXTRA_POINTS; }
 
 	public Stack<Shape> getLeftStack() {
 		return leftStack;
@@ -133,7 +138,7 @@ public class Player {
 	}
 
 	private int getHandHeight(Stack<Shape> currentHand) {
-		return height + currentHand.size() * 20;
+		return height + currentHand.size() * SHAPE_HEIGHT;
 	}
 
 	public int getScore() {

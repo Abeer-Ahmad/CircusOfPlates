@@ -12,29 +12,24 @@ import java.util.LinkedHashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import mvc.Controller;
 import mvc.IViewer;
-
+import static utilities.Properties.*;
 public class ChoosePlayerMenu extends JPanel implements IViewer {
 
 	private static final long serialVersionUID = 1L;
 
 	private BufferedImage backGroundImage;
 	private JButton onePlayer;
-	private ImageIcon onePlayerImage;
 	private JButton twoPlayer;
-	private ImageIcon twoPlayerImage;
 	private ActionListener menuController;
 	private ActionListener infoController;
-	private Controller controller;
 	private JTextField userName;
 	private JTextField userName2;
 	private  JComboBox<String> levelsList;
@@ -42,25 +37,17 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
     private boolean twoPLayers;
     private String dataLevel;
     private String tool;
-    private int frameHeight;
-    private int frameWidth;
     private int y;
+
+	// remove static dimensions in all class!!!
     
-    
-	public ChoosePlayerMenu(int xFrame, int yFrame) {
-		// loadImage = new LoadImage();
-		this.setSize(xFrame, yFrame);
-		this.frameHeight=yFrame; // needed for?
-		this.frameWidth=xFrame; // needed for?
+	public ChoosePlayerMenu() {
+		this.setSize(frameWidth(), frameHeight());
 		try {
-			backGroundImage = ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "newgame.jpg"));
-			onePlayerImage = new ImageIcon(ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "background.jpg")));
-			twoPlayerImage = new ImageIcon(ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "images.png")));
+			backGroundImage = ImageIO.read(new File(NEW_GAME));
 		} catch (IOException e) {
-			
-			throw new RuntimeException("Image not found");
+			throw new RuntimeException("Image Not Found!");
 		}
-		
 		this.setLayout(null);
 		this.setFocusable(true);
 		setButtons();
@@ -68,7 +55,6 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
 	}
 
 	public void setController (Controller controller){
-		this.controller= controller;
 		this.menuController = new PlayerMenuController(controller);
 		onePlayer.addActionListener(this.menuController);
 		twoPlayer.addActionListener(this.menuController);
@@ -82,13 +68,11 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
 	}
 
 	private void setButtons() {
-		onePlayer = new JButton("Player One");
+		onePlayer = new JButton("One Player");
 		onePlayer.setBounds(250, 200, 500, 100);
-		
 		this.add(onePlayer);
-		twoPlayer = new JButton("Player Two");
+		twoPlayer = new JButton("Two Players");
 		twoPlayer.setBounds(250, 400, 500, 100);
-		
 		this.add(twoPlayer);
 		
 	}
@@ -101,11 +85,10 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
 			setInfoTwoPlayer(playerInfo);
 		else
 			setInfoOnePlayer(playerInfo);
-		
-		final DefaultComboBoxModel<String> tools = new DefaultComboBoxModel<String>();
+		final DefaultComboBoxModel<String> tools = new DefaultComboBoxModel<>();
 		tools.addElement("Mouse");
-		tools.addElement("KeyBoard");
-		toolsList = new JComboBox<String>(tools);
+		tools.addElement("Keyboard");
+		toolsList = new JComboBox<>(tools);
 		toolsList.setSelectedIndex(-1);
 		toolsList.setBounds(230, y, 80, 30);
 		
@@ -118,7 +101,7 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
 		levelsList = new JComboBox<String>(levels);
 		levelsList.setSelectedIndex(-1);
 		levelsList.setBounds(230, y + 40 , 80, 30);
-		this.infoController= new infoMenuController(controller);
+		this.infoController= new infoMenuController();
 		levelsList.addActionListener(infoController);
 		toolsList.addActionListener(infoController);
 		playerInfo.add(difficultyLevel);
@@ -128,8 +111,8 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
 	}
 	
 	public LinkedHashMap<String,Object> getConfigurations()	{
-		LinkedHashMap<String,Object> settings = new LinkedHashMap<String,Object>();
-		ArrayList<String> names = new ArrayList<String>();
+		LinkedHashMap<String,Object> settings = new LinkedHashMap<>();
+		ArrayList<String> names = new ArrayList<>();
 		names.add(userName.getText());
 		if (twoPLayers){
 			names.add(userName2.getText());	
@@ -138,8 +121,8 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
 		settings.put("level",dataLevel);
 		settings.put("names", names);
 		settings.put("tool",tool);
-		settings.put("dimX", frameWidth);
-		settings.put("dimY",frameHeight);
+		settings.put("dimX", frameWidth());
+		settings.put("dimY", frameHeight());
 		return settings;
 	}
 	
@@ -177,7 +160,6 @@ private void setInfoTwoPlayer(JPanel current){
 
 
 private class PlayerMenuController implements ActionListener {
-
 	private Controller controller;
 	public PlayerMenuController (Controller controller){
 		this.controller= controller;
@@ -185,33 +167,26 @@ private class PlayerMenuController implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			 twoPLayers=false;
-			if (e.getSource() == onePlayer) {
+			if (e.getSource() == onePlayer)
 				twoPLayers =false;
-			}
-			if (e.getSource() == twoPlayer) {
+			if (e.getSource() == twoPlayer)
 				twoPLayers = true;	
-			}
-			this.controller.popMessage(ChoosePlayerMenu.this,setPlayerInfoPanel(twoPLayers));	
-	}	
+			this.controller.popMessage(ChoosePlayerMenu.this,setPlayerInfoPanel(twoPLayers));
+		}
 }
 
 private class infoMenuController implements ActionListener {
 
-		private Controller controller;
+		public infoMenuController() {
 
-		public infoMenuController(Controller controller) {
-			this.controller = controller;
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == levelsList) {
-				dataLevel = (String) levelsList.getItemAt(levelsList.getSelectedIndex());
-			}
-			if (e.getSource() == toolsList) {
-				tool = (String) toolsList.getItemAt(toolsList.getSelectedIndex());
-			}
+			if (e.getSource() == levelsList)
+				dataLevel = levelsList.getItemAt(levelsList.getSelectedIndex());
+			if (e.getSource() == toolsList)
+				tool = toolsList.getItemAt(toolsList.getSelectedIndex());
 		}
-
 	}
 }

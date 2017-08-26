@@ -38,14 +38,14 @@ public class PlateGenerator {
    
     private void intializeColors() {
         colors = new HashMap<Integer, Color>();
-        colors.put(0, new Color (40, 53, 147));  //blue
-        colors.put(1, new Color (174, 79, 107)); //brown
-        colors.put(2, new Color (178, 135, 0));  //almostgrey
+        colors.put(0, new Color (40, 53, 147));  // blue
+        colors.put(1, new Color (174, 79, 107)); // brown
+        colors.put(2, new Color (178, 135, 0));  // almostgrey
         colors.put(3, new Color  (47, 79, 79));  // dark lategrey
-        colors.put(4, new Color (255, 235, 59)); //yello
-        colors.put(5, new Color (56, 142, 60));  //green
-        colors.put(6, new Color (74, 35, 90));   //violet
-        colors.put(7, new Color (255, 140, 0));  //dark orange
+        colors.put(4, new Color (255, 235, 59)); // yellow
+        colors.put(5, new Color (56, 142, 60));  // green
+        colors.put(6, new Color (74, 35, 90));   // violet
+        colors.put(7, new Color (255, 140, 0));  // dark orange
         
             
     }
@@ -101,7 +101,7 @@ public class PlateGenerator {
 				return temp;
 			}
 		}
-		return shapeFactory.getRandomShape(x, y, beltLength, randomNum, shapeColor);
+        return shapeFactory.getRandomShape(x, y, beltLength, randomNum, shapeColor);
 	}
  
     public int getRandomSpeed() {

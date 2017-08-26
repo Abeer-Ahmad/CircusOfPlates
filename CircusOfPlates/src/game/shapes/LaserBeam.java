@@ -5,34 +5,20 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
-public class LaserBeam extends Shape {
+import static utilities.Properties.frameWidth;
 
-	private Color color;
-	private int width;
+public class LaserBeam {
 
-	public LaserBeam(int width) {
-		super.xPostion = 0;
-		super.yPostion = 140;
-		this.color = Color.red;
-		this.width = width;
+
+	public LaserBeam() {
+
 	}
 
-	@Override
 	public void draw(Graphics2D g) {
-		if (color.equals(Color.red)) {
-			color = Color.blue;
-		} else {
-			color = Color.red;
-		}
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g.setColor(color);
+		g.setColor(Color.red.darker());
 		g.setStroke(new BasicStroke(5));
-		g.drawLine(xPostion, yPostion, xPostion + width, yPostion);
-	}
-
-	@Override
-	public Color getColor() {
-		return color;
+		g.drawLine(0, 140, frameWidth(), 140); // remove static dimensions!!
 	}
 
 }

@@ -1,12 +1,10 @@
 package gui.panels;
- 
-import java.awt.Color;
+
 import java.awt.Graphics;
  
  
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -14,13 +12,9 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
 
 import game.player.Player;
 import game.player.PlayerUI;
@@ -30,15 +24,13 @@ import gui.handlers.KeyBoardHandler;
 import gui.handlers.MouseHandler;
 import mvc.Controller;
 import plateGenerator.Belt;
+import static utilities.Properties.*;
  
 public class GameGrid extends JPanel {
 
     private static final long serialVersionUID = 1L;
     private BufferedImage backGroundImage;
-    private boolean isRunning;
     private LaserBeam leaserBeam;
-    private MouseHandler mouseHandler;
-    private Controller controller;
     private ArrayList<Belt> belts;
     private ArrayList<PlayerUI> playersUI;
     private ArrayList<Shape> shapes;
@@ -48,27 +40,29 @@ public class GameGrid extends JPanel {
     private JLabel player2Name;
     private JLabel player1_score;
     private JLabel player2_score;
-    
-    public GameGrid(boolean twoPlayers, ArrayList<Player> modelPlayers, String firstPlayerTool, int xFrame, int yFrame) {
-        this.setSize(xFrame, yFrame);
+
+    // remove static dimensions in all class!!!
+
+    public GameGrid(boolean twoPlayers, ArrayList<Player> modelPlayers, String firstPlayerTool) {
+        this.setSize(frameWidth(), frameHeight());
         try {
-            backGroundImage = ImageIO.read(new File("resources" + File.separator + "imgs" + File.separator + "background.jpg"));
+            backGroundImage = ImageIO.read(new File(BACK_GROUND));
         } catch (IOException e) {
-            throw new RuntimeException("Image not found");
+            throw new RuntimeException("Image Not Found!");
         }
         this.setLayout(null);
         this.twoPlayers = twoPlayers;
         this.firstPlayerTool=firstPlayerTool;
         this.setFocusable(true);
-        leaserBeam = new LaserBeam(1500);  
-        belts= new  ArrayList<Belt>();
-        shapes= new ArrayList<Shape>();
-        playersUI= new ArrayList<PlayerUI>();
-        playersUI.add(new PlayerUI(modelPlayers.get(0), -1, xFrame, yFrame, "resources" + File.separator + "imgs" + File.separator + "player1.png"));
+        leaserBeam = new LaserBeam();
+        belts= new  ArrayList<>();
+        shapes= new ArrayList<>();
+        playersUI= new ArrayList<>();
+        playersUI.add(new PlayerUI(modelPlayers.get(0), PLAYER1, -1));
         this.add(playersUI.get(0));
         declarePlayer1();
 		if (this.twoPlayers) {
-			playersUI.add(new PlayerUI(modelPlayers.get(1), 1, xFrame, yFrame, "resources" + File.separator + "imgs" + File.separator + "player2.png"));
+			playersUI.add(new PlayerUI(modelPlayers.get(1), PLAYER2, 1));
 			this.add(playersUI.get(1));
 			declarePlayer2();
 		}     
@@ -119,10 +113,9 @@ public class GameGrid extends JPanel {
         	 public void actionPerformed(ActionEvent e) {
         			controller.movePlayer(keyPlayer, 40, getWidth());
         		}};
-        
-            
-       keyPlayer.getActionMap().put("pressedL",pressedActionL);
-       keyPlayer.getActionMap().put("pressedR",pressedActionR);
+
+        keyPlayer.getActionMap().put("pressedL",pressedActionL);
+        keyPlayer.getActionMap().put("pressedR",pressedActionR);
     }
     
     private void setMouseController(final Controller controller,final PlayerUI mousePlayer){
@@ -150,38 +143,26 @@ public class GameGrid extends JPanel {
     }
  
     public void setController (Controller controller){
-        this.controller= controller;
         this.addKeyListener(new KeyBoardHandler(controller));
         if (firstPlayerTool.equals("KeyBoard")){
-         setkeyBoardController(controller,playersUI.get(0));
-          if (twoPlayers){
+            setkeyBoardController(controller,playersUI.get(0));
+            if (twoPlayers)
                 setMouseController(controller,playersUI.get(1));
-          }
-        }  
-        else if (firstPlayerTool.equals("Mouse")){
+        } else if (firstPlayerTool.equals("Mouse")){
             setMouseController(controller,playersUI.get(0));
-            if (twoPlayers){
+            if (twoPlayers)
                 setkeyBoardController(controller,playersUI.get(1));
-            }
-          } 
-       }
-   
-   
-    public void continueGame() {
-        isRunning = true;
-    }
- 
-    private void drawBelts(Graphics2D graphics2d) {
-        for (Belt belt : belts) {
-            belt.drawBelt(graphics2d);
         }
+    }
+
+    private void drawBelts(Graphics2D graphics2d) {
+        for (Belt belt : belts)
+            belt.drawBelt(graphics2d);
     }
  
     private void drawPlayers(Graphics2D graphics2d ) {
-       
-        for (PlayerUI player : playersUI) {
+        for (PlayerUI player : playersUI)
             player.draw(graphics2d);
-        }
     }
  
     private void drawShapes(Graphics2D graphics2d) {   
@@ -190,11 +171,7 @@ public class GameGrid extends JPanel {
             shape.draw(graphics2d);
         }
     }
- 
-    public boolean isRunning() {
-        return isRunning;
-    }
- 
+
     @Override
     public void paintComponent(Graphics g) {
         super.repaint();
@@ -212,17 +189,13 @@ public class GameGrid extends JPanel {
         setkeyBoardController(controller,players.get(0));
         setMouseController(controller,players.get(1));*/
     }
- 
-    public void pauseGame() {
-        isRunning = false;
-    }
-    
+
     public void updateBelts(ArrayList<Belt> belts) {
-        this.belts =belts;             
+        this.belts = belts;
     }
    
     public synchronized void updateShapes(ArrayList<Shape> shapes) {
-        this.shapes =shapes;             
+        this.shapes = shapes;
     }
    
     public void updatePlayers(ArrayList<Player> players) {

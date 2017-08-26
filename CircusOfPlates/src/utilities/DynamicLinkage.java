@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 public class DynamicLinkage implements IDynamicLinkage {
 	
 	private static final String shapeJarPath = "resources" + File.separator + "jars" + File.separator + "shapes";
+
 	private File file;
 	private URL url;
 	private URLClassLoader classLoader;
@@ -22,7 +23,6 @@ public class DynamicLinkage implements IDynamicLinkage {
 	}
 
 	@Override
-	
 	public Class<?> loadClass(String packageName, String className) {
 		try {
 			
