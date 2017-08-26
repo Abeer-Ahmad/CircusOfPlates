@@ -25,7 +25,7 @@ import gui.handlers.MouseHandler;
 import mvc.Controller;
 import plateGenerator.Belt;
 import static utilities.Properties.*;
- 
+
 public class GameGrid extends JPanel {
 
     private static final long serialVersionUID = 1L;
@@ -67,91 +67,94 @@ public class GameGrid extends JPanel {
 			declarePlayer2();
 		}     
     }
- 
+
     private void declarePlayer1() {
-    	 player1Name = new JLabel(playersUI.get(0).getPlayer().getName());
-    	 player1Name.setFont(player1Name.getFont().deriveFont(22.0f));
-    	 player1Name.setBounds(30, 150, 200, 50);
-    	 
-    	 player1_score = new JLabel(Integer.toString(playersUI.get(0).getPlayer().getScore()));
-    	 player1_score.setFont(player1Name.getFont().deriveFont(22.0f));
-    	 player1_score.setBounds(30, 180, 150, 50);
-    	 
-         this.add(player1Name);
-         this.add(player1_score);
+        player1Name = new JLabel(playersUI.get(0).getPlayer().getName());
+        player1Name.setFont(player1Name.getFont().deriveFont(22.0f));
+        player1Name.setBounds(30, 150, 200, 50);
+
+        player1_score = new JLabel(Integer.toString(playersUI.get(0).getPlayer().getScore()));
+        player1_score.setFont(player1Name.getFont().deriveFont(22.0f));
+        player1_score.setBounds(30, 180, 150, 50);
+
+        this.add(player1Name);
+        this.add(player1_score);
     }
-    
+
     private void declarePlayer2() {
-		player2Name = new JLabel(playersUI.get(1).getPlayer().getName());
-		player2Name.setFont(player1Name.getFont().deriveFont(22.0f));
-		player2Name.setBounds(1300, 150, 200, 50);
-		
-		player2_score = new JLabel(Integer.toString(playersUI.get(1).getPlayer().getScore()));
-   	 	player2_score.setFont(player1Name.getFont().deriveFont(22.0f));
-   	 	player2_score.setBounds(1300, 180, 150, 50);
-   	 	
-   	 	this.add(player2Name);
-   	 	this.add(player2_score);
-	}
-    
+        player2Name = new JLabel(playersUI.get(1).getPlayer().getName());
+        player2Name.setFont(player1Name.getFont().deriveFont(22.0f));
+        player2Name.setBounds(1300, 150, 200, 50);
+
+        player2_score = new JLabel(Integer.toString(playersUI.get(1).getPlayer().getScore()));
+        player2_score.setFont(player1Name.getFont().deriveFont(22.0f));
+        player2_score.setBounds(1300, 180, 150, 50);
+
+        this.add(player2Name);
+        this.add(player2_score);
+    }
+
     /* move to keyboard handler */
-    private void setkeyBoardController(final Controller controller,final PlayerUI keyPlayer){
+    private void setKeyBoardController(final Controller controller, final PlayerUI keyPlayer) {
         /*KeyBoardHandler keyBoardHandler = new KeyBoardHandler(controller,keyPlayer);
         keyPlayer.requestFocus();
          keyPlayer.addKeyListener(keyBoardHandler);
         this.addKeyListener(keyBoardHandler);
-        //this.requestFocus();*/ 
-        keyPlayer.getInputMap( WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"),
+        //this.requestFocus();*/
+        keyPlayer.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"),
                 "pressedR");
-        keyPlayer.getInputMap( WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"),
+        keyPlayer.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"),
                 "pressedL");
-        AbstractAction  pressedActionL = new AbstractAction() {
+        AbstractAction pressedActionL = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-        			controller.movePlayer(keyPlayer, -40, getWidth());
-            }};
-        AbstractAction  pressedActionR = new AbstractAction() {
-        	 public void actionPerformed(ActionEvent e) {
-        			controller.movePlayer(keyPlayer, 40, getWidth());
-        		}};
+                controller.movePlayer(keyPlayer, -50);
+            }
+        };
+        AbstractAction pressedActionR = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                controller.movePlayer(keyPlayer, 50);
+            }
+        };
 
-        keyPlayer.getActionMap().put("pressedL",pressedActionL);
-        keyPlayer.getActionMap().put("pressedR",pressedActionR);
+        keyPlayer.getActionMap().put("pressedL", pressedActionL);
+        keyPlayer.getActionMap().put("pressedR", pressedActionR);
     }
-    
-    private void setMouseController(final Controller controller,final PlayerUI mousePlayer){
+
+    private void setMouseController(final Controller controller, final PlayerUI mousePlayer) {
         /*MouseHandler mouseHandler = new MouseHandler(controller,mousePlayer);
         mousePlayer.requestFocus();
         mousePlayer.addMouseListener(mouseHandler);
         mousePlayer.addMouseMotionListener(mouseHandler);
         this.addMouseListener(mouseHandler);
         this.addMouseMotionListener(mouseHandler);*/
-    	 mousePlayer.getInputMap( WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("D"),
-                 "pressedR");
-         mousePlayer.getInputMap( WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("A"),
-                 "pressedL");
-         AbstractAction  pressedActionL = new AbstractAction() {
-             public void actionPerformed(ActionEvent e) {
-             System.out.println("uikey"+mousePlayer.getPlayer().getName());
-         			controller.movePlayer(mousePlayer, -40, getWidth());
-             }};
-         AbstractAction  pressedActionR = new AbstractAction() {
-         	 public void actionPerformed(ActionEvent e) {
-         			controller.movePlayer(mousePlayer, 40, getWidth());
-         		}};    
-        mousePlayer.getActionMap().put("pressedL",pressedActionL);
-        mousePlayer.getActionMap().put("pressedR",pressedActionR);
+        mousePlayer.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("D"),
+                "pressedR");
+        mousePlayer.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("A"),
+                "pressedL");
+        AbstractAction pressedActionL = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                controller.movePlayer(mousePlayer, -40);
+            }
+        };
+        AbstractAction pressedActionR = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                controller.movePlayer(mousePlayer, 40);
+            }
+        };
+        mousePlayer.getActionMap().put("pressedL", pressedActionL);
+        mousePlayer.getActionMap().put("pressedR", pressedActionR);
     }
- 
-    public void setController (Controller controller){
+
+    public void setController(Controller controller) {
         this.addKeyListener(new KeyBoardHandler(controller));
-        if (firstPlayerTool.equals("KeyBoard")){
-            setkeyBoardController(controller,playersUI.get(0));
+        if (firstPlayerTool.equals("Keyboard")) {
+            setKeyBoardController(controller, playersUI.get(0));
             if (twoPlayers)
-                setMouseController(controller,playersUI.get(1));
-        } else if (firstPlayerTool.equals("Mouse")){
-            setMouseController(controller,playersUI.get(0));
+                setMouseController(controller, playersUI.get(1));
+        } else if (firstPlayerTool.equals("Mouse")) {
+            setMouseController(controller, playersUI.get(0));
             if (twoPlayers)
-                setkeyBoardController(controller,playersUI.get(1));
+                setKeyBoardController(controller, playersUI.get(1));
         }
     }
 
@@ -159,14 +162,14 @@ public class GameGrid extends JPanel {
         for (Belt belt : belts)
             belt.drawBelt(graphics2d);
     }
- 
-    private void drawPlayers(Graphics2D graphics2d ) {
+
+    private void drawPlayers(Graphics2D graphics2d) {
         for (PlayerUI player : playersUI)
             player.draw(graphics2d);
     }
- 
-    private void drawShapes(Graphics2D graphics2d) {   
-        for (int i = 0; i< shapes.size(); i++) {
+
+    private void drawShapes(Graphics2D graphics2d) {
+        for (int i = 0; i < shapes.size(); i++) {
             Shape shape = shapes.get(i);
             shape.draw(graphics2d);
         }
@@ -186,29 +189,29 @@ public class GameGrid extends JPanel {
         }
         this.add(players.get(0));
         this.add(players.get(1));
-        setkeyBoardController(controller,players.get(0));
+        setKeyBoardController(controller,players.get(0));
         setMouseController(controller,players.get(1));*/
     }
 
     public void updateBelts(ArrayList<Belt> belts) {
         this.belts = belts;
     }
-   
+
     public synchronized void updateShapes(ArrayList<Shape> shapes) {
         this.shapes = shapes;
     }
-   
+
     public void updatePlayers(ArrayList<Player> players) {
         int i = 0;
         for (PlayerUI player : this.playersUI) {
             player.updatePLayerModel(players.get(i++));
             showScore();
-        }             
+        }
     }
-    
+
     private void showScore() {
-    	if (twoPlayers)
-    		player2_score.setText(Integer.toString(playersUI.get(1).getPlayer().getScore()));
-    	player1_score.setText(Integer.toString(playersUI.get(0).getPlayer().getScore()));
+        if (twoPlayers)
+            player2_score.setText(Integer.toString(playersUI.get(1).getPlayer().getScore()));
+        player1_score.setText(Integer.toString(playersUI.get(0).getPlayer().getScore()));
     }
 }
