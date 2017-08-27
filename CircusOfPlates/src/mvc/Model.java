@@ -82,6 +82,7 @@ public class Model extends Observable {
 		setChanged();
 		notifyObservers(players);
 		player.manageStack(shapes);
+		removeExpired();
 		setChanged();
 		notifyObservers(shapes);
 		System.out.println("end of Model movePlayer");
@@ -124,6 +125,7 @@ public class Model extends Observable {
 		System.out.println("inside updatePlayer");
 		for (Player player : players) {
 			player.manageStack(shapes);
+			removeExpired();
 			setChanged();
 			notifyObservers(shapes);
 		}
