@@ -13,8 +13,8 @@ import static utilities.Properties.*;
 public class Player {
 
 	private static final int LIMIT = 3;
-	private static final int xEPSILON = 10;
-	private static final int yEPSILON = 5;
+	private static final int xEPSILON = 30;
+	private static final int yEPSILON = 50;
 	private static final int rightHand = 1;
 	private static final int leftHand = -1;
 	private Stack<Shape> leftStack;
@@ -28,7 +28,6 @@ public class Player {
 	private int height;
 	private String name;
 
-
 	public Player(String name) {
 		this.name = name;
 		rightStack = new Stack<>();
@@ -41,14 +40,34 @@ public class Player {
 		this.height = height;
 		leftHandXCenter = xCenter - shiftHandFromXCenter;
 		rightHandXCenter = xCenter + shiftHandFromXCenter;
-		// handYCenter = yCenter - shiftHandFromYCenter;
 		handYCenter = frameHeight() - height;
-		System.out.println("frameHeight = " + frameHeight());
-		System.out.println("image height = " + height);
-		System.out.println("yCenter = " + yCenter);
-		System.out.println("handYCenter = " + handYCenter);
 	}
-
+	
+	public void manageStack(Collection<Shape> shapes) {
+		if (shapes.equals(null))
+			return;
+		for (Shape shape : shapes) {
+            if (shape.getState() instanceof OnGround || shape.getState() instanceof Captured)
+				continue;
+			if (manageCurrentHand(shape.getX(), shape.getY(), rightHand)) {
+                shape.setState(new Captured());
+				System.out.print("Right hand caught a shape, now at (");
+				shape.setCenter(rightHandXCenter, rightHandTopmostY());
+				rightStack.push(shape);
+				System.out.println(shape.getX() + ", " + shape.getY() + ")");
+				matchPlates(rightStack);
+				continue;
+			}				
+			if (manageCurrentHand(shape.getX(), shape.getY(), leftHand)) {
+                shape.setState(new Captured());
+				System.out.print("Left hand caught a shape, now at (");
+				shape.setCenter(leftHandXCenter, leftHandTopmostY());
+				leftStack.push(shape);
+				System.out.println(shape.getX() + ", " + shape.getY() + ")");
+				matchPlates(leftStack);
+			}
+		}
+	}
 
 	private boolean manageCurrentHand(int shapeXCenter, int shapeYCenter,int handSide) {
 		int stackXCenter, stackYCenter;
@@ -63,32 +82,7 @@ public class Player {
 		boolean yEpsilon = (shapeYCenter <= stackYCenter + yEPSILON) && (shapeYCenter >= stackYCenter - yEPSILON);
 		return xEpsilon && yEpsilon;
 	}
-	
-	public void manageStack(Collection<Shape> shapes) {
-		if (shapes.equals(null))
-			return;
-		for (Shape shape : shapes) {
-            if (shape.getState() instanceof OnGround || shape.getState() instanceof Captured) {
-				continue;
-            }
-			if (manageCurrentHand(shape.getX(), shape.getY(), rightHand)) {
-                shape.setState(new Captured());
-				System.out.println("Right hand caught a " + shape.getColor() + " shape");
-				shape.setCenter(rightHandXCenter, rightHandTopmostY());
-				rightStack.push(shape);
-				matchPlates(rightStack);
-				continue;
-			}				
-			if (manageCurrentHand(shape.getX(), shape.getY(), leftHand)) {
-                shape.setState(new Captured());
-				System.out.println("Left hand caught a " + shape.getColor() + " shape");
-				shape.setCenter(leftHandXCenter, leftHandTopmostY());
-				leftStack.push(shape);
-				matchPlates(leftStack);
-			}
-		}
-	}
-	
+
 	private int rightHandTopmostY() {
 		return handYCenter - (rightStack.size() * SHAPE_HEIGHT) - SHAPE_HEIGHT / 2;
 	}

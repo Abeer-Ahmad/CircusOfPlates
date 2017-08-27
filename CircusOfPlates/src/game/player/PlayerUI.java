@@ -15,7 +15,6 @@ import static utilities.Properties.*;
 public class PlayerUI extends JComponent {
 
     private static final long serialVersionUID = 6003066744683293690L;
-    private static final int SHIFT = 50;
     private BufferedImage image;
     private Player player;
 
@@ -39,7 +38,6 @@ public class PlayerUI extends JComponent {
     public Player getPlayer() {
         return player;
     }
-
 
     public void draw(Graphics2D g) {
         int topLeftXCoor = player.getxPostion() - (image.getWidth() / 2);

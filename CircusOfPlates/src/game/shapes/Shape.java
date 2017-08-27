@@ -21,7 +21,6 @@ public abstract class Shape implements Serializable{
 	private State state;
 	private int moveSpeed;
 
-
 	public Shape() {
 		state = new OnBelt();
 		width = SHAPE_WIDTH;

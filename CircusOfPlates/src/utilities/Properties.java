@@ -14,7 +14,7 @@ public final class Properties {
 
     public static final String BACK_GROUND = "resources" + File.separator + "imgs" + File.separator + "background.jpg";
 
-    public static final int SHIFT = 50; // shifting clowns from the center at the beginning
+    public static final int SHIFT = 100; // shifting clowns from the center at the beginning
 
     public static final int EXTRA_POINTS = 5;
 
