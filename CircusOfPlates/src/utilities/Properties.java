@@ -24,7 +24,7 @@ public final class Properties {
     
     public final static int shiftHandFromXCenter = 133;
     
-	public final static int shiftHandFromYCenter = 174;
+	public final static int shiftHandFromYCenter = 0;
 
     public static final int frameWidth(){ return Toolkit.getDefaultToolkit().getScreenSize().width; }
 
