@@ -13,8 +13,8 @@ import static utilities.Properties.*;
 public class Player {
 
 	private static final int LIMIT = 3;
-	private static final int xEPSILON = 10;
-	private static final int yEPSILON = 5;
+	private static final int xEPSILON = 30;
+	private static final int yEPSILON = 60;
 	private static final int rightHand = 1;
 	private static final int leftHand = -1;
 	private Stack<Shape> leftStack;
@@ -42,10 +42,6 @@ public class Player {
 		leftHandXCenter = xCenter - shiftHandFromXCenter;
 		rightHandXCenter = xCenter + shiftHandFromXCenter;
 		handYCenter = frameHeight() - height;
-		System.out.println("frameHeight = " + frameHeight());
-		System.out.println("image height = " + height);
-		System.out.println("yCenter = " + yCenter);
-		System.out.println("handYCenter = " + handYCenter);
 	}
 
 
@@ -66,6 +62,22 @@ public class Player {
 	}
 	
 	public void manageStack(Collection<Shape> shapes) {
+		System.out.println("manage stack  \n shapes in right stack");
+		for (int i = 0; i < rightStack.size(); i++) {
+            Shape shape =rightStack.get(i);
+            synchronized (shape) {
+                System.out.println(shape.getClass().getSimpleName() + " color " + shape.getColor().toString() +             		
+               " state " + shape.getState().toString()+ "coor " + shape.getX() + " "+ shape.getY());
+            }
+        }
+        System.out.println("shapes in left stack");
+        for (int i = 0; i < leftStack.size(); i++) {
+            Shape shape = leftStack.get(i);
+            synchronized (shape) {
+            	System.out.println(shape.getClass().getSimpleName() + " color " + shape.getColor().toString()
+            			+ shape.getState().toString() + "coor " + shape.getX() + " "+ shape.getY());
+            }
+       }
 		if (shapes.equals(null))
 			return;
 		for (Shape shape : shapes) {
@@ -88,6 +100,22 @@ public class Player {
 				matchPlates(leftStack);
 			}
 		}
+		System.out.println("shapes in right stack2");
+		for (int i = 0; i < rightStack.size(); i++) {
+            Shape shape =rightStack.get(i);
+            synchronized (shape) {
+                System.out.println(shape.getClass().getSimpleName() + " color " + shape.getColor().toString() +             		
+               " state " + shape.getState().toString()+ "coor " + shape.getX() + " "+ shape.getY());
+            }
+        }
+        System.out.println("shapes in left stack2");
+        for (int i = 0; i < leftStack.size(); i++) {
+            Shape shape = leftStack.get(i);
+            synchronized (shape) {
+            	System.out.println(shape.getClass().getSimpleName() + " color " + shape.getColor().toString()
+            			+ shape.getState().toString() + "coor " + shape.getX() + " "+ shape.getY());
+            }
+       }
 	}
 	
 	private int rightHandTopmostY() {
@@ -118,10 +146,12 @@ public class Player {
 		xCenter %= frameWidth();
 		rightHandXCenter = xCenter + Properties.shiftHandFromXCenter; 
 		leftHandXCenter = xCenter - Properties.shiftHandFromXCenter;
-		for (Shape shape : rightStack)
+		for (Shape shape : rightStack) {
 			shape.setCenter(rightHandXCenter, shape.getY());
-		for (Shape shape : leftStack)
+		}
+		for (Shape shape : leftStack) {	
 			shape.setCenter(leftHandXCenter, shape.getY());
+		}
 	}
 
 	private void updateScore() { score += EXTRA_POINTS; }
@@ -163,4 +193,6 @@ public class Player {
 	public void newLevel() {
 		this.score = 0;
 	}
+	
+	
 }

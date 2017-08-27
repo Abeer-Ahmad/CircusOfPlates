@@ -77,14 +77,14 @@ public class Model extends Observable {
 	}
 
 	public void movePlayer(Player player, int step) {
-		
+ 		System.out.println("inside Model movePlayer");
 		player.move(step);
 		setChanged();
 		notifyObservers(players);
 		player.manageStack(shapes);
 		setChanged();
 		notifyObservers(shapes);
-
+		System.out.println("end of Model movePlayer");
 	}
 
 	private void addNewShape() {
@@ -121,11 +121,13 @@ public class Model extends Observable {
 	}
 
 	private void updatePlayers() {
+		System.out.println("inside updatePlayer");
 		for (Player player : players) {
 			player.manageStack(shapes);
 			setChanged();
 			notifyObservers(shapes);
 		}
+		System.out.println("endside updatePlayer");
 		setChanged();
 		notifyObservers(players);
 	}
