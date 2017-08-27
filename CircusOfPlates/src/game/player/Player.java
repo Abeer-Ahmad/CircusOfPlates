@@ -91,12 +91,13 @@ public class Player {
 	}
 	
 	private int rightHandTopmostY() {
-		 return handYCenter - (rightStack.size() * Properties.SHAPE_HEIGHT) - Properties.SHAPE_HEIGHT / 2;
+		return handYCenter - (rightStack.size() * SHAPE_HEIGHT) - SHAPE_HEIGHT / 2;
 	}
 	
 	private int leftHandTopmostY() {
-		return handYCenter - (leftStack.size() * Properties.SHAPE_HEIGHT) - Properties.SHAPE_HEIGHT / 2;
+		return handYCenter - (leftStack.size() * SHAPE_HEIGHT) - SHAPE_HEIGHT / 2;
 	}
+
 	private void matchPlates(Stack<Shape> currentHand) {
 		int stackSize = currentHand.size();
 		if (stackSize < 3)
