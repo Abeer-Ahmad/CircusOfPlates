@@ -77,6 +77,7 @@ public class Model extends Observable {
 	}
 
 	public void movePlayer(Player player, int step) {
+		
 		player.move(step);
 		setChanged();
 		notifyObservers(players);

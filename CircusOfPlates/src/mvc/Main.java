@@ -1,13 +1,8 @@
 package mvc;
 
 import java.awt.EventQueue;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.util.List;
-import java.util.Properties;
 
-import gui.MainFrame;
+
 
 public class Main {
 

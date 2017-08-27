@@ -1,22 +1,29 @@
 package gui.panels;
 
-import game.player.Player;
-import game.player.PlayerUI;
-import game.shapes.LaserBeam;
-import game.shapes.Shape;
-import gui.handlers.KeyBoardHandler;
-import mvc.Controller;
-import plateGenerator.Belt;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Graphics;
+ 
+ 
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+import javax.swing.AbstractAction;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.KeyStroke;
+
+import game.player.Player;
+import game.player.PlayerUI;
+import game.shapes.LaserBeam;
+import game.shapes.Shape;
+import gui.handlers.KeyBoardHandler;
+import gui.handlers.MouseHandler;
+import mvc.Controller;
+import plateGenerator.Belt;
 import static utilities.Properties.*;
 
 public class GameGrid extends JPanel {
@@ -45,20 +52,20 @@ public class GameGrid extends JPanel {
         }
         this.setLayout(null);
         this.twoPlayers = twoPlayers;
-        this.firstPlayerTool = firstPlayerTool;
+        this.firstPlayerTool=firstPlayerTool;
         this.setFocusable(true);
         leaserBeam = new LaserBeam();
-        belts = new ArrayList<>();
-        shapes = new ArrayList<>();
-        playersUI = new ArrayList<>();
+        belts= new  ArrayList<>();
+        shapes= new ArrayList<>();
+        playersUI= new ArrayList<>();
         playersUI.add(new PlayerUI(modelPlayers.get(0), PLAYER1, -1));
         this.add(playersUI.get(0));
         declarePlayer1();
-        if (this.twoPlayers) {
-            playersUI.add(new PlayerUI(modelPlayers.get(1), PLAYER2, 1));
-            this.add(playersUI.get(1));
-            declarePlayer2();
-        }
+		if (this.twoPlayers) {
+			playersUI.add(new PlayerUI(modelPlayers.get(1), PLAYER2, 1));
+			this.add(playersUI.get(1));
+			declarePlayer2();
+		}     
     }
 
     private void declarePlayer1() {
