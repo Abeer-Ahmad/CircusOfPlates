@@ -41,7 +41,8 @@ public class Player {
 		this.height = height;
 		leftHandXCenter = xCenter - shiftHandFromXCenter;
 		rightHandXCenter = xCenter + shiftHandFromXCenter;
-		handYCenter = yCenter - shiftHandFromYCenter;
+		// handYCenter = yCenter - shiftHandFromYCenter;
+		handYCenter = frameHeight() - height;
 		System.out.println("frameHeight = " + frameHeight());
 		System.out.println("image height = " + height);
 		System.out.println("yCenter = " + yCenter);
@@ -89,14 +90,13 @@ public class Player {
 	}
 	
 	private int rightHandTopmostY() {
-		// return handYCenter - (rightStack.size() * Properties.SHAPE_HEIGHT) - Properties.SHAPE_HEIGHT / 2;
-		return frameHeight() - (handYCenter + rightStack.size() * Properties.SHAPE_HEIGHT);
+		return handYCenter - (rightStack.size() * SHAPE_HEIGHT) - SHAPE_HEIGHT / 2;
 	}
 	
 	private int leftHandTopmostY() {
-		// return handYCenter - (leftStack.size() * Properties.SHAPE_HEIGHT) - Properties.SHAPE_HEIGHT / 2;
-		return frameHeight() - (handYCenter + leftStack.size() * Properties.SHAPE_HEIGHT);
+		return handYCenter - (leftStack.size() * SHAPE_HEIGHT) - SHAPE_HEIGHT / 2;
 	}
+
 	private void matchPlates(Stack<Shape> currentHand) {
 		int stackSize = currentHand.size();
 		if (stackSize < 3)
