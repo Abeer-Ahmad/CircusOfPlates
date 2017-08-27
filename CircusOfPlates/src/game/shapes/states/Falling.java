@@ -14,6 +14,7 @@ public class Falling extends State {
 	public Falling(int x, int y) {
 		newXCenter = x;
 		newYCenter = y;
+		state = "falling";
 	}
 
 	@Override

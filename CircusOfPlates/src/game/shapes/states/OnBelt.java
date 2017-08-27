@@ -1,6 +1,7 @@
 package game.shapes.states;
 
 import game.shapes.Shape;
+
 import static utilities.Properties.frameWidth;
 
 public class OnBelt extends State {
@@ -9,7 +10,7 @@ public class OnBelt extends State {
 	private int yCenter;
 	
 	public OnBelt() {
-
+		state = "onBelt";
 	}
 
 	@Override
@@ -39,4 +40,6 @@ public class OnBelt extends State {
 		if (stateChanged)
 			shape.setState(new Falling(xCenter, yCenter));
 	}
+	
+	
 }
