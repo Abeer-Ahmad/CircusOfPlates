@@ -12,9 +12,10 @@ public class Falling extends State {
 	private int newYCenter;
 	
 	public Falling(int x, int y) {
+		super();
+		state = "Falling";
 		newXCenter = x;
 		newYCenter = y;
-		state = "falling";
 	}
 
 	@Override

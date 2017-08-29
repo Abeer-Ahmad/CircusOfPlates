@@ -18,7 +18,6 @@ public class KeyBoardHandler implements KeyListener {
 	public KeyBoardHandler(Controller controller,PlayerUI player) {
 		gridController= controller;
 		playerUI=player;
-		System.out.println("const"+playerUI.getPlayer().getName());
 	}
 
 	@Override

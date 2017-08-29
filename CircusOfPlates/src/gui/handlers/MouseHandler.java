@@ -42,7 +42,6 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 	public void mouseMoved(MouseEvent e) {	
 		int currentX = e.getX();
 		//System.out.println("mouseMoving startX"+startX+"playerPosx"+playerUI.getX()+"y"+playerUI.getY());
-		System.out.println("mousekey"+playerUI.getPlayer().getName());
 		// gridController.movePlayer(playerUI, currentX-startX);
 		startX=currentX;
 		

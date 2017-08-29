@@ -89,11 +89,6 @@ public class GameGrid extends JPanel {
 
     /* move to keyboard handler */
     private void setKeyBoardController(final Controller controller, final PlayerUI keyPlayer) {
-        /*KeyBoardHandler keyBoardHandler = new KeyBoardHandler(controller,keyPlayer);
-        keyPlayer.requestFocus();
-         keyPlayer.addKeyListener(keyBoardHandler);
-        this.addKeyListener(keyBoardHandler);
-        //this.requestFocus();*/
         keyPlayer.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"),
                 "pressedR");
         keyPlayer.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"),
@@ -113,12 +108,6 @@ public class GameGrid extends JPanel {
     }
 
     private void setMouseController(final Controller controller, final PlayerUI mousePlayer) {
-        /*MouseHandler mouseHandler = new MouseHandler(controller,mousePlayer);
-        mousePlayer.requestFocus();
-        mousePlayer.addMouseListener(mouseHandler);
-        mousePlayer.addMouseMotionListener(mouseHandler);
-        this.addMouseListener(mouseHandler);
-        this.addMouseMotionListener(mouseHandler);*/
         mousePlayer.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("D"),
                 "pressedR");
         mousePlayer.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("A"),

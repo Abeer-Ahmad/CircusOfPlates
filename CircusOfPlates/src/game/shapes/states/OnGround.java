@@ -5,7 +5,8 @@ import game.shapes.Shape;
 public class OnGround extends State {
 
 	public OnGround() {
-		state = "onGound";
+		super();
+		state = "OnGound";
 	}
 
 	@Override
