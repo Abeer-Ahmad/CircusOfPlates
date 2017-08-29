@@ -44,19 +44,17 @@ public class PlayerUI extends JComponent {
         int topLeftYCoor = player.getyPostion() - (image.getHeight() / 2);
         g.drawImage(image, topLeftXCoor, topLeftYCoor, null);
         this.setBounds(topLeftXCoor, topLeftYCoor, image.getWidth(), image.getHeight());
-   
         for (int i = 0; i < player.getRightStack().size(); i++) {
             Shape shape = player.getRightStack().get(i);
             synchronized (shape) {
                 shape.draw(g);
             }
         }
-       
         for (int i = 0; i < player.getLeftStack().size(); i++) {
             Shape shape = player.getLeftStack().get(i);
             synchronized (shape) {
                 shape.draw(g);
             }
-        }      
+        }
     }
 }

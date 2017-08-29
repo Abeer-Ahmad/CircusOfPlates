@@ -13,7 +13,7 @@ import static utilities.Properties.*;
 public class Player {
 
 	private static final int LIMIT = 3;
-	private static final int xEPSILON = 30;
+	private static final int xEPSILON = 25;
 	private static final int yEPSILON = 50;
 	private static final int rightHand = 1;
 	private static final int leftHand = -1;
@@ -59,7 +59,7 @@ public class Player {
 		return xEpsilon && yEpsilon;
 	}
 	
-	public void manageStack(Collection<Shape> shapes) {
+	public synchronized void manageStack(Collection<Shape> shapes) {
 		if (shapes.equals(null))
 			return;
 		for (Shape shape : shapes) {

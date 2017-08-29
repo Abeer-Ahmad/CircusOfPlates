@@ -22,9 +22,7 @@ public final class Properties {
 
     public static final int SHAPE_HEIGHT = 20;
     
-    public final static int shiftHandFromXCenter = 133;
-    
-	public final static int shiftHandFromYCenter = 0;
+    public static final int shiftHandFromXCenter = 133;
 
     public static final int frameWidth(){ return Toolkit.getDefaultToolkit().getScreenSize().width; }
 

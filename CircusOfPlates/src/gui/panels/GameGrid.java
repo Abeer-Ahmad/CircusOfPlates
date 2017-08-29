@@ -1,7 +1,6 @@
 package gui.panels;
 
 import game.player.Player;
-
 import game.player.PlayerUI;
 import game.shapes.LaserBeam;
 import game.shapes.Shape;
@@ -12,7 +11,6 @@ import utilities.Pair;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
@@ -30,14 +28,14 @@ public class GameGrid extends JPanel {
     private static final long serialVersionUID = 1L;
     private static final int leftDirection = -1;
     private static final int rightDirection = 1;
-    private static final int playerStep = 40;
-    
+    private static final int playerStep = 60;
+
     private BufferedImage backGroundImage;
     private LaserBeam leaserBeam;
     private ArrayList<Belt> belts;
     private ArrayList<PlayerUI> playersUI;
     private ArrayList<Shape> shapes;
-    private HashMap <Integer, Pair<JComponent, Integer>> keyBoardMoveMap;
+    private HashMap<Integer, Pair<JComponent, Integer>> keyBoardMoveMap;
     private boolean twoPlayers;
     private JLabel player1Name;
     private JLabel player2Name;
@@ -60,18 +58,18 @@ public class GameGrid extends JPanel {
         belts = new ArrayList<>();
         shapes = new ArrayList<>();
         playersUI = new ArrayList<>();
-        keyBoardMoveMap = new HashMap <>();
-        
+        keyBoardMoveMap = new HashMap<>();
+
         playersUI.add(new PlayerUI(modelPlayers.get(0), PLAYER1, leftDirection));
         this.add(playersUI.get(0));
         declarePlayer1();
-      
+
         if (this.twoPlayers) {
             playersUI.add(new PlayerUI(modelPlayers.get(1), PLAYER2, rightDirection));
             this.add(playersUI.get(1));
             declarePlayer2();
         }
-        
+
         setKeyBoardMoveMap(this.twoPlayers);
     }
 
@@ -101,22 +99,21 @@ public class GameGrid extends JPanel {
         this.add(player2_score);
     }
 
-    
+
     private void setKeyBoardMoveMap(final boolean twoPlayers) {
-    	keyBoardMoveMap.put(KeyEvent.VK_LEFT, new Pair<>(playersUI.get(0),leftDirection * playerStep));
-    	keyBoardMoveMap.put(KeyEvent.VK_RIGHT, new Pair<>(playersUI.get(0),rightDirection * playerStep));
-    	
-    	if (twoPlayers) {
-    		keyBoardMoveMap.put(KeyEvent.VK_A, new Pair<>(playersUI.get(1),leftDirection * playerStep));
-        	keyBoardMoveMap.put(KeyEvent.VK_D, new Pair<>(playersUI.get(1),rightDirection * playerStep));
-    	}
-    	
+        keyBoardMoveMap.put(KeyEvent.VK_LEFT, new Pair(playersUI.get(0), leftDirection * playerStep));
+        keyBoardMoveMap.put(KeyEvent.VK_RIGHT, new Pair(playersUI.get(0), rightDirection * playerStep));
+
+        if (twoPlayers) {
+            keyBoardMoveMap.put(KeyEvent.VK_A, new Pair(playersUI.get(1), leftDirection * playerStep));
+            keyBoardMoveMap.put(KeyEvent.VK_D, new Pair(playersUI.get(1), rightDirection * playerStep));
+        }
     }
 
     public void setController(Controller controller) {
-         
-    	this.addKeyListener(new MultiKeyPressListener(controller));
-    	
+
+        this.addKeyListener(new MultiKeyPressListener(controller));
+
     }
 
     private void drawBelts(Graphics2D graphics2d) {
@@ -145,7 +142,7 @@ public class GameGrid extends JPanel {
         drawShapes(graphics2d);
         drawPlayers(graphics2d);
         drawBelts(graphics2d);
-      
+
     }
 
     public void updateBelts(ArrayList<Belt> belts) {
@@ -169,49 +166,49 @@ public class GameGrid extends JPanel {
             player2_score.setText(Integer.toString(playersUI.get(1).getPlayer().getScore()));
         player1_score.setText(Integer.toString(playersUI.get(0).getPlayer().getScore()));
     }
-    
-    private class MultiKeyPressListener implements KeyListener { 	
-    	
-    	private Controller controller;
-    	
-    	MultiKeyPressListener (Controller controller) {
-    		this.controller = controller;
-    	}
-    	
+
+    private class MultiKeyPressListener implements KeyListener {
+
         // Set of currently pressed keys
         private final Set<Integer> pressedKeys = new HashSet<Integer>();
+        private Controller controller;
+
+        MultiKeyPressListener(Controller controller) {
+            this.controller = controller;
+        }
 
         @Override
         public synchronized void keyPressed(KeyEvent e) {
             pressedKeys.add(e.getKeyCode());
-            
+            System.out.println("all keys" + pressedKeys);
             if (pressedKeys.size() > 0) {
-        
-             for (Integer pressedKey : pressedKeys) {
-            	 
-            	 if (pressedKey == KeyEvent.VK_ESCAPE){
-         			controller.pauseGame();
-         		}
-            	 
-            	 if (keyBoardMoveMap.containsKey(pressedKey)) {
-            		 Pair<JComponent, Integer> moveInfo = keyBoardMoveMap.get(pressedKey);
-            		 controller.movePlayer((PlayerUI)moveInfo.getFirst(), (int) moveInfo.getSecond());
-            	 }
-            	 
-             	}
-             }
+                for (Integer pressedKey : pressedKeys) {
+                    if (pressedKey == KeyEvent.VK_UP) {
+                        System.out.println("sesc");
+                        controller.pauseGame();
+                        pressedKeys.remove(KeyEvent.VK_ESCAPE);
+                    }
+
+                    if (keyBoardMoveMap.containsKey(pressedKey)) {
+                        System.out.println("inside Lop");
+                        Pair<JComponent, Integer> moveInfo = keyBoardMoveMap.get(pressedKey);
+                        controller.movePlayer((PlayerUI) moveInfo.getFirst(), (int) moveInfo.getSecond());
+                    }
+                }
+            }
         }
 
         @Override
         public synchronized void keyReleased(KeyEvent e) {
+            System.out.println(e);
             pressedKeys.remove(e.getKeyCode());
         }
-		
-		@Override
-		public void keyTyped(KeyEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
+
+        @Override
+        public void keyTyped(KeyEvent arg0) {
+            // TODO Auto-generated method stub
+
+        }
     }
-    
+
 }

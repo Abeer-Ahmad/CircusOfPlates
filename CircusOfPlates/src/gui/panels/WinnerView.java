@@ -9,11 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import game.player.Player;
@@ -33,9 +29,12 @@ public class WinnerView extends JPanel implements ActionListener,IViewer {
 	public WinnerView(Player player) {
 		setSize(frameWidth(), frameHeight());
 		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			backGroundImage = ImageIO.read(new File(NEW_GAME));
 		} catch (IOException e) {
 			throw new RuntimeException("Image Not Found!");
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		this.setLayout(null);
 		this.setFocusable(true);

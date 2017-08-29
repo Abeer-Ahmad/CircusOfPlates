@@ -5,16 +5,17 @@ import static utilities.Properties.frameWidth;
 import static utilities.Properties.frameHeight;
 public class Falling extends State {
 
-	private int g = 3;
+	private int g = 2;
 	private int deltaT = 1;
 	private int elaspedT = 0;
 	private int newXCenter;
 	private int newYCenter;
 	
 	public Falling(int x, int y) {
+		super();
+		state = "Falling";
 		newXCenter = x;
 		newYCenter = y;
-		state = "falling";
 	}
 
 	@Override

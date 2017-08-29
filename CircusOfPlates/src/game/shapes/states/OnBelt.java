@@ -10,7 +10,8 @@ public class OnBelt extends State {
 	private int yCenter;
 	
 	public OnBelt() {
-		state = "onBelt";
+		super();
+		state = "OnBelt";
 	}
 
 	@Override

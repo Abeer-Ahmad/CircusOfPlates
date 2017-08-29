@@ -5,7 +5,8 @@ import game.shapes.Shape;
 public class Captured extends State{
 	
 	public Captured() {
-		state = "captured";
+		super();
+		state = "Captured";
 	}
 
 	@Override

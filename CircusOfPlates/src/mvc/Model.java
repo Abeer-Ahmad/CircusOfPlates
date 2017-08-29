@@ -22,12 +22,14 @@ import plateGenerator.Belt;
 import plateGenerator.LeftBelt;
 import plateGenerator.RightBelt;
 
+import javax.swing.*;
+
 public class Model extends Observable {
 
 	private ArrayList<Belt> belts;
 	private ArrayList<Player> players;
 	private ArrayList<Shape> shapes;
-	private long shapeTimer;
+	private NewShapeThread shapeThread;
 	private boolean isRunning;
 	private String level;
 	private String firstPlayerTool;
@@ -40,7 +42,7 @@ public class Model extends Observable {
 		players = new ArrayList<Player>();
 		shapes = new ArrayList<Shape>();
 		belts = new ArrayList<Belt>();
-		shapeTimer = 0;
+		shapeThread = new NewShapeThread();
 		isRunning = false;
 		addObserver(gameViewer);
 		scoreManager = null;
@@ -88,19 +90,7 @@ public class Model extends Observable {
         notifyObservers(shapes);
     }
 
-	private void addNewShape() {
-		if (shapeTimer % 20 == 0) {
-			for (Belt belt : belts) {
-				shapes.add(belt.addShape());
-			}
-		}
-		shapeTimer++;
-		if (shapeTimer > 1000000000) {
-			shapeTimer = 1;
-		}
-	}
-
-	private void removeExpired() {
+	private synchronized void removeExpired() {
 
 		int size = shapes.size();
 		for (int i = size - 1; i >= 0; --i) {
@@ -115,13 +105,15 @@ public class Model extends Observable {
 
 	}
 
-	private void updateShapes() {
+	private synchronized void updateShapes() {
 		for (Shape shape : shapes) {
 			shape.update();
 		}
+		setChanged();
+		notifyObservers(shapes);
 	}
 
-	private void updatePlayers() {
+	private synchronized void updatePlayers() {
 		for (Player player : players) {
 			player.manageStack(shapes);
 			removeExpired();
@@ -147,6 +139,8 @@ public class Model extends Observable {
 		/* should be called after belts set*/
 		setLevel((String) settings.get("level"));
 		scoreManager =ScoreManager.getInstance(players, frameHeight()- laserHeight);
+		shapeThread.setTimerDelay(2500);
+		shapeThread.execute();
 		updateGameItems();
 		isRunning = true;
 		notify();
@@ -175,8 +169,7 @@ public class Model extends Observable {
 		notify();
 	}
 
-	public void updateGameItems() {
-		addNewShape();
+	public synchronized void updateGameItems() {
 		updateShapes();
 		updatePlayers();
 		removeExpired();
@@ -207,4 +200,31 @@ public class Model extends Observable {
 			/*
 			settings.put("names", names.);*/
 	}
+
+	private class NewShapeThread extends SwingWorker<Void, Void> {
+
+		int timerDelay ;
+
+		protected void setTimerDelay (int timerDelay){
+			this.timerDelay = timerDelay;
+		}
+
+		@Override
+		protected Void doInBackground() throws Exception {
+
+			while (isRunning()) {
+				for (Belt belt : belts) {
+					shapes.add(belt.addShape());
+				}
+				setChanged();
+				notifyObservers(shapes);
+				Thread.sleep(timerDelay);
+				System.out.println("Running add newShape");
+			}
+
+			return null;
+		}
+	}
+
+
 }
