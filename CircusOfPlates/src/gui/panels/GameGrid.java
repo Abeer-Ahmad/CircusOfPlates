@@ -1,34 +1,44 @@
 package gui.panels;
 
 import game.player.Player;
+
 import game.player.PlayerUI;
 import game.shapes.LaserBeam;
 import game.shapes.Shape;
-import gui.handlers.KeyBoardHandler;
 import mvc.Controller;
 import plateGenerator.Belt;
+import utilities.Pair;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import static utilities.Properties.*;
 
 public class GameGrid extends JPanel {
 
     private static final long serialVersionUID = 1L;
+    private static final int leftDirection = -1;
+    private static final int rightDirection = 1;
+    private static final int playerStep = 40;
+    
     private BufferedImage backGroundImage;
     private LaserBeam leaserBeam;
     private ArrayList<Belt> belts;
     private ArrayList<PlayerUI> playersUI;
     private ArrayList<Shape> shapes;
+    private HashMap <Integer, Pair<JComponent, Integer>> keyBoardMoveMap;
     private boolean twoPlayers;
-    private String firstPlayerTool;
     private JLabel player1Name;
     private JLabel player2Name;
     private JLabel player1_score;
@@ -36,7 +46,7 @@ public class GameGrid extends JPanel {
 
     // remove static dimensions in all class!!!
 
-    public GameGrid(boolean twoPlayers, ArrayList<Player> modelPlayers, String firstPlayerTool) {
+    public GameGrid(boolean twoPlayers, ArrayList<Player> modelPlayers) {
         this.setSize(frameWidth(), frameHeight());
         try {
             backGroundImage = ImageIO.read(new File(BACK_GROUND));
@@ -45,20 +55,24 @@ public class GameGrid extends JPanel {
         }
         this.setLayout(null);
         this.twoPlayers = twoPlayers;
-        this.firstPlayerTool = firstPlayerTool;
         this.setFocusable(true);
         leaserBeam = new LaserBeam();
         belts = new ArrayList<>();
         shapes = new ArrayList<>();
         playersUI = new ArrayList<>();
-        playersUI.add(new PlayerUI(modelPlayers.get(0), PLAYER1, -1));
+        keyBoardMoveMap = new HashMap <>();
+        
+        playersUI.add(new PlayerUI(modelPlayers.get(0), PLAYER1, leftDirection));
         this.add(playersUI.get(0));
         declarePlayer1();
+      
         if (this.twoPlayers) {
-            playersUI.add(new PlayerUI(modelPlayers.get(1), PLAYER2, 1));
+            playersUI.add(new PlayerUI(modelPlayers.get(1), PLAYER2, rightDirection));
             this.add(playersUI.get(1));
             declarePlayer2();
         }
+        
+        setKeyBoardMoveMap(this.twoPlayers);
     }
 
     private void declarePlayer1() {
@@ -87,67 +101,22 @@ public class GameGrid extends JPanel {
         this.add(player2_score);
     }
 
-    /* move to keyboard handler */
-    private void setKeyBoardController(final Controller controller, final PlayerUI keyPlayer) {
-        /*KeyBoardHandler keyBoardHandler = new KeyBoardHandler(controller,keyPlayer);
-        keyPlayer.requestFocus();
-         keyPlayer.addKeyListener(keyBoardHandler);
-        this.addKeyListener(keyBoardHandler);
-        //this.requestFocus();*/
-        keyPlayer.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"),
-                "pressedR");
-        keyPlayer.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"),
-                "pressedL");
-        AbstractAction pressedActionL = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                controller.movePlayer(keyPlayer, -50);
-            }
-        };
-        AbstractAction pressedActionR = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                controller.movePlayer(keyPlayer, 50);
-            }
-        };
-        keyPlayer.getActionMap().put("pressedL", pressedActionL);
-        keyPlayer.getActionMap().put("pressedR", pressedActionR);
-    }
-
-    private void setMouseController(final Controller controller, final PlayerUI mousePlayer) {
-        /*MouseHandler mouseHandler = new MouseHandler(controller,mousePlayer);
-        mousePlayer.requestFocus();
-        mousePlayer.addMouseListener(mouseHandler);
-        mousePlayer.addMouseMotionListener(mouseHandler);
-        this.addMouseListener(mouseHandler);
-        this.addMouseMotionListener(mouseHandler);*/
-        mousePlayer.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("D"),
-                "pressedR");
-        mousePlayer.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("A"),
-                "pressedL");
-        AbstractAction pressedActionL = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                controller.movePlayer(mousePlayer, -40);
-            }
-        };
-        AbstractAction pressedActionR = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                controller.movePlayer(mousePlayer, 40);
-            }
-        };
-        mousePlayer.getActionMap().put("pressedL", pressedActionL);
-        mousePlayer.getActionMap().put("pressedR", pressedActionR);
+    
+    private void setKeyBoardMoveMap(final boolean twoPlayers) {
+    	keyBoardMoveMap.put(KeyEvent.VK_LEFT, new Pair<>(playersUI.get(0),leftDirection * playerStep));
+    	keyBoardMoveMap.put(KeyEvent.VK_RIGHT, new Pair<>(playersUI.get(0),rightDirection * playerStep));
+    	
+    	if (twoPlayers) {
+    		keyBoardMoveMap.put(KeyEvent.VK_A, new Pair<>(playersUI.get(1),leftDirection * playerStep));
+        	keyBoardMoveMap.put(KeyEvent.VK_D, new Pair<>(playersUI.get(1),rightDirection * playerStep));
+    	}
+    	
     }
 
     public void setController(Controller controller) {
-        this.addKeyListener(new KeyBoardHandler(controller));
-        if (firstPlayerTool.equals("Keyboard")) {
-            setKeyBoardController(controller, playersUI.get(0));
-            if (twoPlayers)
-                setMouseController(controller, playersUI.get(1));
-        } else if (firstPlayerTool.equals("Mouse")) {
-            setMouseController(controller, playersUI.get(0));
-            if (twoPlayers)
-                setKeyBoardController(controller, playersUI.get(1));
-        }
+         
+    	this.addKeyListener(new MultiKeyPressListener(controller));
+    	
     }
 
     private void drawBelts(Graphics2D graphics2d) {
@@ -176,13 +145,7 @@ public class GameGrid extends JPanel {
         drawShapes(graphics2d);
         drawPlayers(graphics2d);
         drawBelts(graphics2d);
-        /*if ((firstPlayerTool.equals("Mouse"))||(twoPlayers)){
-            setMouseController(controller);
-        }
-        this.add(players.get(0));
-        this.add(players.get(1));
-        setKeyBoardController(controller,players.get(0));
-        setMouseController(controller,players.get(1));*/
+      
     }
 
     public void updateBelts(ArrayList<Belt> belts) {
@@ -206,4 +169,49 @@ public class GameGrid extends JPanel {
             player2_score.setText(Integer.toString(playersUI.get(1).getPlayer().getScore()));
         player1_score.setText(Integer.toString(playersUI.get(0).getPlayer().getScore()));
     }
+    
+    private class MultiKeyPressListener implements KeyListener { 	
+    	
+    	private Controller controller;
+    	
+    	MultiKeyPressListener (Controller controller) {
+    		this.controller = controller;
+    	}
+    	
+        // Set of currently pressed keys
+        private final Set<Integer> pressedKeys = new HashSet<Integer>();
+
+        @Override
+        public synchronized void keyPressed(KeyEvent e) {
+            pressedKeys.add(e.getKeyCode());
+            
+            if (pressedKeys.size() > 0) {
+        
+             for (Integer pressedKey : pressedKeys) {
+            	 
+            	 if (pressedKey == KeyEvent.VK_ESCAPE){
+         			controller.pauseGame();
+         		}
+            	 
+            	 if (keyBoardMoveMap.containsKey(pressedKey)) {
+            		 Pair<JComponent, Integer> moveInfo = keyBoardMoveMap.get(pressedKey);
+            		 controller.movePlayer((PlayerUI)moveInfo.getFirst(), (int) moveInfo.getSecond());
+            	 }
+            	 
+             	}
+             }
+        }
+
+        @Override
+        public synchronized void keyReleased(KeyEvent e) {
+            pressedKeys.remove(e.getKeyCode());
+        }
+		
+		@Override
+		public void keyTyped(KeyEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+    }
+    
 }

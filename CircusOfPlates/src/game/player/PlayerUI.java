@@ -44,25 +44,19 @@ public class PlayerUI extends JComponent {
         int topLeftYCoor = player.getyPostion() - (image.getHeight() / 2);
         g.drawImage(image, topLeftXCoor, topLeftYCoor, null);
         this.setBounds(topLeftXCoor, topLeftYCoor, image.getWidth(), image.getHeight());
-        System.out.println(" Inside Player Draw \n shapes in right");
+   
         for (int i = 0; i < player.getRightStack().size(); i++) {
             Shape shape = player.getRightStack().get(i);
             synchronized (shape) {
                 shape.draw(g);
-                System.out.println(shape.getClass().getSimpleName() + " color " + shape.getColor().toString() +             		
-               " state " + shape.getState().toString()+ "coor " + shape.getX() + " "+ shape.getY());
             }
         }
-        System.out.println("shapes in left");
+       
         for (int i = 0; i < player.getLeftStack().size(); i++) {
             Shape shape = player.getLeftStack().get(i);
             synchronized (shape) {
-            	System.out.println(shape.getClass().getSimpleName() + " color " + shape.getColor().toString()
-            			+ shape.getState().toString() + "coor " + shape.getX() + " "+ shape.getY());
                 shape.draw(g);
             }
-        }
-        System.out.println(" outside Player Draw");
-        
+        }      
     }
 }

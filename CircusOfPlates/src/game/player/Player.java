@@ -54,8 +54,6 @@ public class Player {
 			stackXCenter = leftHandXCenter;
 			stackYCenter = leftHandTopmostY();
 		}
-		System.out.print("shapes coor "+ shapeXCenter +" " + shapeYCenter);
-		System.out.println(" hand coor "+ stackXCenter +" " + stackYCenter);
 		boolean xEpsilon = (shapeXCenter <= stackXCenter + xEPSILON) && (shapeXCenter >= stackXCenter - xEPSILON);
 		boolean yEpsilon = (shapeYCenter <= stackYCenter + yEPSILON) && (shapeYCenter >= stackYCenter - yEPSILON);
 		return xEpsilon && yEpsilon;
@@ -70,7 +68,6 @@ public class Player {
             }
 			if (manageCurrentHand(shape.getX(), shape.getY(), rightHand)) {
                 shape.setState(new Captured());
-				System.out.println("Right hand caught a " + shape.getColor() + " shape");
 				shape.setCenter(rightHandXCenter, rightHandTopmostY());
 				rightStack.push(shape);
 				matchPlates(rightStack);
@@ -78,7 +75,6 @@ public class Player {
 			}				
 			if (manageCurrentHand(shape.getX(), shape.getY(), leftHand)) {
                 shape.setState(new Captured());
-				System.out.println("Left hand caught a " + shape.getColor() + " shape");
 				shape.setCenter(leftHandXCenter, leftHandTopmostY());
 				leftStack.push(shape);
 				matchPlates(leftStack);
