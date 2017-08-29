@@ -59,7 +59,7 @@ public class Viewer implements Observer{
 		if (valueChanged instanceof Boolean) {
 			boolean twoPlayers = (boolean) valueChanged;
 			Model gameModel = (Model) model;
-			gameGrid = new GameGrid(twoPlayers,gameModel.getPlayers(),gameModel.getFirstPlayerTool());
+			gameGrid = new GameGrid(twoPlayers,gameModel.getPlayers());
 			gameGrid.setController(controller);
 			goToGame();			
 		} else if (valueChanged instanceof ArrayList) {

@@ -33,10 +33,8 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
 	private JTextField userName;
 	private JTextField userName2;
 	private  JComboBox<String> levelsList;
-	private  JComboBox<String> toolsList;
     private boolean twoPLayers;
     private String dataLevel;
-    private String tool;
     private int y;
 
 	// remove static dimensions in all class!!!
@@ -85,12 +83,6 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
 			setInfoTwoPlayer(playerInfo);
 		else
 			setInfoOnePlayer(playerInfo);
-		final DefaultComboBoxModel<String> tools = new DefaultComboBoxModel<>();
-		tools.addElement("Mouse");
-		tools.addElement("Keyboard");
-		toolsList = new JComboBox<>(tools);
-		toolsList.setSelectedIndex(-1);
-		toolsList.setBounds(230, y, 80, 30);
 		
 		JLabel difficultyLevel = new JLabel("Difficulty Level");
 		difficultyLevel.setBounds(60, y + 40, 250, 30);
@@ -103,9 +95,7 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
 		levelsList.setBounds(230, y + 40 , 80, 30);
 		this.infoController= new infoMenuController();
 		levelsList.addActionListener(infoController);
-		toolsList.addActionListener(infoController);
 		playerInfo.add(difficultyLevel);
-		playerInfo.add(toolsList);
 		playerInfo.add(levelsList);
 		return playerInfo;
 	}
@@ -120,9 +110,6 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
 		settings.put("twoPlayers", twoPLayers);
 		settings.put("level",dataLevel);
 		settings.put("names", names);
-		settings.put("tool",tool);
-		settings.put("dimX", frameWidth());
-		settings.put("dimY", frameHeight());
 		return settings;
 	}
 	
@@ -132,11 +119,8 @@ private void setInfoOnePlayer(JPanel current){
 	 userName = new JTextField();
 	 userName.setBounds(60,80,250,30);
 	 y = 120;
-	 JLabel tool = new JLabel("How would you like to Play?"); 
-	 tool.setBounds(60, 120, 253, 30);
 	 current.add(name);
 	 current.add(userName);
-	 current.add(tool);
 }
 
 private void setInfoTwoPlayer(JPanel current){
@@ -149,13 +133,10 @@ private void setInfoTwoPlayer(JPanel current){
 	  userName2 = new JTextField();
 	 userName2.setBounds(60,160,250,30);
 	 y = 200;
-	 JLabel tool = new JLabel(" How would player1 Play?"); 
-	 tool.setBounds(60, 200, 253, 30);
 	 current.add(name);
 	 current.add(userName);
 	 current.add(name2);
 	 current.add(userName2);
-	 current.add(tool);
 }
 
 
@@ -185,8 +166,6 @@ private class infoMenuController implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == levelsList)
 				dataLevel = levelsList.getItemAt(levelsList.getSelectedIndex());
-			if (e.getSource() == toolsList)
-				tool = toolsList.getItemAt(toolsList.getSelectedIndex());
 		}
 	}
 }

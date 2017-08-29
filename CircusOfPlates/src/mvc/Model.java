@@ -1,5 +1,7 @@
 package mvc;
 
+
+import static utilities.Properties.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -134,21 +136,17 @@ public class Model extends Observable {
 		restart();
 		 twoPlayers = (boolean) settings.get("twoPlayers");
 		ArrayList<String> names = (ArrayList<String>) settings.get("names");
-		int frameWidth= (int) settings.get("dimX");
-		int frameHeight = (int) settings.get("dimY");
-		firstPlayerTool = (String) settings.get("tool");
 		setPlayers(twoPlayers, names);
 		setChanged();
 		Boolean twoBPlayers = new Boolean(twoPlayers);
 		notifyObservers(twoBPlayers);
 		/* after game grid is intialized*/
-		setBelts(frameWidth);
+		setBelts(frameWidth());
 		setChanged();
 		notifyObservers(belts);
 		/* should be called after belts set*/
 		setLevel((String) settings.get("level"));
-		scoreManager =ScoreManager.getInstance(players, frameHeight- laserHeight);
-		//framewidth
+		scoreManager =ScoreManager.getInstance(players, frameHeight()- laserHeight);
 		updateGameItems();
 		isRunning = true;
 		notify();
@@ -206,9 +204,7 @@ public class Model extends Observable {
 	     LinkedHashMap<String,Object> settings = new LinkedHashMap<String,Object>();
 	         settings.put("twoPlayers", temp.getTwoPlayers());
 			settings.put("level",temp.getLevel());		
-			settings.put("tool",temp.getTool());
-			/*settings.put("dimX", xFrame);
-			settings.put("dimY",yFrame);
+			/*
 			settings.put("names", names.);*/
 	}
 }
