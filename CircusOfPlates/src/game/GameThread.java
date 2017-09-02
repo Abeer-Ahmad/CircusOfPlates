@@ -16,12 +16,12 @@ public class GameThread implements Runnable {
 			try {
 				if (game.isRunning())
 						game.updateGameItems();
+						System.out.println("runnung gameThread");
 			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 					try {
-						Thread.sleep(50);
+						Thread.sleep(150);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
