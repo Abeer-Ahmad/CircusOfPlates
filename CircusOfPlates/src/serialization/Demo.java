@@ -5,7 +5,7 @@ import java.io.*;
 public class Demo {
 
     public static void main(String[] args) {
-        Point p = new Point(0, 0, java.awt.Color.BLUE.darker());
+       /* Point p = new Point(0, 0, java.awt.Color.BLUE.darker());
         p.increment();
         p.increment();
         save(p);
@@ -14,7 +14,10 @@ public class Demo {
         System.out.println("Saved point:");
         load();
         System.out.println("Current point:");
-        p.print();
+        p.print();*/
+        Point c = new Child(0, 0, java.awt.Color.BLUE.darker());
+        save (c);
+        load();
     }
 
     private static void save(Point p) {
@@ -24,7 +27,7 @@ public class Demo {
             out.writeObject(p);
             out.close();
             fileOut.close();
-            System.out.printf("Serialized data is saved in point.ser");
+            System.out.println("Serialized data is saved in point.ser");
         }catch(IOException i) {
             i.printStackTrace();
         }
@@ -42,7 +45,7 @@ public class Demo {
             i.printStackTrace();
             return;
         }catch(ClassNotFoundException c) {
-            System.out.println("Employee class not found");
+            System.out.println("Point class not found");
             c.printStackTrace();
             return;
         }

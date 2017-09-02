@@ -13,11 +13,9 @@ public class ScoreManager {
     private static ScoreManager scoreManager;
     
     private ScoreManager(ArrayList<Player> players, int laserHeight) {
-    	
         this.players = players;
         redLevel = laserHeight;
         maxScore = 0;
- 
     }
    
     public static ScoreManager getInstance (ArrayList<Player> players, int laserHeight){
@@ -34,6 +32,7 @@ public class ScoreManager {
     }
    
     public Player getWinner() {
+        maxScore = 0;
         for (Player player : players)
             if (player.getScore() > maxScore) {
                 winner = player;

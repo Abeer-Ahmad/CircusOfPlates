@@ -5,7 +5,7 @@ import static utilities.Properties.frameWidth;
 import static utilities.Properties.frameHeight;
 public class Falling extends State {
 
-	private int g = 3;
+	private int g = 2;
 	private int deltaT = 1;
 	private int elaspedT = 0;
 	private int newXCenter;
@@ -43,5 +43,4 @@ public class Falling extends State {
 		if (stateChanged)
 			shape.setState(new OnGround());
 	}
-
 }

@@ -1,12 +1,11 @@
 package game.shapes.states;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import game.shapes.Shape;
 
 public abstract class State implements Serializable{
-
-	private static final long serialVersionUID = 823924900345247275L;
 
 	protected String state;
 
@@ -22,9 +21,16 @@ public abstract class State implements Serializable{
 
 	public abstract boolean updateCoor(int moveSpeed, int x, int y, int beltLength); // read belt length from class
 
+	private void writeObject(java.io.ObjectOutputStream stream) throws IOException {
+		stream.defaultWriteObject();
+	}
+
+	private void readObject(java.io.ObjectInputStream stream) throws IOException, ClassNotFoundException {
+		stream.defaultReadObject();
+	}
+
 	@Override
 	public String toString() {
 		return state;
 	}
-
 }
