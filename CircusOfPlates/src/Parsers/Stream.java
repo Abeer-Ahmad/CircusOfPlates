@@ -13,7 +13,7 @@ public class Stream {
     public void save(ArrayList<Player> players, ArrayList<Shape> shapes,
                      String level, String game) {
         try {
-            FileOutputStream fileOut = new FileOutputStream(game + ".ser");
+            FileOutputStream fileOut = new FileOutputStream("resources" + File.separator + "savedGames" + File.separator + game + ".ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             Memento savedGame = new Memento(players, shapes, level);
             out.writeObject(savedGame);
@@ -26,7 +26,7 @@ public class Stream {
 
     public Memento load(String game) {
         try {
-            FileInputStream fileIn = new FileInputStream(game + ".ser");
+            FileInputStream fileIn = new FileInputStream("resources" + File.separator + "savedGames" + File.separator + game + ".ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             Memento loadedGame = (Memento) in.readObject();
             in.close();

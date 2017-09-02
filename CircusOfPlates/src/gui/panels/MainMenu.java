@@ -48,7 +48,7 @@ public class MainMenu extends JPanel implements ActionListener,IViewer {
 		if (e.getSource() == newGame)
 			controller.changeDisplay("playerMenu");
 		if (e.getSource() == loadSavedGame)
-			controller.load();
+			controller.loadInfo();
 		if (e.getSource() == exit)
 			controller.exitGame();
 	}

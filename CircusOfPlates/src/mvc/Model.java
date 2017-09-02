@@ -19,6 +19,7 @@ import java.util.LinkedHashMap;
 import java.util.Observable;
 import java.util.Observer;
 
+import static utilities.Properties.PLAYER1;
 import static utilities.Properties.frameHeight;
 import static utilities.Properties.frameWidth;
 
@@ -181,11 +182,14 @@ public class Model extends Observable {
     }
 
     public void save() {
-        stream.save(players, shapes, level, "trial");
+        String game = "";
+        for (Player player : players)
+            game += player.getName();
+        stream.save(players, shapes, level, game);
     }
 
-    public void load() {
-        Memento loadedGame = stream.load("trial");
+    public void load(String game) {
+        Memento loadedGame = stream.load(game);
         players = loadedGame.getPlayers();
         shapes = loadedGame.getShapes();
 

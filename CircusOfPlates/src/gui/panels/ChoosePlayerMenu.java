@@ -29,18 +29,20 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
     private JTextField userName2;
     private JComboBox<String> levelsList;
     private boolean twoPLayers;
+    private boolean savedGame;
     private String dataLevel;
     private int y;
 
     // remove static dimensions in all class!!!
 
     public ChoosePlayerMenu() {
-        this.setSize(frameWidth(), frameHeight());
         try {
             backGroundImage = ImageIO.read(new File(NEW_GAME));
         } catch (IOException e) {
             throw new RuntimeException("Image Not Found!");
         }
+        savedGame = false;
+        this.setSize(frameWidth(), frameHeight());
         this.setLayout(null);
         this.setFocusable(true);
         setButtons();
@@ -51,9 +53,11 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
         this.menuController = new PlayerMenuController(controller);
         onePlayer.addActionListener(this.menuController);
         twoPlayer.addActionListener(this.menuController);
-
     }
 
+    public void setSaved(boolean current) {
+        savedGame = current;
+    }
 
     @Override
     public void paintComponent(Graphics g) {
@@ -79,19 +83,21 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
         else
             setInfoOnePlayer(playerInfo);
 
-        JLabel difficultyLevel = new JLabel("Difficulty Level");
-        difficultyLevel.setBounds(60, y + 40, 250, 30);
-        final DefaultComboBoxModel<String> levels = new DefaultComboBoxModel<>();
-        levels.addElement("Easy");
-        levels.addElement("Medium");
-        levels.addElement("Hard");
-        levelsList = new JComboBox<>(levels);
-        levelsList.setSelectedIndex(-1);
-        levelsList.setBounds(230, y + 40, 80, 30);
-        this.infoController = new infoMenuController();
-        levelsList.addActionListener(infoController);
-        playerInfo.add(difficultyLevel);
-        playerInfo.add(levelsList);
+        if (!savedGame) {
+            JLabel difficultyLevel = new JLabel("Difficulty Level");
+            difficultyLevel.setBounds(60, y + 40, 250, 30);
+            final DefaultComboBoxModel<String> levels = new DefaultComboBoxModel<>();
+            levels.addElement("Easy");
+            levels.addElement("Medium");
+            levels.addElement("Hard");
+            levelsList = new JComboBox<>(levels);
+            levelsList.setSelectedIndex(-1);
+            levelsList.setBounds(230, y + 40, 80, 30);
+            this.infoController = new InfoMenuController();
+            levelsList.addActionListener(infoController);
+            playerInfo.add(difficultyLevel);
+            playerInfo.add(levelsList);
+        }
         return playerInfo;
     }
 
@@ -148,13 +154,13 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
                 twoPLayers = false;
             if (e.getSource() == twoPlayer)
                 twoPLayers = true;
-            this.controller.popMessage(ChoosePlayerMenu.this, setPlayerInfoPanel(twoPLayers));
+            this.controller.popMessage(ChoosePlayerMenu.this, setPlayerInfoPanel(twoPLayers), savedGame);
         }
     }
 
-    private class infoMenuController implements ActionListener {
+    private class InfoMenuController implements ActionListener {
 
-        public infoMenuController() {
+        public InfoMenuController() {
 
         }
 

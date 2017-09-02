@@ -38,13 +38,16 @@ public class Controller {
         viewer.setCurrentPanel("mainMenu");
     }
 
-    public void load() {
-        // viewer.setCurrentPanel("playerMenu");
-        model.load();
+    public void load(String game) {
+        model.load(game);
     }
 
-    public void popMessage(JPanel container, JPanel message) {
-        viewer.popMessage(container, message);
+    public void loadInfo() {
+        viewer.readInfo();
+    }
+
+    public void popMessage(JPanel container, JPanel message, boolean savedGame) {
+        viewer.popMessage(container, message, savedGame);
     }
 
     public void changeDisplay(String namePanel) {
