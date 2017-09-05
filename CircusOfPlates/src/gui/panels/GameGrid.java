@@ -46,21 +46,22 @@ public class GameGrid extends JPanel {
 
 	// remove static dimensions in all class!!!
 
-	public GameGrid(boolean twoPlayers, ArrayList<Player> modelPlayers) {
-		this.setSize(frameWidth(), frameHeight());
-		try {
-			backGroundImage = ImageIO.read(new File(BACK_GROUND));
-		} catch (IOException e) {
-			throw new RuntimeException("Image Not Found!");
-		}
-		this.setLayout(null);
-		this.twoPlayers = twoPlayers;
-		this.setFocusable(true);
-		leaserBeam = new LaserBeam();
-		belts = new ArrayList<>();
-		shapes = new CopyOnWriteArrayList<Shape>();
-		playersUI = new ArrayList<>();
-		keyBoardMoveMap = new HashMap<>();
+
+    public GameGrid(boolean twoPlayers, ArrayList<Player> modelPlayers) {
+        try {
+            backGroundImage = ImageIO.read(new File(BACK_GROUND));
+        } catch (IOException e) {
+            throw new RuntimeException("Image Not Found!");
+        }
+        this.setSize(frameWidth(), frameHeight());
+        this.setLayout(null);
+        this.setFocusable(true);
+        this.twoPlayers = twoPlayers;
+        leaserBeam = new LaserBeam();
+        belts = new ArrayList<>();
+        shapes = new ArrayList<>();
+        playersUI = new ArrayList<>();
+        keyBoardMoveMap = new HashMap<>();
 
 		playersUI.add(new PlayerUI(modelPlayers.get(0), PLAYER1, leftDirection));
 		this.add(playersUI.get(0));
@@ -156,19 +157,20 @@ public class GameGrid extends JPanel {
 		this.shapes = shapes;
 	}
 
-	public void updatePlayers(ArrayList<Player> players) {
-		int i = 0;
-		for (PlayerUI player : this.playersUI) {
-			player.updatePLayerModel(players.get(i++));
-			showScore();
-		}
-	}
-
+	
 	private void showScore() {
 		if (twoPlayers)
 			player2_score.setText(Integer.toString(playersUI.get(1).getPlayer().getScore()));
 		player1_score.setText(Integer.toString(playersUI.get(0).getPlayer().getScore()));
 	}
+
+    public void updatePlayers(ArrayList<Player> players) {
+        int i = 0;
+        for (PlayerUI player : playersUI) {
+            player.updatePLayerModel(players.get(i++));
+            showScore();
+        }
+    }
 
 	private class MultiKeyPressListener implements KeyListener {
 
@@ -180,6 +182,7 @@ public class GameGrid extends JPanel {
 			this.controller = controller;
 		}
 
+
 		@Override
 		public synchronized void keyPressed(KeyEvent e) {
 			pressedKeys.add(e.getKeyCode());
@@ -189,7 +192,6 @@ public class GameGrid extends JPanel {
 						controller.pauseGame();
 						pressedKeys.remove(KeyEvent.VK_ESCAPE);
 					}
-
 					if (keyBoardMoveMap.containsKey(pressedKey)) {
 						Pair<JComponent, Integer> moveInfo = keyBoardMoveMap.get(pressedKey);
 						controller.movePlayer((PlayerUI) moveInfo.getFirst(), (int) moveInfo.getSecond());
@@ -197,17 +199,15 @@ public class GameGrid extends JPanel {
 				}
 			}
 		}
-
 		@Override
 		public synchronized void keyReleased(KeyEvent e) {
 			pressedKeys.remove(e.getKeyCode());
 		}
 
-		@Override
-		public void keyTyped(KeyEvent arg0) {
-			// TODO Auto-generated method stub
 
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub		
 		}
 	}
-
 }

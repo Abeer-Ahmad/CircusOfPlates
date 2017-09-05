@@ -2,5 +2,5 @@ package mvc;
 
 public interface IViewer {
 
-	public void setController(Controller controller);
+    public void setController(Controller controller);
 }

@@ -14,21 +14,22 @@ import static utilities.Properties.*;
 
 public class PlayerUI extends JComponent {
 
-    private static final long serialVersionUID = 6003066744683293690L;
     private BufferedImage image;
     private Player player;
 
     public PlayerUI(Player player, String path, int direction) {
         try {
             image = ImageIO.read(new File(path));
-            int xCenter = frameWidth() / 2 + SHIFT * direction;
-            int yCenter = frameHeight() - (image.getHeight() / 2);
-            player.setDimensions(xCenter, yCenter, image.getHeight());
+            if (player.getxCenter() == 0) {
+                int xCenter = frameWidth() / 2 + SHIFT * direction;
+                int yCenter = frameHeight() - (image.getHeight() / 2);
+                player.setDimensions(xCenter, yCenter, image.getHeight());
+            }
         } catch (IOException e) {
             throw new RuntimeException("Player Image Not Found!");
         }
         this.player = player;
-        this.setBounds(player.getxPostion(), player.getyPostion(), image.getWidth(), image.getHeight());
+        this.setBounds(player.getxCenter(), player.getyCenter(), image.getWidth(), image.getHeight());
     }
 
     public void updatePLayerModel(Player updatedPlayer) {
@@ -40,8 +41,8 @@ public class PlayerUI extends JComponent {
     }
 
     public void draw(Graphics2D g) {
-        int topLeftXCoor = player.getxPostion() - (image.getWidth() / 2);
-        int topLeftYCoor = player.getyPostion() - (image.getHeight() / 2);
+        int topLeftXCoor = player.getxCenter() - (image.getWidth() / 2);
+        int topLeftYCoor = player.getyCenter() - (image.getHeight() / 2);
         g.drawImage(image, topLeftXCoor, topLeftYCoor, null);
         this.setBounds(topLeftXCoor, topLeftYCoor, image.getWidth(), image.getHeight());
         for (int i = 0; i < player.getRightStack().size(); i++) {

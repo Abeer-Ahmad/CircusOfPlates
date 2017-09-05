@@ -2,6 +2,9 @@ package game.player;
 
 import java.awt.*;
 
+import java.io.IOException;
+import java.io.Serializable;
+
 import java.util.Collection;
 import java.util.Stack;
 
@@ -11,7 +14,7 @@ import utilities.Properties;
 
 import static utilities.Properties.*;
 
-public class Player {
+public class Player implements Serializable{
 
 	private static final int LIMIT = 3;
 	private static final int xEPSILON = 25;
@@ -157,11 +160,11 @@ public class Player {
 		return score;
 	}
 
-	public int getxPostion() {
+	public int getxCenter() {
 		return xCenter;
 	}
 
-	public int getyPostion() {
+	public int getyCenter() {
 		return yCenter;
 	}
 
@@ -173,5 +176,13 @@ public class Player {
 		this.score = 0;
 		rightStack.removeAllElements();
 		leftStack.removeAllElements();
+	}
+
+	private void writeObject(java.io.ObjectOutputStream stream) throws IOException {
+		stream.defaultWriteObject();
+	}
+
+	private void readObject(java.io.ObjectInputStream stream) throws IOException, ClassNotFoundException {
+		stream.defaultReadObject();
 	}
 }

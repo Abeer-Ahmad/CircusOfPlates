@@ -1,62 +1,71 @@
 package mvc;
 
 
-
-import java.util.LinkedHashMap;
-
-import javax.swing.JPanel;
-
 import game.player.PlayerUI;
+
+import javax.swing.*;
+import java.util.LinkedHashMap;
 
 public class Controller {
 
-	
-	protected Model gameItems;
-	protected Viewer viewer;
-	
-	public  Controller(Model gameItems, Viewer gameGUI){
-		 this.gameItems = gameItems;
-		 this.viewer = gameGUI;	 
-		 this.viewer.setController(this);
-	}
-	
-	public void movePlayer(PlayerUI playerUI, int step) {
-		gameItems.movePlayer(playerUI.getPlayer(), step);
-	}
 
-	public void pauseGame() {
-		gameItems.pauseGame();
-		viewer.setCurrentPanel("pauseMenu");
-	}
+    protected Model model;
+    protected Viewer viewer;
 
-	public void continueGame() {
-		gameItems.continueGame();
-		viewer.goToGame();
-	}
+    public Controller(Model model, Viewer viewer) {
+        this.model = model;
+        this.viewer = viewer;
+        this.viewer.setController(this);
+    }
 
-	public void save() {
-		
-	}
+    public void movePlayer(PlayerUI playerUI, int step) {
+        model.movePlayer(playerUI.getPlayer(), step);
+    }
 
-   public void popMessage (JPanel container, JPanel message){  
-	   viewer.popMessage(container,message);
-   }
+    public void pauseGame() {
+        model.pauseGame();
+        viewer.setCurrentPanel("pauseMenu");
+    }
 
-	public void changeDisplay(String namePanel) {
-		viewer.setCurrentPanel(namePanel);
-	}
+    public void continueGame() {
+        model.continueGame();
+        viewer.goToGame();
+    }
 
-	public void startGame(LinkedHashMap<String, Object> settings) {
-		gameItems.startGame(settings);	
-	}
-	
-	public void exitGame() {
-		viewer.exitGame();	
-	}
+    public void save() {
+        model.save();
+        viewer.confirmSaving();
+        viewer.setCurrentPanel("mainMenu");
+    }
+
 
 	public void playAgain() {
 	    viewer.goToGame();
-	    gameItems.playAgain();
+	    model.playAgain();
 	}
 	
+
+    public void load(String game) {
+        model.load(game);
+    }
+
+    public void loadInfo() {
+        viewer.readInfo();
+    }
+
+    public void popMessage(JPanel container, JPanel message, boolean savedGame) {
+        viewer.popMessage(container, message, savedGame);
+    }
+
+    public void changeDisplay(String namePanel) {
+        viewer.setCurrentPanel(namePanel);
+    }
+
+    public void startGame(LinkedHashMap<String, Object> settings) {
+        model.startGame(settings, true);
+    }
+
+    public void exitGame() {
+        viewer.exitGame();
+    }
 }

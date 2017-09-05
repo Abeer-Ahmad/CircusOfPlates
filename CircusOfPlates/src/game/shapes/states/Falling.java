@@ -43,5 +43,4 @@ public class Falling extends State {
 		if (stateChanged)
 			shape.setState(new OnGround());
 	}
-
 }

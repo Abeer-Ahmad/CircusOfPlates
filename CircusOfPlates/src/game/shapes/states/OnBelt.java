@@ -41,6 +41,4 @@ public class OnBelt extends State {
 		if (stateChanged)
 			shape.setState(new Falling(xCenter, yCenter));
 	}
-	
-	
 }
