@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -56,6 +57,7 @@ public class Viewer implements Observer{
 	
 	@Override
 	public void update(Observable model, Object valueChanged) {
+		
 		if (valueChanged instanceof Boolean) {
 			boolean twoPlayers = (boolean) valueChanged;
 			Model gameModel = (Model) model;
@@ -64,8 +66,11 @@ public class Viewer implements Observer{
 			goToGame();			
 		} else if (valueChanged instanceof ArrayList) {
 			if (((ArrayList) valueChanged).size() > 0) {
-		      if(((ArrayList) valueChanged).get(0)instanceof Shape)
+		      if(((ArrayList) valueChanged).get(0)instanceof Shape) {
+		    	  System.out.println("shapes notified");
 		    	  gameGrid.updateShapes((ArrayList<Shape>) valueChanged); 
+		    	  
+		      }
 		      if (((ArrayList) valueChanged).get(0)instanceof Player)
 		    	  gameGrid.updatePlayers((ArrayList<Player>) valueChanged);
 		      if  (((ArrayList) valueChanged).get(0)instanceof Belt)

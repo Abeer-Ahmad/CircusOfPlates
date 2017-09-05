@@ -16,7 +16,7 @@ public class ScoreManager {
     	
         this.players = players;
         redLevel = laserHeight;
-        maxScore = 0;
+        
  
     }
    
@@ -28,14 +28,16 @@ public class ScoreManager {
     
     public boolean isOver() {
         for (Player player : players)
-            if (player.getMaxHeight() >= redLevel)
+            if (player.getMaxHeight() >= redLevel) {
                 return true;
+            }
         return false;
     }
    
     public Player getWinner() {
-        for (Player player : players)
-            if (player.getScore() > maxScore) {
+    	maxScore = Integer.MIN_VALUE;
+        for (Player player : players) 
+            if (player.getScore() >= maxScore) {
                 winner = player;
                 maxScore = winner.getScore();
             }

@@ -1,17 +1,16 @@
 package mvc;
 
-
 import static utilities.Properties.*;
+
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import Parsers.Memento;
 import Parsers.Stream;
-import collections.Shapes;
 import game.ScoreManager;
 import game.player.Player;
 import game.shapes.Shape;
@@ -80,37 +79,40 @@ public class Model extends Observable {
 		return firstPlayerTool;
 	}
 
-    public void movePlayer(Player player, int step) {
-        player.move(step);
-        setChanged();
-        notifyObservers(players);
-        player.manageStack(shapes);
-        removeExpired();
-        setChanged();
-        notifyObservers(shapes);
-    }
-
-	private synchronized void removeExpired() {
-
-		int size = shapes.size();
-		for (int i = size - 1; i >= 0; --i) {
-			Shape shape = shapes.get(i);
-			State state = shape.getState();
-			if ((state instanceof OnGround) || (state instanceof Captured)) {
-				shapes.remove(i);
-			}
-		}
+	public void movePlayer(Player player, int step) {
+		player.move(step);
+		setChanged();
+		notifyObservers(players);
+		player.manageStack(shapes);
+		removeExpired();
 		setChanged();
 		notifyObservers(shapes);
+	}
+
+	private synchronized void removeExpired() {
+		synchronized (shapes) {
+			int size = shapes.size();
+			for (int i = size - 1; i >= 0; --i) {
+				Shape shape = shapes.get(i);
+				State state = shape.getState();
+				if ((state instanceof OnGround) || (state instanceof Captured)) {
+					shapes.remove(i);
+				}
+			}
+			setChanged();
+			notifyObservers(shapes);
+		}
 
 	}
 
-	private synchronized void updateShapes() {
-		for (Shape shape : shapes) {
-			shape.update();
+	private void updateShapes() {
+		synchronized (shapes) {
+			for (Shape shape : shapes) {
+				shape.update();
+			}
+			setChanged();
+			notifyObservers(shapes);
 		}
-		setChanged();
-		notifyObservers(shapes);
 	}
 
 	private synchronized void updatePlayers() {
@@ -126,25 +128,25 @@ public class Model extends Observable {
 
 	public synchronized void startGame(LinkedHashMap<String, Object> settings) {
 		restart();
-		 twoPlayers = (boolean) settings.get("twoPlayers");
+		twoPlayers = (boolean) settings.get("twoPlayers");
 		ArrayList<String> names = (ArrayList<String>) settings.get("names");
 		setPlayers(twoPlayers, names);
 		setChanged();
 		Boolean twoBPlayers = new Boolean(twoPlayers);
 		notifyObservers(twoBPlayers);
-		/* after game grid is intialized*/
+		/* after game grid is intialized */
 		setBelts(frameWidth());
 		setChanged();
 		notifyObservers(belts);
-		/* should be called after belts set*/
+		/* should be called after belts set */
 		setLevel((String) settings.get("level"));
-		scoreManager =ScoreManager.getInstance(players, frameHeight()- laserHeight);
-		shapeThread.setTimerDelay(2500);
+		scoreManager = ScoreManager.getInstance(players, frameHeight() - laserHeight);
+		shapeThread.setTimerDelay(GENERATION_SHAPES_SPEED);
 		shapeThread.execute();
 		updateGameItems();
 		isRunning = true;
-		notify();
-		
+		notifyAll();
+
 	}
 
 	private void restart() {
@@ -156,17 +158,22 @@ public class Model extends Observable {
 		isRunning = false;
 	}
 
-	public synchronized void newLevel(){
+	public synchronized void playAgain() {
 		shapes.clear();
+		setChanged();
+		notifyObservers(shapes);
 		for (Player player : players) {
-			player.newLevel();
+			player.reset();
 		}
-		isRunning=true;
-		notify();
+		setChanged();
+		notifyObservers(players);
+		isRunning = true;
+		notifyAll();
 	}
+
 	public synchronized void continueGame() {
 		isRunning = true;
-		notify();
+		notifyAll();
 	}
 
 	public synchronized void updateGameItems() {
@@ -174,10 +181,11 @@ public class Model extends Observable {
 		updatePlayers();
 		removeExpired();
 		if (scoreManager.isOver()) {
-			System.out.println("game over");
+
 			isRunning = false;
 			setChanged();
 			notifyObservers(scoreManager.getWinner());
+			System.out.println("game over after notify");
 		}
 	}
 
@@ -187,25 +195,26 @@ public class Model extends Observable {
 		}
 		return isRunning;
 	}
-	
-	public void saveGame(){
-		fileManager.save(players,shapes,level,twoPlayers,firstPlayerTool,"trial");
+
+	public void saveGame() {
+		// fileManager.save(players,shapes,level,twoPlayers,firstPlayerTool,"trial");
 	}
-	
-	public void loadGame(){
-	     Memento temp = fileManager.load("trial");
-	     LinkedHashMap<String,Object> settings = new LinkedHashMap<String,Object>();
-	         settings.put("twoPlayers", temp.getTwoPlayers());
-			settings.put("level",temp.getLevel());		
-			/*
-			settings.put("names", names.);*/
+
+	public void loadGame() {
+		Memento temp = fileManager.load("trial");
+		LinkedHashMap<String, Object> settings = new LinkedHashMap<String, Object>();
+		settings.put("twoPlayers", temp.getTwoPlayers());
+		settings.put("level", temp.getLevel());
+		/*
+		 * settings.put("names", names.);
+		 */
 	}
 
 	private class NewShapeThread extends SwingWorker<Void, Void> {
 
-		int timerDelay ;
+		int timerDelay;
 
-		protected void setTimerDelay (int timerDelay){
+		protected void setTimerDelay(int timerDelay) {
 			this.timerDelay = timerDelay;
 		}
 
@@ -213,18 +222,21 @@ public class Model extends Observable {
 		protected Void doInBackground() throws Exception {
 
 			while (isRunning()) {
-				for (Belt belt : belts) {
-					shapes.add(belt.addShape());
+				System.out.println("Running add newShape");
+				synchronized (shapes) {
+					for (Belt belt : belts) {
+						shapes.add(belt.addShape());
+					}
 				}
+				System.out.println("model" + shapes.size());
 				setChanged();
 				notifyObservers(shapes);
 				Thread.sleep(timerDelay);
-				System.out.println("Running add newShape");
+
 			}
 
 			return null;
 		}
 	}
-
 
 }

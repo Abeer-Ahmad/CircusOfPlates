@@ -54,9 +54,9 @@ public class Controller {
 		viewer.exitGame();	
 	}
 
-	public void newLevel() {
-		gameItems.newLevel();
-	    viewer.goToGame();		
+	public void playAgain() {
+	    viewer.goToGame();
+	    gameItems.playAgain();
 	}
 	
 }
