@@ -65,6 +65,5 @@ public class Controller {
     public void playAgain() {
 	    viewer.goToGame();
 	    model.playAgain();
-
 	}
 }
