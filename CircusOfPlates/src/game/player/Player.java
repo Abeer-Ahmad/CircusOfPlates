@@ -1,7 +1,6 @@
 package game.player;
 
 import java.awt.*;
-
 import java.util.Collection;
 import java.util.Stack;
 
@@ -29,6 +28,7 @@ public class Player {
 	private int height;
 	private String name;
 
+
 	public Player(String name) {
 		this.name = name;
 		rightStack = new Stack<>();
@@ -44,7 +44,8 @@ public class Player {
 		handYCenter = frameHeight() - height;
 	}
 
-	private boolean manageCurrentHand(int shapeXCenter, int shapeYCenter, int handSide) {
+
+	private boolean manageCurrentHand(int shapeXCenter, int shapeYCenter,int handSide) {
 		int stackXCenter, stackYCenter;
 		if (handSide == rightHand) {
 			stackXCenter = rightHandXCenter;
@@ -57,73 +58,57 @@ public class Player {
 		boolean yEpsilon = (shapeYCenter <= stackYCenter + yEPSILON) && (shapeYCenter >= stackYCenter - yEPSILON);
 		return xEpsilon && yEpsilon;
 	}
-
-	public void manageStack(Collection<Shape> shapes) {
+	
+	public synchronized void manageStack(Collection<Shape> shapes) {
 		if (shapes.equals(null))
 			return;
-		synchronized (shapes) {
-			for (Shape shape : shapes) {
-				if (shape.getState() instanceof OnGround || shape.getState() instanceof Captured) {
-					continue;
-				}
-				if (manageCurrentHand(shape.getX(), shape.getY(), rightHand)) {
-					shape.setState(new Captured());
-					shape.setCenter(rightHandXCenter, rightHandTopmostY());
-					rightStack.push(shape);
-					matchPlates(rightStack);
-					continue;
-				}
-				if (manageCurrentHand(shape.getX(), shape.getY(), leftHand)) {
-					shape.setState(new Captured());
-					shape.setCenter(leftHandXCenter, leftHandTopmostY());
-					leftStack.push(shape);
-					matchPlates(leftStack);
-				}
+		for (Shape shape : shapes) {
+            if (shape.getState() instanceof OnGround || shape.getState() instanceof Captured) {
+				continue;
+            }
+			if (manageCurrentHand(shape.getX(), shape.getY(), rightHand)) {
+                shape.setState(new Captured());
+				shape.setCenter(rightHandXCenter, rightHandTopmostY());
+				rightStack.push(shape);
+				matchPlates(rightStack);
+				continue;
+			}				
+			if (manageCurrentHand(shape.getX(), shape.getY(), leftHand)) {
+                shape.setState(new Captured());
+				shape.setCenter(leftHandXCenter, leftHandTopmostY());
+				leftStack.push(shape);
+				matchPlates(leftStack);
 			}
 		}
 	}
-
+	
 	private int rightHandTopmostY() {
 		return handYCenter - (rightStack.size() * SHAPE_HEIGHT) - SHAPE_HEIGHT / 2;
 	}
-
+	
 	private int leftHandTopmostY() {
 		return handYCenter - (leftStack.size() * SHAPE_HEIGHT) - SHAPE_HEIGHT / 2;
 	}
 
 	private void matchPlates(Stack<Shape> currentHand) {
-
 		int stackSize = currentHand.size();
-		boolean corruptPlate = false;
-		if (!currentHand.isEmpty()) {
-			if (currentHand.peek().getColor() == Corrupt_Color) {
-				if (!corruptPlate) {
-					updateScore(false);
-					corruptPlate = true;
-				} else {
-					corruptPlate = false;
-				}
-			}
-		}
 		if (stackSize < 3)
 			return;
 		Color[] topColors = new Color[LIMIT];
 		for (int i = 1; i < 4; i++)
 			topColors[i - 1] = currentHand.get(stackSize - i).getColor();
 		if (topColors[0].equals(topColors[1]) && topColors[0].equals(topColors[2])) {
-			for (int i = 1; i < 4; i++) {
+			for (int i = 1; i < 4; i++)
 				currentHand.remove(stackSize - i);
-			}
-			updateScore(true);
+			updateScore();
 		}
-
 	}
 
 	public void move(int step) {
 		xCenter += step;
 		xCenter += frameWidth();
 		xCenter %= frameWidth();
-		rightHandXCenter = xCenter + Properties.shiftHandFromXCenter;
+		rightHandXCenter = xCenter + Properties.shiftHandFromXCenter; 
 		leftHandXCenter = xCenter - Properties.shiftHandFromXCenter;
 		for (Shape shape : rightStack)
 			shape.setCenter(rightHandXCenter, shape.getY());
@@ -131,9 +116,7 @@ public class Player {
 			shape.setCenter(leftHandXCenter, shape.getY());
 	}
 
-	private void updateScore(Boolean increaseScore) {
-		score += increaseScore ? EXTRA_POINTS : -1 * EXTRA_POINTS;
-	}
+	private void updateScore() { score += EXTRA_POINTS; }
 
 	public Stack<Shape> getLeftStack() {
 		return leftStack;
@@ -169,9 +152,7 @@ public class Player {
 		return name;
 	}
 
-	public void reset() {
+	public void newLevel() {
 		this.score = 0;
-		rightStack.removeAllElements();
-		leftStack.removeAllElements();
 	}
 }

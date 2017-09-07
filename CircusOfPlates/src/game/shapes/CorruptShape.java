@@ -1,13 +1,10 @@
 package game.shapes;
 
 import java.awt.Color;
-
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
 import game.shapes.states.OnBelt;
-
-import static utilities.Properties.*;
 
 public class CorruptShape extends Shape{
 
@@ -17,7 +14,7 @@ public class CorruptShape extends Shape{
 		super.beltLength = beltLength;
 		xCenter = x;
 		yCenter = y;
-		color = Corrupt_Color;
+		color = Color.BLACK;
 
 	}
 	
