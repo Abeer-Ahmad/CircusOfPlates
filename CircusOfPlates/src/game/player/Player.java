@@ -4,7 +4,6 @@ import java.awt.*;
 
 import java.io.IOException;
 import java.io.Serializable;
-
 import java.util.Collection;
 import java.util.Stack;
 
@@ -160,11 +159,11 @@ public class Player implements Serializable{
 		return score;
 	}
 
-	public int getxCenter() {
+	public int getXCenter() {
 		return xCenter;
 	}
 
-	public int getyCenter() {
+	public int getYCenter() {
 		return yCenter;
 	}
 
@@ -177,7 +176,7 @@ public class Player implements Serializable{
 		rightStack.removeAllElements();
 		leftStack.removeAllElements();
 	}
-
+	
 	private void writeObject(java.io.ObjectOutputStream stream) throws IOException {
 		stream.defaultWriteObject();
 	}

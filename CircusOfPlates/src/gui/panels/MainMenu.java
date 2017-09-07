@@ -1,11 +1,10 @@
 package gui.panels;
 
-import static utilities.Properties.*;
-
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -14,14 +13,13 @@ import javax.swing.JPanel;
 
 import mvc.Controller;
 import mvc.IViewer;
-import utilities.ResourceLoader;
+import static utilities.Properties.*;
 
 public class MainMenu extends JPanel implements ActionListener,IViewer {
 
 	private static final long serialVersionUID = 1L;
 
 	private BufferedImage backGroundImage;
-	//private BufferedImage newGameImage;
 	private JButton exit;
 	private JButton loadSavedGame;
 	private JButton newGame;
@@ -30,7 +28,7 @@ public class MainMenu extends JPanel implements ActionListener,IViewer {
 	public MainMenu() {
 		this.setSize(frameWidth(), frameHeight());
 		try {
-			backGroundImage = ImageIO.read(ResourceLoader.load(NEW_GAME));
+			backGroundImage = ImageIO.read(new File(NEW_GAME));
 		} catch (IOException e) {
 			throw new RuntimeException("Image Not Found!");
 		}

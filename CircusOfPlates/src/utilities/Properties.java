@@ -1,4 +1,3 @@
-
 package utilities;
 
 import java.awt.*;
@@ -6,14 +5,12 @@ import java.io.File;
 
 public final class Properties {
 
-	private static final String RESOURCE_SEPARATOR = "/";
-    //public static final String PLAYER1 =  "imgs" + RESOURCE_SEPARATOR + "player1.png";
-    //public static final String PLAYER2 =  "imgs" + RESOURCE_SEPARATOR + "player2.png";
-    public static final String NEW_GAME = "imgs" + RESOURCE_SEPARATOR  + "newgame.jpg";
-   // public static final String BACK_GROUND = "imgs" + RESOURCE_SEPARATOR  + "background.jpg";
-    public static final String BACK_GROUND = "resources" + File.separator + "imgs" + File.separator + "background.jpg";
-    public static final String PLAYER1 = "resources" + File.separator + "imgs" + File.separator + "player1.png";
+
+	public static final String PLAYER1 = "resources" + File.separator + "imgs" + File.separator + "player1.png";
     public static final String PLAYER2 = "resources" + File.separator + "imgs" + File.separator + "player2.png";
+    public static final String NEW_GAME = "resources" + File.separator + "imgs" + File.separator + "newgame.jpg";
+    public static final String BACK_GROUND = "resources" + File.separator + "imgs" + File.separator + "background.jpg";
+    
     public static final Color Corrupt_Color = Color.black;
 
     public static final int SHIFT = 100; // shifting clowns from the center at the beginning

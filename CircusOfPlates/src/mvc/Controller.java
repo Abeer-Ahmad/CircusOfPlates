@@ -38,13 +38,6 @@ public class Controller {
         viewer.setCurrentPanel("mainMenu");
     }
 
-
-	public void playAgain() {
-	    viewer.goToGame();
-	    model.playAgain();
-	}
-	
-
     public void load(String game) {
         model.load(game);
     }
@@ -68,4 +61,9 @@ public class Controller {
     public void exitGame() {
         viewer.exitGame();
     }
+
+    public void playAgain() {
+	    viewer.goToGame();
+	    model.playAgain();
+	}
 }

@@ -1,14 +1,5 @@
 package mvc;
 
-import static utilities.Properties.frameHeight;
-import static utilities.Properties.frameWidth;
-
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Observable;
-import java.util.Observer;
-
-import javax.swing.SwingWorker;
 
 import Parsers.Memento;
 import Parsers.Stream;
@@ -22,56 +13,66 @@ import plateGenerator.Belt;
 import plateGenerator.LeftBelt;
 import plateGenerator.RightBelt;
 
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Observable;
+import java.util.Observer;
+
+import static utilities.Properties.PLAYER1;
+import static utilities.Properties.frameHeight;
+import static utilities.Properties.frameWidth;
+
 public class Model extends Observable {
 
-	private ArrayList<Belt> belts;
-	private ArrayList<Player> players;
-	private ArrayList<Shape> shapes;
-	private NewShapeThread shapeThread;
-	private boolean isRunning;
-	private String level;
-	private ScoreManager scoreManager;
-	private Stream stream;
-	private int laserHeight;
+    private ArrayList<Belt> belts;
+    private ArrayList<Player> players;
+    private ArrayList<Shape> shapes;
+    private NewShapeThread shapeThread;
+    private boolean isRunning;
+    private String level;
+    private ScoreManager scoreManager;
+    private Stream stream;
+    private int laserHeight;
+    private boolean twoPlayers;
 
+    public Model(Observer gameViewer) {
+        players = new ArrayList<>();
+        shapes = new ArrayList<>();
+        belts = new ArrayList<>();
+        shapeThread = new NewShapeThread();
+        isRunning = false;
+        addObserver(gameViewer);
+        scoreManager = null;
+        laserHeight = 140;
+        stream = new Stream();
+    }
 
-	public Model(Observer gameViewer) {
-		players = new ArrayList<>();
-		shapes = new ArrayList<>();
-		belts = new ArrayList<>();
-		shapeThread = new NewShapeThread();
-		isRunning = false;
-		addObserver(gameViewer);
-		scoreManager = null;
-		laserHeight = 140;
-		stream = new Stream();
-	}
+    private void setBelts(int x) {
+        belts.add(new LeftBelt(0, 50, 400));
+        belts.add(new LeftBelt(0, 100, 250));
+        belts.add(new RightBelt(x, 50, 400));
+        belts.add(new RightBelt(x, 100, 250));
+    }
 
-	private void setBelts(int x) {
-		belts.add(new LeftBelt(0, 50, 400));
-		belts.add(new LeftBelt(0, 100, 250));
-		belts.add(new RightBelt(x, 50, 400));
-		belts.add(new RightBelt(x, 100, 250));
-	}
+    public void setPlayers(boolean twoPlayers, ArrayList<String> names) {
+        players.add(new Player(names.get(0)));
+        if (twoPlayers)
+            players.add(new Player(names.get(1)));
+    }
 
-	public void setPlayers(boolean twoPlayers, ArrayList<String> names) {
-		players.add(new Player(names.get(0)));
-		if (twoPlayers)
-			players.add(new Player(names.get(1)));
-	}
+    public void setLevel(String dataLevel) {
+        this.level = dataLevel;
+        for (Belt belt : belts) {
+            belt.getRandomGenerator().setDifficultyLevel(dataLevel);
+        }
+    }
 
-	public void setLevel(String dataLevel) {
-		this.level = dataLevel;
-		for (Belt belt : belts) {
-			belt.getRandomGenerator().setDifficultyLevel(dataLevel);
-		}
-	}
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
 
-	public ArrayList<Player> getPlayers() {
-		return players;
-	}
-
-	public void movePlayer(Player player, int step) {
+    public void movePlayer(Player player, int step) {
 		player.move(step);
 		setChanged();
 		notifyObservers(players);
@@ -80,8 +81,8 @@ public class Model extends Observable {
 		setChanged();
 		notifyObservers(shapes);
 	}
-
-	private synchronized void removeExpired() {
+    
+    private synchronized void removeExpired() {
 		synchronized (shapes) {
 			int size = shapes.size();
 			for (int i = size - 1; i >= 0; --i) {
@@ -94,9 +95,10 @@ public class Model extends Observable {
 			setChanged();
 			notifyObservers(shapes);
 		}
+
 	}
 
-	private void updateShapes() {
+    private void updateShapes() {
 		synchronized (shapes) {
 			for (Shape shape : shapes) {
 				shape.update();
@@ -117,7 +119,7 @@ public class Model extends Observable {
 		notifyObservers(players);
 	}
 
-	public synchronized void startGame(LinkedHashMap<String, Object> settings, boolean newGame) {
+    public synchronized void startGame(LinkedHashMap<String, Object> settings, boolean newGame) {
         Boolean twoPlayers = (Boolean) settings.get("twoPlayers");
         if (newGame) {
             restart();
@@ -139,18 +141,19 @@ public class Model extends Observable {
         updateGameItems();
         isRunning = true;
         notifyAll();
+
     }
-	
-	private void restart() {
-		shapes.clear();
-		players.clear();
-	}
 
-	public void pauseGame() {
-		isRunning = false;
-	}
+    private void restart() {
+        shapes.clear();
+        players.clear();
+    }
 
-	public synchronized void playAgain() {
+    public void pauseGame() {
+        isRunning = false;
+    }
+
+    public synchronized void playAgain() {
 		shapes.clear();
 		setChanged();
 		notifyObservers(shapes);
@@ -163,12 +166,12 @@ public class Model extends Observable {
 		notifyAll();
 	}
 
-	public synchronized void continueGame() {
-		isRunning = true;
-		notify();
-	}
+    public synchronized void continueGame() {
+        isRunning = true;
+        notifyAll();
+    }
 
-	public synchronized void updateGameItems() {
+    public synchronized void updateGameItems() {
 		updateShapes();
 		updatePlayers();
 		removeExpired();
@@ -180,40 +183,40 @@ public class Model extends Observable {
 		}
 	}
 
-	public synchronized boolean isRunning() throws InterruptedException {
-		if (!isRunning) {
-			wait();
-		}
-		return isRunning;
-	}
+    public synchronized boolean isRunning() throws InterruptedException {
+        if (!isRunning)
+            wait();
+        return isRunning;
+    }
 
-	public void save() {
-		String game = "";
-		for (Player player : players)
-			game += player.getName();
-		stream.save(players, shapes, level, game);
-	}
+    public void save() {
+        String game = "";
+        for (Player player : players)
+            game += player.getName();
+        stream.save(players, shapes, level, game);
+    }
 
-	public void load(String game) {
-		Memento loadedGame = stream.load(game);
-		players = loadedGame.getPlayers();
-		shapes = loadedGame.getShapes();
+    public void load(String game) {
+        Memento loadedGame = stream.load(game);
+        players = loadedGame.getPlayers();
+        shapes = loadedGame.getShapes();
 
-		LinkedHashMap<String, Object> settings = new LinkedHashMap<>();
-		ArrayList<String> names = new ArrayList<>();
-		for (Player player : players)
-			names.add(player.getName());
+        LinkedHashMap<String,Object> settings = new LinkedHashMap<>();
+        ArrayList<String> names = new ArrayList<>();
+        for (Player player : players)
+            names.add(player.getName());
 
-		settings.put("twoPlayers", players.size() > 1);
-		settings.put("level", loadedGame.getLevel());
-		settings.put("names", names);
+        settings.put("twoPlayers", players.size() > 1);
+        settings.put("level", loadedGame.getLevel());
+        settings.put("names", names);
 
-		startGame(settings, false);
-	}
+        startGame(settings, false);
+        scoreManager.updatePlayers(players);
+    }
 
-	private class NewShapeThread extends SwingWorker<Void, Void> {
+    private class NewShapeThread extends SwingWorker<Void, Void> {
 
-		private int timerDelay;
+    	int timerDelay;
 
 		protected void setTimerDelay(int timerDelay) {
 			this.timerDelay = timerDelay;
@@ -221,16 +224,22 @@ public class Model extends Observable {
 
 		@Override
 		protected Void doInBackground() throws Exception {
+
 			while (isRunning()) {
+				System.out.println("Running add newShape");
 				synchronized (shapes) {
-					for (Belt belt : belts)
+					for (Belt belt : belts) {
 						shapes.add(belt.addShape());
-					setChanged();
-					notifyObservers(shapes);
-					Thread.sleep(timerDelay);
+					}
 				}
+				System.out.println("model" + shapes.size());
+				setChanged();
+				notifyObservers(shapes);
+				Thread.sleep(timerDelay);
+
 			}
+
 			return null;
 		}
-	}
+    }
 }
