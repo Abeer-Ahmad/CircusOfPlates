@@ -1,23 +1,36 @@
 package mvc;
 
+
+import java.util.ArrayList;
+
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
+
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+
 import game.player.Player;
 import game.shapes.Shape;
 import gui.MainFrame;
 import gui.panels.*;
 import plateGenerator.Belt;
 
-import javax.swing.*;
-import java.util.*;
 
 import static utilities.Properties.frameHeight;
 import static utilities.Properties.frameWidth;
 
 public class Viewer implements Observer {
 
+
     private Controller controller;
     private LinkedHashMap<String, JPanel> menuPanels;
     private GameGrid gameGrid;
     private MainFrame mainFrame;
+
 
     public Viewer() {
         menuPanels = new LinkedHashMap<>();

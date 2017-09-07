@@ -25,7 +25,7 @@ public class WinnerView extends JPanel implements ActionListener,IViewer {
 
 	private BufferedImage backGroundImage;
 	private JButton exit;
-	private JButton playAgain;
+	private JButton continueGame;
 	private JButton newGame;
 	private Controller controller;
 	public WinnerView(Player player) {
@@ -40,13 +40,9 @@ public class WinnerView extends JPanel implements ActionListener,IViewer {
 		}
 		this.setLayout(null);
 		this.setFocusable(true);
-		System.out.println("inside constructor of winnerview");
-		System.out.println(player.getName()+ "  "+player.getScore());
-		System.out.println("inside constructor of winnerview");
 		JOptionPane.showMessageDialog(null, player.getName() + " wins with "
-				+ Integer.toString(player.getScore()) + " points", "Winner Announcement",
+				+ Integer.toString(player.getScore()) + " points", "Warning",
 				JOptionPane.PLAIN_MESSAGE);
-		System.out.println("after JOption constructor of winnerview");
 		setButtons();
 		repaint();
 	}
@@ -59,7 +55,7 @@ public class WinnerView extends JPanel implements ActionListener,IViewer {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == newGame)
 			controller.changeDisplay("playerMenu");
-		if (e.getSource() == playAgain)
+		if (e.getSource() == continueGame)
 			controller.playAgain();
 		if (e.getSource() == exit)
 			controller.exitGame();
@@ -67,9 +63,7 @@ public class WinnerView extends JPanel implements ActionListener,IViewer {
 
 	@Override
 	public void paintComponent(Graphics g) {
-		super.repaint();
 		g.drawImage(backGroundImage, 0, 0, getWidth(), getHeight(), this);
-		System.out.println("repaint winner view");
 	}
 
 	private void setButtons() { // remove static dimensions!!!
@@ -77,10 +71,10 @@ public class WinnerView extends JPanel implements ActionListener,IViewer {
 		newGame.setBounds(250, 50, 500, 100);
 		newGame.addActionListener(this);
 		this.add(newGame);
-		playAgain = new JButton("Play Again");
-		playAgain.setBounds(250, 200, 500, 100);
-		playAgain.addActionListener(this);
-		this.add(playAgain);
+		continueGame = new JButton("Play Again");
+		continueGame.setBounds(250, 200, 500, 100);
+		continueGame.addActionListener(this);
+		this.add(continueGame);
 		exit = new JButton("Quit");
 		exit.setBounds(250, 350, 500, 100);
 		exit.addActionListener(this);

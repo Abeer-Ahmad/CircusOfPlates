@@ -1,11 +1,11 @@
 package game.shapes;
 
-
 import java.awt.Graphics2D;
 
-
 import game.shapes.states.OnBelt;
+
 import static utilities.Properties.*;
+
 public class CorruptShape extends Shape{
 
 	

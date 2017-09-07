@@ -1,3 +1,4 @@
+
 package utilities;
 
 import java.awt.*;
@@ -31,3 +32,4 @@ public final class Properties {
     }
 
 }
+

@@ -181,6 +181,7 @@ public class GameGrid extends JPanel {
         @Override
         public synchronized void keyPressed(KeyEvent e) {
             pressedKeys.add(e.getKeyCode());
+
             if (pressedKeys.size() > 0) {
                 for (Integer pressedKey : pressedKeys) {
                     if (pressedKey == KeyEvent.VK_ESCAPE) {

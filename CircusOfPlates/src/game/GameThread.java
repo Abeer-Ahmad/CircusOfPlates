@@ -2,7 +2,6 @@ package game;
 
 import mvc.Model;
 import static utilities.Properties.*;
-
 public class GameThread implements Runnable {
 
 	private Model game;
@@ -21,12 +20,12 @@ public class GameThread implements Runnable {
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
-			try {
+					try {
 						Thread.sleep(UPDATED_SHAPES_SPEED);
-			} catch (InterruptedException e) {
+					} catch (InterruptedException e) {
 						e.printStackTrace();
-			}
-		} 
+					}
+				} 
 	}
 		
 	}
