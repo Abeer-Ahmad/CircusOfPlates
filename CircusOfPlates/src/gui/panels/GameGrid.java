@@ -7,6 +7,7 @@ import game.shapes.Shape;
 import mvc.Controller;
 import plateGenerator.Belt;
 import utilities.Pair;
+import utilities.ResourceLoader;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -46,7 +47,7 @@ public class GameGrid extends JPanel {
 
     public GameGrid(boolean twoPlayers, ArrayList<Player> modelPlayers) {
         try {
-            backGroundImage = ImageIO.read(new File(BACK_GROUND));
+            backGroundImage = ImageIO.read(ResourceLoader.load(BACK_GROUND));
         } catch (IOException e) {
             throw new RuntimeException("Image Not Found!");
         }

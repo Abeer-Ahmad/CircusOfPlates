@@ -15,6 +15,8 @@ import javax.swing.border.EmptyBorder;
 import game.player.Player;
 import mvc.Controller;
 import mvc.IViewer;
+import utilities.ResourceLoader;
+
 import static utilities.Properties.*;
 
 public class WinnerView extends JPanel implements ActionListener,IViewer {
@@ -30,7 +32,7 @@ public class WinnerView extends JPanel implements ActionListener,IViewer {
 		setSize(frameWidth(), frameHeight());
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			backGroundImage = ImageIO.read(new File(NEW_GAME));
+			backGroundImage = ImageIO.read(ResourceLoader.load(NEW_GAME));
 		} catch (IOException e) {
 			throw new RuntimeException("Image Not Found!");
 		} catch (Exception e) {

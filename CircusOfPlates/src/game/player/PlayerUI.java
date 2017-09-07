@@ -2,6 +2,7 @@ package game.player;
 
 
 import game.shapes.Shape;
+import utilities.ResourceLoader;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -19,7 +20,7 @@ public class PlayerUI extends JComponent {
 
     public PlayerUI(Player player, String path, int direction) {
         try {
-            image = ImageIO.read(new File(path));
+            image = ImageIO.read(ResourceLoader.load(path));
             if (player.getXCenter() == 0) {
                 int xCenter = frameWidth() / 2 + SHIFT * direction;
                 int yCenter = frameHeight() - (image.getHeight() / 2);

@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 
 import mvc.Controller;
 import mvc.IViewer;
+import utilities.ResourceLoader;
+
 import static utilities.Properties.*;
 
 public class MainMenu extends JPanel implements ActionListener,IViewer {
@@ -28,7 +30,7 @@ public class MainMenu extends JPanel implements ActionListener,IViewer {
 	public MainMenu() {
 		this.setSize(frameWidth(), frameHeight());
 		try {
-			backGroundImage = ImageIO.read(new File(NEW_GAME));
+			backGroundImage = ImageIO.read(ResourceLoader.load(NEW_GAME));
 		} catch (IOException e) {
 			throw new RuntimeException("Image Not Found!");
 		}
