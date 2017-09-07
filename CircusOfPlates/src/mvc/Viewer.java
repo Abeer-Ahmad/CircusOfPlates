@@ -54,6 +54,7 @@ public class Viewer implements Observer {
 	}
 
 	public void goToGame() {
+		System.out.println("change Scene to games");
 		mainFrame.changeScene(gameGrid);
 	}
 

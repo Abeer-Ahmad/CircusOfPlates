@@ -1,20 +1,18 @@
 package gui.panels;
 
 import java.awt.Graphics;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
 import game.player.Player;
 import mvc.Controller;
 import mvc.IViewer;
+import utilities.ResourceLoader;
 import static utilities.Properties.*;
 
 public class WinnerView extends JPanel implements ActionListener,IViewer {
@@ -30,7 +28,7 @@ public class WinnerView extends JPanel implements ActionListener,IViewer {
 		setSize(frameWidth(), frameHeight());
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			backGroundImage = ImageIO.read(new File(NEW_GAME));
+			backGroundImage = ImageIO.read(ResourceLoader.load(NEW_GAME));
 		} catch (IOException e) {
 			throw new RuntimeException("Image Not Found!");
 		} catch (Exception e) {

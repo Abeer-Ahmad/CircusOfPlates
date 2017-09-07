@@ -2,6 +2,7 @@ package gui.panels;
 
 import mvc.Controller;
 import mvc.IViewer;
+import utilities.ResourceLoader;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -37,7 +38,7 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
 
     public ChoosePlayerMenu() {
         try {
-            backGroundImage = ImageIO.read(new File(NEW_GAME));
+            backGroundImage = ImageIO.read(ResourceLoader.load(NEW_GAME));
         } catch (IOException e) {
             throw new RuntimeException("Image Not Found!");
         }

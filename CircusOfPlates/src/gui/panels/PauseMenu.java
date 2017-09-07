@@ -2,6 +2,7 @@ package gui.panels;
 
 import mvc.Controller;
 import mvc.IViewer;
+import utilities.ResourceLoader;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -10,7 +11,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import static utilities.Properties.*;
@@ -28,7 +28,7 @@ public class PauseMenu extends JPanel implements ActionListener, IViewer {
     public PauseMenu() {
         this.setSize(frameWidth(), frameHeight());
         try {
-            backGroundImage = ImageIO.read(new File(NEW_GAME));
+            backGroundImage = ImageIO.read(ResourceLoader.load(NEW_GAME));
         } catch (IOException e) {
             throw new RuntimeException("Image Not Found!");
         }

@@ -21,9 +21,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.CopyOnWriteArrayList;
+
 
 import static utilities.Properties.*;
+import utilities.ResourceLoader;
 
 public class GameGrid extends JPanel {
 
@@ -49,7 +50,9 @@ public class GameGrid extends JPanel {
 
     public GameGrid(boolean twoPlayers, ArrayList<Player> modelPlayers) {
         try {
-            backGroundImage = ImageIO.read(new File(BACK_GROUND));
+           
+        	backGroundImage = ImageIO.read(new File(BACK_GROUND));
+        	//backGroundImage = ImageIO.read(ResourceLoader.load(BACK_GROUND));
         } catch (IOException e) {
             throw new RuntimeException("Image Not Found!");
         }

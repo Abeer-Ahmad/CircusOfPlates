@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
+import utilities.ResourceLoader;
 import static utilities.Properties.*;
 
 public class PlayerUI extends JComponent {
@@ -19,7 +19,8 @@ public class PlayerUI extends JComponent {
 
     public PlayerUI(Player player, String path, int direction) {
         try {
-            image = ImageIO.read(new File(path));
+        	image = ImageIO.read(new File(path));
+        	//image = ImageIO.read(ResourceLoader.load(path));
             if (player.getxCenter() == 0) {
                 int xCenter = frameWidth() / 2 + SHIFT * direction;
                 int yCenter = frameHeight() - (image.getHeight() / 2);
