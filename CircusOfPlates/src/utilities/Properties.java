@@ -10,10 +10,10 @@ public final class Properties {
 	public static final String PLAYER2 = "imgs" + RESOURCE_SEPARATOR + "player2.png";
 	public static final String NEW_GAME = "imgs" + RESOURCE_SEPARATOR + "newgame.jpg";
 	public static final String BACK_GROUND = "imgs" + RESOURCE_SEPARATOR + "background.jpg";
-	public static final String NEW_GAME_BUTTON = "imgs" + RESOURCE_SEPARATOR + "new_game.png";
-	public static final String LOAD_BUTTON = "imgs" + RESOURCE_SEPARATOR + "load_game.png";
-	public static final String QUIT_BUTTON = "imgs" + RESOURCE_SEPARATOR + "quit.png";
-	public static final String RULES_BUTTON = "imgs" + RESOURCE_SEPARATOR + "rules.png";
+	public static final String NEW_GAME_BUTTON = "imgs" + RESOURCE_SEPARATOR + "buttons" + RESOURCE_SEPARATOR + "new_game.png";
+	public static final String LOAD_BUTTON = "imgs" + RESOURCE_SEPARATOR + "buttons" + RESOURCE_SEPARATOR + "load_game.png";
+	public static final String QUIT_BUTTON = "imgs" + RESOURCE_SEPARATOR + "buttons" + RESOURCE_SEPARATOR + "quit.png";
+	public static final String RULES_BUTTON = "imgs" + RESOURCE_SEPARATOR + "buttons" + RESOURCE_SEPARATOR + "rules.png";
 	public static final String MAIN_MENU = "mainMenu";
 	public static final String PLAYER_MENU = "playerMenu";
 	public static final String PAUSE_MENU = "pauseMenu";

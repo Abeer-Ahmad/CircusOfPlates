@@ -49,13 +49,14 @@ public class MainMenu extends JPanel implements ActionListener,IViewer {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == buttons.get(NEW_GAME_BUTTON))
+		JButton buttonPressed = (JButton) e.getSource();
+		if (buttonPressed.getName().equals(NEW_GAME_BUTTON))
 			controller.changeDisplay(PLAYER_MENU);
-		if (e.getSource() == buttons.get(LOAD_BUTTON))
+		if (buttonPressed.getName().equals(LOAD_BUTTON))
 			controller.loadInfo();
-		if (e.getSource() == QUIT_BUTTON)
+		if (buttonPressed.getName().equals(QUIT_BUTTON))
 			controller.exitGame();
-		if (e.getSource() == RULES_BUTTON){
+		if (buttonPressed.getName().equals(RULES_BUTTON)){
 			//RULES PANEL
 		}
 	}
@@ -75,13 +76,16 @@ public class MainMenu extends JPanel implements ActionListener,IViewer {
 		try {
 			newGameIcon = new ImageIcon(ImageIO.read(ResourceLoader.loadStream(NEW_GAME_BUTTON)));
 			buttons.put(NEW_GAME_BUTTON, new JButton(newGameIcon));
+			buttons.get(NEW_GAME_BUTTON).setName(NEW_GAME_BUTTON);
 			loadIcon = new ImageIcon(ImageIO.read(ResourceLoader.loadStream(LOAD_BUTTON)));
 			buttons.put(LOAD_BUTTON, new JButton(loadIcon));
+			buttons.get(LOAD_BUTTON).setName(LOAD_BUTTON);
 			rulesIcon = new ImageIcon(ImageIO.read(ResourceLoader.loadStream(RULES_BUTTON)));
 			buttons.put(RULES_BUTTON, new JButton(rulesIcon));
+			buttons.get(RULES_BUTTON).setName(RULES_BUTTON);
 			quitIcon = new ImageIcon(ImageIO.read(ResourceLoader.loadStream(QUIT_BUTTON)));
 			buttons.put(QUIT_BUTTON, new JButton(quitIcon));
-			
+			buttons.get(QUIT_BUTTON).setName(QUIT_BUTTON);
 		} catch (IOException e) {
 			System.out.println("Button Image not found");			
 		}
@@ -92,6 +96,7 @@ public class MainMenu extends JPanel implements ActionListener,IViewer {
 		button.setContentAreaFilled(false);
 		button.addActionListener(this);		
 		box.add(button);
+		
 		}
 		box.setBounds(topLeftBoxXAlignment, topLeftBoxYAlignment, newGameIcon.getIconWidth()
 				      , 5 * newGameIcon.getIconHeight());
