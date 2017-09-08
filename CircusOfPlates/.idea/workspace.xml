@@ -1,42 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f3679f3d-efcd-41b4-8b29-c667b76d27a0" name="Default" comment="re-push">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/imgs/back.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/imgs/game rules.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gui/panels/Rules.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/point.ser" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/savedGames/1.ser" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/game/GameThread.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/game/GameThread.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/game/ScoreManager.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/game/ScoreManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/game/player/Player.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/game/player/Player.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/game/player/PlayerUI.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/game/player/PlayerUI.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/game/shapes/CorruptShape.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/game/shapes/CorruptShape.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/game/strategy/Easy.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/game/strategy/Easy.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/game/strategy/Hard.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/game/strategy/Hard.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/game/strategy/Medium.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/game/strategy/Medium.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/gui/MainFrame$FrameClose.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/gui/MainFrame$FrameClose.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/gui/MainFrame.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/gui/MainFrame.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/gui/panels/ChoosePlayerMenu$InfoMenuController.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/gui/panels/ChoosePlayerMenu$InfoMenuController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/gui/panels/ChoosePlayerMenu$PlayerMenuController.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/gui/panels/ChoosePlayerMenu$PlayerMenuController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/gui/panels/ChoosePlayerMenu.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/gui/panels/ChoosePlayerMenu.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/gui/panels/GameGrid$MultiKeyPressListener.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/gui/panels/GameGrid$MultiKeyPressListener.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/gui/panels/GameGrid.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/gui/panels/GameGrid.class" />
+    <list default="true" id="f3679f3d-efcd-41b4-8b29-c667b76d27a0" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/imgs/button.jpg" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/imgs/back.png" afterPath="$PROJECT_DIR$/resources/imgs/buttons/back.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/gui/panels/MainMenu.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/gui/panels/MainMenu.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/gui/panels/PauseMenu.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/gui/panels/PauseMenu.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/gui/panels/WinnerView.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/gui/panels/WinnerView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/imgs/newgame.jpg" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/imgs/newgame.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/mvc/Controller.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/mvc/Controller.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/mvc/Model$NewShapeThread.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/mvc/Model$NewShapeThread.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/mvc/Model.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/mvc/Model.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/mvc/Viewer.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/mvc/Viewer.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/savedGames/1.ser" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/savedGames/1.ser" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/utilities/Properties.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/utilities/Properties.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/utilities/ResourceLoader.class" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/utilities/ResourceLoader.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/savedGames/1.ser" afterPath="$PROJECT_DIR$/resources/savedGames/1.ser" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/production/CircusOfPlates/imgs/Thumbs.db" afterPath="$PROJECT_DIR$/classes/production/CircusOfPlates/imgs/Thumbs.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/panels/MainMenu.java" afterPath="$PROJECT_DIR$/src/gui/panels/MainMenu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mvc/Viewer.java" afterPath="$PROJECT_DIR$/src/mvc/Viewer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utilities/Properties.java" afterPath="$PROJECT_DIR$/src/utilities/Properties.java" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -50,21 +23,36 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Properties.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Properties.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/utilities/Properties.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="23" column="35" lean-forward="false" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+            <state relative-caret-position="228">
+              <caret line="18" column="105" lean-forward="false" selection-start-line="18" selection-start-column="105" selection-end-line="18" selection-end-column="105" />
+              <folding>
+                <marker date="1504846037422" expanded="false" signature="1867:1872" ph=" { " />
+                <marker date="1504846037422" expanded="false" signature="1929:1932" ph=" }" />
+                <marker date="1504846037422" expanded="false" signature="1972:1977" ph=" { " />
+                <marker date="1504846037422" expanded="false" signature="2035:2038" ph=" }" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Rules.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gui/panels/Rules.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="42">
+              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Rules.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/gui/panels/Rules.java">
+      <file leaf-file-name="ResourceLoader.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utilities/ResourceLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="32" column="111" lean-forward="false" selection-start-line="32" selection-start-column="111" selection-end-line="32" selection-end-column="111" />
+            <state relative-caret-position="102">
+              <caret line="7" column="40" lean-forward="false" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -73,8 +61,24 @@
       <file leaf-file-name="MainMenu.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gui/panels/MainMenu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="87" column="43" lean-forward="true" selection-start-line="84" selection-start-column="12" selection-end-line="87" selection-end-column="43" />
+            <state relative-caret-position="170">
+              <caret line="76" column="98" lean-forward="false" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="98" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1227#1228#0" expanded="true" />
+                <element signature="e#1261#1262#0" expanded="true" />
+                <element signature="e#1772#1773#0" expanded="true" />
+                <element signature="e#1844#1845#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Viewer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mvc/Viewer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -181,10 +185,10 @@
         <option value="$PROJECT_DIR$/src/gui/panels/GameGrid.java" />
         <option value="$PROJECT_DIR$/src/game/ScoreManager.java" />
         <option value="$PROJECT_DIR$/src/mvc/Model.java" />
-        <option value="$PROJECT_DIR$/src/utilities/Properties.java" />
         <option value="$PROJECT_DIR$/src/mvc/Viewer.java" />
         <option value="$PROJECT_DIR$/src/gui/panels/MainMenu.java" />
         <option value="$PROJECT_DIR$/src/gui/panels/Rules.java" />
+        <option value="$PROJECT_DIR$/src/utilities/Properties.java" />
       </list>
     </option>
   </component>
@@ -245,8 +249,22 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="utilities" />
+              <option name="myItemId" value="CircusOfPlates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Circus of Plates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CircusOfPlates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -264,7 +282,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imgs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -291,6 +313,9 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Mohamed\git\Circus of Plates\CircusOfPlates\resources\imgs\buttons" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Mohamed\git\Circus of Plates\CircusOfPlates\src\gui\panels" />
       <recent name="C:\Users\Mohamed\git\Circus of Plates\CircusOfPlates\resources\imgs" />
@@ -742,7 +767,21 @@
       <option name="project" value="LOCAL" />
       <updated>1504334283781</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="rules added">
+      <created>1504844692248</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1504844692248</updated>
+    </task>
+    <task id="LOCAL-00016" summary="re-commit">
+      <created>1504845125932</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1504845125932</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -821,7 +860,9 @@
     <MESSAGE value="save, load working - spare version" />
     <MESSAGE value="saving in &quot;resources/savedGames/game_name&quot;" />
     <MESSAGE value="re-push" />
-    <option name="LAST_COMMIT_MESSAGE" value="re-push" />
+    <MESSAGE value="rules added" />
+    <MESSAGE value="re-commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="re-commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -834,22 +875,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/collections/Shapes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="52" column="12" lean-forward="false" selection-start-line="52" selection-start-column="12" selection-end-line="52" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MotionWithKeyListener.java" />
-    <entry file="file://$PROJECT_DIR$/src/gui/handlers/KeyBoardHandler.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/awt/Point.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="36" column="3" lean-forward="true" selection-start-line="36" selection-start-column="3" selection-end-line="36" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/awt/AWTKeyStroke.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-361">
@@ -1122,8 +1147,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mvc/Viewer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="27" column="41" lean-forward="false" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
+        <state relative-caret-position="170">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1136,27 +1161,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utilities/Properties.java">
+    <entry file="file://$PROJECT_DIR$/src/gui/panels/MainMenu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="23" column="35" lean-forward="false" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
-          <folding />
+        <state relative-caret-position="170">
+          <caret line="76" column="98" lean-forward="false" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="98" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1227#1228#0" expanded="true" />
+            <element signature="e#1261#1262#0" expanded="true" />
+            <element signature="e#1772#1773#0" expanded="true" />
+            <element signature="e#1844#1845#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/panels/MainMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="87" column="43" lean-forward="true" selection-start-line="84" selection-start-column="12" selection-end-line="87" selection-end-column="43" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/resources/imgs/newgame.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/imgs/game rules.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/imgs/buttons/back.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/imgs/buttons/back.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/panels/Rules.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="32" column="111" lean-forward="false" selection-start-line="32" selection-start-column="111" selection-end-line="32" selection-end-column="111" />
+        <state relative-caret-position="42">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utilities/Properties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="18" column="105" lean-forward="false" selection-start-line="18" selection-start-column="105" selection-end-line="18" selection-end-column="105" />
+          <folding>
+            <marker date="1504846037422" expanded="false" signature="1867:1872" ph=" { " />
+            <marker date="1504846037422" expanded="false" signature="1929:1932" ph=" }" />
+            <marker date="1504846037422" expanded="false" signature="1972:1977" ph=" { " />
+            <marker date="1504846037422" expanded="false" signature="2035:2038" ph=" }" />
+          </folding>
         </state>
       </provider>
     </entry>
