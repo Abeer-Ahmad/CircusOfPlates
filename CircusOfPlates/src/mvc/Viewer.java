@@ -91,18 +91,21 @@ public class Viewer implements Observer {
 
     public void popMessage(JPanel container, JPanel message, boolean savedGame) {		
         if (JOptionPane.showConfirmDialog(container, message, "New Game", JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
-            if (savedGame) {
-                ((ChoosePlayerMenu) menuPanels.get(PLAYER_MENU)).setSaved(false);
-                ArrayList<String> names = (ArrayList<String>) ((ChoosePlayerMenu) container).getConfigurations().get("names");
-                String game = "";
-                for (String name : names)
-                    game += name;
-                controller.load(game);
-            } else
-                controller.startGame(((ChoosePlayerMenu) container).getConfigurations());
+        	intializeGrid(container, savedGame);
         }
     }
 
+    public void intializeGrid (JPanel container, boolean savedGame) {
+    	if (savedGame) {
+            ((ChoosePlayerMenu) menuPanels.get(PLAYER_MENU)).setSaved(false);
+            ArrayList<String> names = (ArrayList<String>) ((ChoosePlayerMenu) container).getConfigurations().get("names");
+            String game = "";
+            for (String name : names)
+                game += name;
+            controller.load(game);
+        } else
+            controller.startGame(((ChoosePlayerMenu) container).getConfigurations());
+    }
     public void confirmSaving() {
         JOptionPane.showMessageDialog(null, "Your game has been saved!");
     }
