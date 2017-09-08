@@ -21,8 +21,6 @@ public final class Properties {
 	public static final String MAIN_MENU = "mainMenu";
 	public static final String PLAYER_MENU = "playerMenu";
 	public static final String PAUSE_MENU = "pauseMenu";
-	public static final String  RULES = "rules";
-
 	public static final Color Corrupt_Color = Color.black;
 
 	public static final int SHIFT = 100; // shifting clowns from the center at
