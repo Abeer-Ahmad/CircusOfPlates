@@ -29,7 +29,7 @@ public class PauseMenu extends JPanel implements ActionListener, IViewer {
     public PauseMenu() {
         this.setSize(frameWidth(), frameHeight());
         try {
-            backGroundImage = ImageIO.read(ResourceLoader.load(NEW_GAME));
+            backGroundImage = ImageIO.read(ResourceLoader.loadStream(NEW_GAME));
         } catch (IOException e) {
             throw new RuntimeException("Image Not Found!");
         }

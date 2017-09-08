@@ -4,12 +4,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.SwingWorker;
 
 import mvc.Controller;
 import mvc.IViewer;
@@ -20,21 +23,20 @@ import static utilities.Properties.*;
 public class MainMenu extends JPanel implements ActionListener,IViewer {
 
 	private static final long serialVersionUID = 1L;
-
+	private static int topLeftBoxXAlignment;
+	private static int topLeftBoxYAlignment;
+	private ImageLoader imageLoader;
 	private BufferedImage backGroundImage;
-	private JButton exit;
-	private JButton loadSavedGame;
-	private JButton newGame;
+	private Map<String,JButton> buttons;
 	private Controller controller;
 
 	public MainMenu() {
-		this.setSize(frameWidth(), frameHeight());
-		try {
-			backGroundImage = ImageIO.read(ResourceLoader.load(NEW_GAME));
-		} catch (IOException e) {
-			throw new RuntimeException("Image Not Found!");
-		}
+		imageLoader = new ImageLoader();
+		imageLoader.execute();
+		buttons = new LinkedHashMap<>();
 		setSize(frameWidth(), frameHeight());
+		topLeftBoxXAlignment = frameWidth() / 10;
+		topLeftBoxYAlignment = frameWidth() / 10;
 		this.setLayout(null);
 		this.setFocusable(true);
 		setButtons();
@@ -47,12 +49,15 @@ public class MainMenu extends JPanel implements ActionListener,IViewer {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == newGame)
-			controller.changeDisplay("playerMenu");
-		if (e.getSource() == loadSavedGame)
+		if (e.getSource() == buttons.get(NEW_GAME_BUTTON))
+			controller.changeDisplay(PLAYER_MENU);
+		if (e.getSource() == buttons.get(LOAD_BUTTON))
 			controller.loadInfo();
-		if (e.getSource() == exit)
+		if (e.getSource() == QUIT_BUTTON)
 			controller.exitGame();
+		if (e.getSource() == RULES_BUTTON){
+			//RULES PANEL
+		}
 	}
 
 	@Override
@@ -60,18 +65,68 @@ public class MainMenu extends JPanel implements ActionListener,IViewer {
 		g.drawImage(backGroundImage, 0, 0, getWidth(), getHeight(), this);
 	}
 
-	private void setButtons() { // remove static dimensions!!!
-		newGame = new JButton("New Game");
-		newGame.setBounds(250, 50, 500, 100);
-		newGame.addActionListener(this);
-		this.add(newGame);
-		loadSavedGame = new JButton("Load Game");
-		loadSavedGame.setBounds(250, 200, 500, 100);
-		loadSavedGame.addActionListener(this);
-		this.add(loadSavedGame);
-		exit = new JButton("Quit");
-		exit.setBounds(250, 350, 500, 100);
-		exit.addActionListener(this);
-		this.add(exit);
+	private void setButtons() { 
+		
+		javax.swing.Box box = javax.swing.Box.createVerticalBox();
+		ImageIcon newGameIcon = null;
+		ImageIcon loadIcon = null;
+		ImageIcon rulesIcon = null;
+		ImageIcon quitIcon = null;
+		try {
+			newGameIcon = new ImageIcon(ImageIO.read(ResourceLoader.loadStream(NEW_GAME_BUTTON)));
+			buttons.put(NEW_GAME_BUTTON, new JButton(newGameIcon));
+			loadIcon = new ImageIcon(ImageIO.read(ResourceLoader.loadStream(LOAD_BUTTON)));
+			buttons.put(LOAD_BUTTON, new JButton(loadIcon));
+			rulesIcon = new ImageIcon(ImageIO.read(ResourceLoader.loadStream(RULES_BUTTON)));
+			buttons.put(RULES_BUTTON, new JButton(rulesIcon));
+			quitIcon = new ImageIcon(ImageIO.read(ResourceLoader.loadStream(QUIT_BUTTON)));
+			buttons.put(QUIT_BUTTON, new JButton(quitIcon));
+			
+		} catch (IOException e) {
+			System.out.println("Button Image not found");			
+		}
+		for (JButton button : buttons.values()) {
+		button.setSize(newGameIcon.getIconWidth(), newGameIcon.getIconHeight());
+		button.setOpaque(false);
+		button.setBorderPainted(false);
+		button.setContentAreaFilled(false);
+		button.addActionListener(this);		
+		box.add(button);
+		}
+		box.setBounds(topLeftBoxXAlignment, topLeftBoxYAlignment, newGameIcon.getIconWidth()
+				      , 5 * newGameIcon.getIconHeight());
+		this.add(box);
+	
+	}
+	
+	private class ImageLoader extends SwingWorker<BufferedImage, Void> {
+	    @Override
+	    public BufferedImage doInBackground() {
+	        BufferedImage backGroundImage = null;
+			try {
+				backGroundImage = ImageIO.read(ResourceLoader.loadStream(NEW_GAME));
+			} catch (IOException e) {
+				System.out.println("backgoundImage not found");
+			}
+	        return backGroundImage;
+	    }
+
+	    @Override
+	    public void done() {
+	        
+	        try {
+	        	backGroundImage = get();
+	        } catch (InterruptedException ignore) {}
+	        catch (java.util.concurrent.ExecutionException e) {
+	            String why = null;
+	            Throwable cause = e.getCause();
+	            if (cause != null) {
+	                why = cause.getMessage();
+	            } else {
+	                why = e.getMessage();
+	            }
+	            System.err.println("Error retrieving file: " + why);
+	        }
+	    }
 	}
 }

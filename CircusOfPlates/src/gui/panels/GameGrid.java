@@ -1,6 +1,7 @@
 package gui.panels;
 
 import game.player.Player;
+
 import game.player.PlayerUI;
 import game.shapes.LaserBeam;
 import game.shapes.Shape;
@@ -15,7 +16,6 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,7 +47,7 @@ public class GameGrid extends JPanel {
 
     public GameGrid(boolean twoPlayers, ArrayList<Player> modelPlayers) {
         try {
-            backGroundImage = ImageIO.read(ResourceLoader.load(BACK_GROUND));
+            backGroundImage = ImageIO.read(ResourceLoader.loadStream(BACK_GROUND));
         } catch (IOException e) {
             throw new RuntimeException("Image Not Found!");
         }

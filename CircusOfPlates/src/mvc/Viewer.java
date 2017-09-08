@@ -9,8 +9,8 @@ import plateGenerator.Belt;
 import javax.swing.*;
 import java.util.*;
 
-import static utilities.Properties.frameHeight;
-import static utilities.Properties.frameWidth;
+import static utilities.Properties.*;
+
 
 public class Viewer implements Observer {
 
@@ -21,12 +21,12 @@ public class Viewer implements Observer {
 
     public Viewer() {
         menuPanels = new LinkedHashMap<>();
-        menuPanels.put("mainMenu", new MainMenu());
+        menuPanels.put(MAIN_MENU, new MainMenu());
 
         /**can be done using swing utility thread**/
-        menuPanels.put("playerMenu", new ChoosePlayerMenu());
-        menuPanels.put("pauseMenu", new PauseMenu());
-        mainFrame = new MainFrame(menuPanels.get("mainMenu"));
+        menuPanels.put(PLAYER_MENU, new ChoosePlayerMenu());
+        menuPanels.put(PAUSE_MENU, new PauseMenu());
+        mainFrame = new MainFrame(menuPanels.get(MAIN_MENU));
         mainFrame.setSize(frameWidth(), frameHeight());
         mainFrame.setVisible(true);
     }
@@ -72,8 +72,8 @@ public class Viewer implements Observer {
     }
 
     public void readInfo() {
-        setCurrentPanel("playerMenu");
-        ((ChoosePlayerMenu) menuPanels.get("playerMenu")).setSaved(true);
+        setCurrentPanel(PLAYER_MENU);
+        ((ChoosePlayerMenu) menuPanels.get(PLAYER_MENU)).setSaved(true);
     }
 
     public void setCurrentPanel(String namePanel) {
@@ -87,7 +87,7 @@ public class Viewer implements Observer {
     public void popMessage(JPanel container, JPanel message, boolean savedGame) {
         if (JOptionPane.showConfirmDialog(container, message, "New Game", JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
             if (savedGame) {
-                ((ChoosePlayerMenu) menuPanels.get("playerMenu")).setSaved(false);
+                ((ChoosePlayerMenu) menuPanels.get(PLAYER_MENU)).setSaved(false);
                 ArrayList<String> names = (ArrayList<String>) ((ChoosePlayerMenu) container).getConfigurations().get("names");
                 String game = "";
                 for (String name : names)

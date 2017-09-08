@@ -20,7 +20,7 @@ public class PlayerUI extends JComponent {
 
     public PlayerUI(Player player, String path, int direction) {
         try {
-            image = ImageIO.read(ResourceLoader.load(path));
+            image = ImageIO.read(ResourceLoader.loadStream(path));
             if (player.getXCenter() == 0) {
                 int xCenter = frameWidth() / 2 + SHIFT * direction;
                 int yCenter = frameHeight() - (image.getHeight() / 2);

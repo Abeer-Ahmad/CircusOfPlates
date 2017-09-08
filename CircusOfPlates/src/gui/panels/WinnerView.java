@@ -32,7 +32,7 @@ public class WinnerView extends JPanel implements ActionListener,IViewer {
 		setSize(frameWidth(), frameHeight());
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			backGroundImage = ImageIO.read(ResourceLoader.load(NEW_GAME));
+			backGroundImage = ImageIO.read(ResourceLoader.loadStream(NEW_GAME));
 		} catch (IOException e) {
 			throw new RuntimeException("Image Not Found!");
 		} catch (Exception e) {

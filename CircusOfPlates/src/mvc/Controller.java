@@ -3,8 +3,11 @@ package mvc;
 
 import game.player.PlayerUI;
 
+
 import javax.swing.*;
 import java.util.LinkedHashMap;
+
+import static utilities.Properties.*;
 
 public class Controller {
 
@@ -24,7 +27,7 @@ public class Controller {
 
     public void pauseGame() {
         model.pauseGame();
-        viewer.setCurrentPanel("pauseMenu");
+        viewer.setCurrentPanel(PAUSE_MENU);
     }
 
     public void continueGame() {
@@ -35,7 +38,7 @@ public class Controller {
     public void save() {
         model.save();
         viewer.confirmSaving();
-        viewer.setCurrentPanel("mainMenu");
+        viewer.setCurrentPanel(MAIN_MENU);
     }
 
     public void load(String game) {

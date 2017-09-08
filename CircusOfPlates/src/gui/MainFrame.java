@@ -18,6 +18,7 @@ public class MainFrame extends JFrame {
             //should log error with UIManager
             e.printStackTrace();
         }
+        setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(panel);
         close = new FrameClose();
