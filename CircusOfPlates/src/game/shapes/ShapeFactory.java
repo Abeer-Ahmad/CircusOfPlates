@@ -11,7 +11,7 @@ import utilities.DynamicLinkage;
 
 public class ShapeFactory extends IShapeFactory {
 	
-	private static final String configurationFile = "gameConfiguration.properties";
+	private static final String configurationFile = "/configurations/gameConfiguration.properties";
 	
 	private DynamicLinkage loader;
 	private String[] shapeNames;
@@ -27,8 +27,8 @@ public class ShapeFactory extends IShapeFactory {
 	}
 	
 	private String[] readConfigurationFiles () {
-		
-		File configFile = new File(configurationFile);
+	
+		File configFile = new File(ShapeFactory.class.getResource(configurationFile).toString());
 		String[] shapesLoaded;
 		try {
 			FileReader reader = new FileReader(configFile);
@@ -37,7 +37,7 @@ public class ShapeFactory extends IShapeFactory {
 			shapesLoaded =  prop.getProperty("Shapes").split("\\s*,\\s*");
 			
 		} catch (Exception e) {
-			throw new RuntimeException("Error in Configuration File!");
+			throw new RuntimeException("Error in Configuration File!" + e.getMessage());
 		}
 		return shapesLoaded;
 	}
