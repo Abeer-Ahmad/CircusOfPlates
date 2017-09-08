@@ -21,14 +21,14 @@ import utilities.ResourceLoader;
 
 import static utilities.Properties.*;
 
-public class MainMenu extends JPanel implements ActionListener,IViewer {
+public class MainMenu extends JPanel implements ActionListener, IViewer {
 
 	private static final long serialVersionUID = 1L;
 	private static int topLeftBoxXAlignment;
 	private static int topLeftBoxYAlignment;
 	private ImageLoader imageLoader;
 	private BufferedImage backGroundImage;
-	private Map<String,JButton> buttons;
+	private Map<String, JButton> buttons;
 	private Controller controller;
 
 	public MainMenu() {
@@ -44,10 +44,10 @@ public class MainMenu extends JPanel implements ActionListener,IViewer {
 		repaint();
 	}
 
-	public void setController(Controller controller){
-		this.controller= controller;
+	public void setController(Controller controller) {
+		this.controller = controller;
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton buttonPressed = (JButton) e.getSource();
@@ -57,22 +57,22 @@ public class MainMenu extends JPanel implements ActionListener,IViewer {
 			controller.loadInfo();
 		if (buttonPressed.getName().equals(QUIT_BUTTON))
 			controller.exitGame();
-		if (buttonPressed.getName().equals(RULES_BUTTON)){
+		if (buttonPressed.getName().equals(RULES_BUTTON)) {
 			controller.changeDisplay(RULES);
 		}
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
-		if(backGroundImage != null) {
-		  g.drawImage(backGroundImage, 0, 0, getWidth(), getHeight(), this);
+		if (backGroundImage != null) {
+			g.drawImage(backGroundImage, 0, 0, getWidth(), getHeight(), this);
 		} else {
-			System.out.println(" null");
+			System.out.println(" main menu background null");
 		}
 	}
 
-	private void setButtons() { 
-		
+	private void setButtons() {
+
 		javax.swing.Box box = javax.swing.Box.createVerticalBox();
 		ImageIcon newGameIcon = null;
 		ImageIcon loadIcon = null;
@@ -95,48 +95,48 @@ public class MainMenu extends JPanel implements ActionListener,IViewer {
 			System.out.println("Button Image not found");
 		}
 		for (JButton button : buttons.values()) {
-		button.setSize(newGameIcon.getIconWidth(), newGameIcon.getIconHeight());
-		button.setOpaque(false);
-		button.setBorderPainted(false);
-		button.setContentAreaFilled(false);
-		button.addActionListener(this);
-		box.add(button);
+			button.setSize(newGameIcon.getIconWidth(), newGameIcon.getIconHeight());
+			button.setOpaque(false);
+			button.setBorderPainted(false);
+			button.setContentAreaFilled(false);
+			button.addActionListener(this);
+			box.add(button);
 
 		}
-		box.setBounds(topLeftBoxXAlignment, topLeftBoxYAlignment, newGameIcon.getIconWidth()
-				      , 5 * newGameIcon.getIconHeight());
+		box.setBounds(topLeftBoxXAlignment, topLeftBoxYAlignment, newGameIcon.getIconWidth(),
+				5 * newGameIcon.getIconHeight());
 		this.add(box);
-	
+
 	}
-	
+
 	private class ImageLoader extends SwingWorker<BufferedImage, Void> {
-	    @Override
-	    public BufferedImage doInBackground() {
-	        BufferedImage backGroundImage = null;
+		@Override
+		public BufferedImage doInBackground() {
+			BufferedImage backGroundImage = null;
 			try {
 				backGroundImage = ImageIO.read(ResourceLoader.loadStream(NEW_GAME));
 			} catch (IOException e) {
 				System.out.println("backgoundImage not found");
 			}
-	        return backGroundImage;
-	    }
+			return backGroundImage;
+		}
 
-	    @Override
-	    public void done() {
-	        
-	        try {
-	        	backGroundImage = get();
-	        } catch (InterruptedException ignore) {}
-	        catch (java.util.concurrent.ExecutionException e) {
-	            String why = null;
-	            Throwable cause = e.getCause();
-	            if (cause != null) {
-	                why = cause.getMessage();
-	            } else {
-	                why = e.getMessage();
-	            }
-	            System.err.println("Error retrieving file: " + why);
-	        }
-	    }
+		@Override
+		public void done() {
+			try {
+				backGroundImage = get();
+				MainMenu.this.repaint();
+			} catch (InterruptedException ignore) {
+			} catch (java.util.concurrent.ExecutionException e) {
+				String why = null;
+				Throwable cause = e.getCause();
+				if (cause != null) {
+					why = cause.getMessage();
+				} else {
+					why = e.getMessage();
+				}
+				System.err.println("Error retrieving file: " + why);
+			}
+		}
 	}
 }

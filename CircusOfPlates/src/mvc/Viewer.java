@@ -5,8 +5,13 @@ import game.shapes.Shape;
 import gui.MainFrame;
 import gui.panels.*;
 import plateGenerator.Belt;
+import utilities.ResourceLoader;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import java.awt.Color;
+import java.io.IOException;
 import java.util.*;
 
 import static utilities.Properties.*;
@@ -84,7 +89,7 @@ public class Viewer implements Observer {
         mainFrame.close();
     }
 
-    public void popMessage(JPanel container, JPanel message, boolean savedGame) {
+    public void popMessage(JPanel container, JPanel message, boolean savedGame) {		
         if (JOptionPane.showConfirmDialog(container, message, "New Game", JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
             if (savedGame) {
                 ((ChoosePlayerMenu) menuPanels.get(PLAYER_MENU)).setSaved(false);
@@ -94,7 +99,7 @@ public class Viewer implements Observer {
                     game += name;
                 controller.load(game);
             } else
-                this.controller.startGame(((ChoosePlayerMenu) container).getConfigurations());
+                controller.startGame(((ChoosePlayerMenu) container).getConfigurations());
         }
     }
 
