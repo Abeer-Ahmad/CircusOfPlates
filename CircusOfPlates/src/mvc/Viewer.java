@@ -22,10 +22,10 @@ public class Viewer implements Observer {
     public Viewer() {
         menuPanels = new LinkedHashMap<>();
         menuPanels.put(MAIN_MENU, new MainMenu());
-
         /**can be done using swing utility thread**/
         menuPanels.put(PLAYER_MENU, new ChoosePlayerMenu());
         menuPanels.put(PAUSE_MENU, new PauseMenu());
+        menuPanels.put(RULES, new Rules());
         mainFrame = new MainFrame(menuPanels.get(MAIN_MENU));
         mainFrame.setSize(frameWidth(), frameHeight());
         mainFrame.setVisible(true);
