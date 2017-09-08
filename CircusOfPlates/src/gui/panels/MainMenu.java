@@ -58,7 +58,7 @@ public class MainMenu extends JPanel implements ActionListener,IViewer {
 		if (buttonPressed.getName().equals(QUIT_BUTTON))
 			controller.exitGame();
 		if (buttonPressed.getName().equals(RULES_BUTTON)){
-			//RULES PANEL
+			controller.changeDisplay(RULES);
 		}
 	}
 
@@ -92,16 +92,16 @@ public class MainMenu extends JPanel implements ActionListener,IViewer {
 			buttons.put(QUIT_BUTTON, new JButton(quitIcon));
 			buttons.get(QUIT_BUTTON).setName(QUIT_BUTTON);
 		} catch (IOException e) {
-			System.out.println("Button Image not found");			
+			System.out.println("Button Image not found");
 		}
 		for (JButton button : buttons.values()) {
 		button.setSize(newGameIcon.getIconWidth(), newGameIcon.getIconHeight());
 		button.setOpaque(false);
 		button.setBorderPainted(false);
 		button.setContentAreaFilled(false);
-		button.addActionListener(this);		
+		button.addActionListener(this);
 		box.add(button);
-		
+
 		}
 		box.setBounds(topLeftBoxXAlignment, topLeftBoxYAlignment, newGameIcon.getIconWidth()
 				      , 5 * newGameIcon.getIconHeight());
