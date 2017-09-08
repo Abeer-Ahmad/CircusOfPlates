@@ -16,6 +16,7 @@ import javax.swing.SwingWorker;
 
 import mvc.Controller;
 import mvc.IViewer;
+//import utilities.ImageLoader;
 import utilities.ResourceLoader;
 
 import static utilities.Properties.*;
@@ -63,7 +64,11 @@ public class MainMenu extends JPanel implements ActionListener,IViewer {
 
 	@Override
 	public void paintComponent(Graphics g) {
-		g.drawImage(backGroundImage, 0, 0, getWidth(), getHeight(), this);
+		if(backGroundImage != null) {
+		  g.drawImage(backGroundImage, 0, 0, getWidth(), getHeight(), this);
+		} else {
+			System.out.println(" null");
+		}
 	}
 
 	private void setButtons() { 

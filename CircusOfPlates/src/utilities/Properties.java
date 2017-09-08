@@ -14,6 +14,12 @@ public final class Properties {
 	public static final String LOAD_BUTTON = "imgs" + RESOURCE_SEPARATOR + "buttons" + RESOURCE_SEPARATOR + "load_game.png";
 	public static final String QUIT_BUTTON = "imgs" + RESOURCE_SEPARATOR + "buttons" + RESOURCE_SEPARATOR + "quit.png";
 	public static final String RULES_BUTTON = "imgs" + RESOURCE_SEPARATOR + "buttons" + RESOURCE_SEPARATOR + "rules.png";
+	public static final String SAVE_BUTTON = "imgs" + RESOURCE_SEPARATOR + "buttons" + RESOURCE_SEPARATOR + "save_game.png";
+	public static final String CONTINUE_BUTTON = "imgs" + RESOURCE_SEPARATOR + "buttons" + RESOURCE_SEPARATOR + "continue.png";
+	public static final String MAINMENU_BUTTON = "imgs" + RESOURCE_SEPARATOR + "buttons" + RESOURCE_SEPARATOR + "main_menu.png";
+	public static final String PLAYAGAIN_BUTTON = "imgs" + RESOURCE_SEPARATOR + "buttons" + RESOURCE_SEPARATOR + "play_again.png";
+	public static final String ONEPLAYER_BUTTON = "imgs" + RESOURCE_SEPARATOR + "buttons" + RESOURCE_SEPARATOR + "one_player.png";
+	public static final String TWOPLAYERS_BUTTON = "imgs" + RESOURCE_SEPARATOR + "buttons" + RESOURCE_SEPARATOR + "two_players.png";
 	public static final String MAIN_MENU = "mainMenu";
 	public static final String PLAYER_MENU = "playerMenu";
 	public static final String PAUSE_MENU = "pauseMenu";
