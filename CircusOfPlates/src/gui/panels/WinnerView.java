@@ -1,16 +1,18 @@
 package gui.panels;
 
 import java.awt.Graphics;
-import java.awt.Toolkit;
+
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
+
 import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
 import game.player.Player;
 import mvc.Controller;
@@ -22,12 +24,12 @@ import static utilities.Properties.*;
 public class WinnerView extends JPanel implements ActionListener,IViewer {
 
 	private static final long serialVersionUID = 1L;
-
+	private static int topLeftBoxXAlignment;
+	private static int topLeftBoxYAlignment;
 	private BufferedImage backGroundImage;
-	private JButton exit;
-	private JButton continueGame;
-	private JButton newGame;
+	private Map<String, JButton> buttons;
 	private Controller controller;
+	
 	public WinnerView(Player player) {
 		setSize(frameWidth(), frameHeight());
 		try {
@@ -43,6 +45,9 @@ public class WinnerView extends JPanel implements ActionListener,IViewer {
 		JOptionPane.showMessageDialog(null, player.getName() + " wins with "
 				+ Integer.toString(player.getScore()) + " points", "Warning",
 				JOptionPane.PLAIN_MESSAGE);
+		topLeftBoxXAlignment = frameWidth() / 10;
+		topLeftBoxYAlignment = frameWidth() / 10;
+		buttons = new LinkedHashMap<>();
 		setButtons();
 		repaint();
 	}
@@ -53,12 +58,14 @@ public class WinnerView extends JPanel implements ActionListener,IViewer {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == newGame)
-			controller.changeDisplay("playerMenu");
-		if (e.getSource() == continueGame)
-			controller.playAgain();
-		if (e.getSource() == exit)
+		JButton buttonPressed = (JButton) e.getSource();
+		if (buttonPressed.getName().equals(NEW_GAME_BUTTON))
+			controller.changeDisplay(PLAYER_MENU);
+		if (buttonPressed.getName().equals(QUIT_BUTTON))
 			controller.exitGame();
+		if (buttonPressed.getName().equals(CONTINUE_BUTTON)) {
+			controller.playAgain();
+		}		
 	}
 
 	@Override
@@ -66,19 +73,37 @@ public class WinnerView extends JPanel implements ActionListener,IViewer {
 		g.drawImage(backGroundImage, 0, 0, getWidth(), getHeight(), this);
 	}
 
-	private void setButtons() { // remove static dimensions!!!
-		newGame = new JButton("New Game");
-		newGame.setBounds(250, 50, 500, 100);
-		newGame.addActionListener(this);
-		this.add(newGame);
-		continueGame = new JButton("Play Again");
-		continueGame.setBounds(250, 200, 500, 100);
-		continueGame.addActionListener(this);
-		this.add(continueGame);
-		exit = new JButton("Quit");
-		exit.setBounds(250, 350, 500, 100);
-		exit.addActionListener(this);
-		this.add(exit);
+	private void setButtons() {
+		javax.swing.Box box = javax.swing.Box.createVerticalBox();
+		ImageIcon continueIcon = null;
+		ImageIcon newGameIcon = null;
+		ImageIcon quitIcon = null;
+		try {
+			continueIcon = new ImageIcon(ImageIO.read(ResourceLoader.loadStream(CONTINUE_BUTTON)));
+			buttons.put(CONTINUE_BUTTON, new JButton(continueIcon));
+			buttons.get(CONTINUE_BUTTON).setName(CONTINUE_BUTTON);
+			newGameIcon = new ImageIcon(ImageIO.read(ResourceLoader.loadStream(NEW_GAME_BUTTON)));
+			buttons.put(NEW_GAME_BUTTON, new JButton(newGameIcon));
+			buttons.get(NEW_GAME_BUTTON).setName(NEW_GAME_BUTTON);
+			quitIcon = new ImageIcon(ImageIO.read(ResourceLoader.loadStream(QUIT_BUTTON)));
+			buttons.put(QUIT_BUTTON, new JButton(quitIcon));
+			buttons.get(QUIT_BUTTON).setName(QUIT_BUTTON);
+		} catch (IOException e) {
+			System.out.println("Button Image not found");
+		}
+		for (JButton button : buttons.values()) {
+			button.setSize(continueIcon.getIconWidth(), continueIcon.getIconHeight());
+			button.setOpaque(false);
+			button.setBorderPainted(false);
+			button.setContentAreaFilled(false);
+			button.addActionListener(this);
+			box.add(button);
+
+		}
+		box.setBounds(topLeftBoxXAlignment, topLeftBoxYAlignment, continueIcon.getIconWidth(),
+				5 * continueIcon.getIconHeight());
+		this.add(box);
+
 	}
 }
 

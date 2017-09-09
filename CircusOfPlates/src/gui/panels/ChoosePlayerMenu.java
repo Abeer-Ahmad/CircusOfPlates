@@ -53,8 +53,6 @@ public class ChoosePlayerMenu extends JPanel implements ActionListener, IViewer 
 
 	public void setController(Controller controller) {
 		this.controller = controller;
-		buttons.get(ONEPLAYER_BUTTON).addActionListener(this);
-		buttons.get(TWOPLAYERS_BUTTON).addActionListener(this);
 	}
 
 	public void setSaved(boolean current) {
@@ -71,6 +69,7 @@ public class ChoosePlayerMenu extends JPanel implements ActionListener, IViewer 
 		javax.swing.Box box = javax.swing.Box.createHorizontalBox();
 		ImageIcon onePlayerIcon = null;
 		ImageIcon twoPlayerIcon = null;
+		ImageIcon mainMenuIcon = null;
 		try {
 			onePlayerIcon = new ImageIcon(ImageIO.read(ResourceLoader.loadStream(ONEPLAYER_BUTTON)));
 			buttons.put(ONEPLAYER_BUTTON, new JButton(onePlayerIcon));
@@ -78,7 +77,9 @@ public class ChoosePlayerMenu extends JPanel implements ActionListener, IViewer 
 			twoPlayerIcon = new ImageIcon(ImageIO.read(ResourceLoader.loadStream(TWOPLAYERS_BUTTON)));
 			buttons.put(TWOPLAYERS_BUTTON, new JButton(twoPlayerIcon));
 			buttons.get(TWOPLAYERS_BUTTON).setName(TWOPLAYERS_BUTTON);
-
+			mainMenuIcon = new ImageIcon(ImageIO.read(ResourceLoader.loadStream(MAINMENU_BUTTON)));
+			buttons.put(MAINMENU_BUTTON, new JButton(mainMenuIcon));
+			buttons.get(MAINMENU_BUTTON).setName(MAINMENU_BUTTON);
 		} catch (IOException e) {
 			System.out.println("Button Image not found");
 		}
@@ -87,12 +88,19 @@ public class ChoosePlayerMenu extends JPanel implements ActionListener, IViewer 
 			button.setOpaque(false);
 			button.setBorderPainted(false);
 			button.setContentAreaFilled(false);
+			button.addActionListener(this);
 			box.add(button);
 			box.add(Box.createHorizontalStrut(onePlayerIcon.getIconWidth() / 3));
 		}
+		box.remove(buttons.get(MAINMENU_BUTTON));
+		buttons.get(MAINMENU_BUTTON).setBounds(frameWidth() - mainMenuIcon.getIconWidth()- 100 , 
+				frameHeight() - mainMenuIcon.getIconHeight() - 100, mainMenuIcon.getIconWidth(), mainMenuIcon.getIconHeight());
+		this.add(buttons.get(MAINMENU_BUTTON));
 		box.setBounds(topLeftBoxXAlignment, topLeftBoxYAlignment, 4 * twoPlayerIcon.getIconWidth(),
 				twoPlayerIcon.getIconHeight());
+		
 		this.add(box);
+		
 	}
 
 	@Override
@@ -107,8 +115,11 @@ public class ChoosePlayerMenu extends JPanel implements ActionListener, IViewer 
 			twoPLayers = true;
 			buttons.get(ONEPLAYER_BUTTON).setEnabled(false);
 		}
-		ChoosePlayerMenu.this.add(new PlayerInfoPanel(twoPLayers));
-		
+		if (buttonPressed.getName().equals(MAINMENU_BUTTON)){
+			controller.changeDisplay(MAIN_MENU);
+			return;
+		}
+		ChoosePlayerMenu.this.add(new PlayerInfoPanel(twoPLayers));	
 		ChoosePlayerMenu.this.repaint();
 	}
 

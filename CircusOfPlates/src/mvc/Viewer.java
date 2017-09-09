@@ -97,10 +97,6 @@ public class Viewer implements Observer {
      }
     
     public void popMessage(JPanel container, boolean savedGame) {		
-       /* if (JOptionPane.showConfirmDialog(container, message, "New Game", JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
-        	
-        }*/
-    	System.out.println("viewer + pop");
     	intializeGrid(container, savedGame);
     }
 
