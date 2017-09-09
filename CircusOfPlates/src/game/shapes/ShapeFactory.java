@@ -4,16 +4,17 @@ import java.awt.Color;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Properties;
 import utilities.DynamicLinkage;
+import utilities.ResourceLoader;
 
 public class ShapeFactory extends IShapeFactory {
 
-	private static final String configurationFile = "resources" + File.separator + "configurations" + File.separator
-			+ "gameConfiguration.properties";
-
+	
+	private static final String configurationFile = "configurations/gameConfiguration.properties";
 	private DynamicLinkage loader;
 	private String[] shapeNames;
 	private HashMap<String, Constructor<?>> shapes;
@@ -28,13 +29,11 @@ public class ShapeFactory extends IShapeFactory {
 	}
 
 	private String[] readConfigurationFiles() {
-
-		File configFile = new File(configurationFile);
 		String[] shapesLoaded;
 		try {
-			FileReader reader = new FileReader(configFile);
+	
 			Properties prop = new Properties();
-			prop.load(reader);
+			prop.load(ResourceLoader.loadStream(configurationFile));
 			shapesLoaded = prop.getProperty("Shapes").split("\\s*,\\s*");
 
 		} catch (Exception e) {
