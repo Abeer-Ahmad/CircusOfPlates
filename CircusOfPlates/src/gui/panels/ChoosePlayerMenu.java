@@ -1,6 +1,7 @@
 package gui.panels;
 
 import mvc.Controller;
+
 import mvc.IViewer;
 import utilities.ResourceLoader;
 
@@ -10,7 +11,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -99,11 +99,16 @@ public class ChoosePlayerMenu extends JPanel implements ActionListener, IViewer 
 	public void actionPerformed(ActionEvent e) {
 		JButton buttonPressed = (JButton) e.getSource();
 		twoPLayers = false;
-		if (buttonPressed.getName().equals(ONEPLAYER_BUTTON))
+		if (buttonPressed.getName().equals(ONEPLAYER_BUTTON)){
 			twoPLayers = false;
-		if (buttonPressed.getName().equals(TWOPLAYERS_BUTTON))
+			buttons.get(TWOPLAYERS_BUTTON).setEnabled(false);
+		}
+		if (buttonPressed.getName().equals(TWOPLAYERS_BUTTON)){
 			twoPLayers = true;
+			buttons.get(ONEPLAYER_BUTTON).setEnabled(false);
+		}
 		ChoosePlayerMenu.this.add(new PlayerInfoPanel(twoPLayers));
+		
 		ChoosePlayerMenu.this.repaint();
 	}
 
