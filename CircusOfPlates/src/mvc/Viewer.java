@@ -89,10 +89,19 @@ public class Viewer implements Observer {
         mainFrame.close();
     }
 
-    public void popMessage(JPanel container, JPanel message, boolean savedGame) {		
-        if (JOptionPane.showConfirmDialog(container, message, "New Game", JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
-        	intializeGrid(container, savedGame);
-        }
+    public void popMessage(JPanel container,JPanel message, boolean savedGame) {		
+         if (JOptionPane.showConfirmDialog(container, message, "New Game", JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
+         	
+         }
+     	intializeGrid(container, savedGame);
+     }
+    
+    public void popMessage(JPanel container, boolean savedGame) {		
+       /* if (JOptionPane.showConfirmDialog(container, message, "New Game", JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
+        	
+        }*/
+    	System.out.println("viewer + pop");
+    	intializeGrid(container, savedGame);
     }
 
     public void intializeGrid (JPanel container, boolean savedGame) {

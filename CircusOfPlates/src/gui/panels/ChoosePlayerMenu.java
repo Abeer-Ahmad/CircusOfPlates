@@ -18,14 +18,13 @@ import java.util.Map;
 
 import static utilities.Properties.*;
 
-public class ChoosePlayerMenu extends JPanel implements IViewer {
+public class ChoosePlayerMenu extends JPanel implements ActionListener, IViewer {
 
 	private static final long serialVersionUID = 1L;
 
 	private BufferedImage backGroundImage;
 	private Map<String, JButton> buttons;
-	private ActionListener menuController;
-	private ActionListener infoController;
+	private Controller controller;
 	private JTextField userName;
 	private JTextField userName2;
 	private JComboBox<String> levelsList;
@@ -34,9 +33,6 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
 	private String dataLevel;
 	private static int topLeftBoxXAlignment;
 	private static int topLeftBoxYAlignment;
-	private int y;
-
-	// remove static dimensions in all class!!!
 
 	public ChoosePlayerMenu() {
 		try {
@@ -56,9 +52,9 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
 	}
 
 	public void setController(Controller controller) {
-		this.menuController = new PlayerMenuController(controller);
-		buttons.get(ONEPLAYER_BUTTON).addActionListener(menuController);
-		buttons.get(TWOPLAYERS_BUTTON).addActionListener(menuController);
+		this.controller = controller;
+		buttons.get(ONEPLAYER_BUTTON).addActionListener(this);
+		buttons.get(TWOPLAYERS_BUTTON).addActionListener(this);
 	}
 
 	public void setSaved(boolean current) {
@@ -99,31 +95,16 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
 		this.add(box);
 	}
 
-	private JPanel setPlayerInfoPanel(boolean twoPlayers) {
-		JPanel playerInfo = new JPanel();
-		playerInfo.setLayout(null);
-		playerInfo.setPreferredSize(new Dimension(400, 400));
-		if (twoPlayers)
-			setInfoTwoPlayer(playerInfo);
-		else
-			setInfoOnePlayer(playerInfo);
-
-		if (!savedGame) {
-			JLabel difficultyLevel = new JLabel("Difficulty Level");
-			difficultyLevel.setBounds(60, y + 40, 250, 30);
-			final DefaultComboBoxModel<String> levels = new DefaultComboBoxModel<>();
-			levels.addElement("Easy");
-			levels.addElement("Medium");
-			levels.addElement("Hard");
-			levelsList = new JComboBox<>(levels);
-			levelsList.setSelectedIndex(-1);
-			levelsList.setBounds(230, y + 40, 80, 30);
-			this.infoController = new InfoMenuController();
-			levelsList.addActionListener(infoController);
-			playerInfo.add(difficultyLevel);
-			playerInfo.add(levelsList);
-		}
-		return playerInfo;
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JButton buttonPressed = (JButton) e.getSource();
+		twoPLayers = false;
+		if (buttonPressed.getName().equals(ONEPLAYER_BUTTON))
+			twoPLayers = false;
+		if (buttonPressed.getName().equals(TWOPLAYERS_BUTTON))
+			twoPLayers = true;
+		ChoosePlayerMenu.this.add(new PlayerInfoPanel(twoPLayers));
+		ChoosePlayerMenu.this.repaint();
 	}
 
 	public LinkedHashMap<String, Object> getConfigurations() {
@@ -132,67 +113,119 @@ public class ChoosePlayerMenu extends JPanel implements IViewer {
 		names.add(userName.getText());
 		if (twoPLayers)
 			names.add(userName2.getText());
-
+       
 		settings.put("twoPlayers", twoPLayers);
 		settings.put("level", dataLevel);
 		settings.put("names", names);
 		return settings;
 	}
 
-	private void setInfoOnePlayer(JPanel current) {
-		JLabel name = new JLabel("Enter your name");
-		name.setBounds(60, 40, 250, 30);
-		userName = new JTextField();
-		userName.setBounds(60, 80, 250, 30);
-		y = 120;
-		current.add(name);
-		current.add(userName);
-	}
+	private class PlayerInfoPanel extends JPanel implements ActionListener {
+		private static final int WIDTH = 500;
+		private static final int HEIGHT = 400;
+		private static final int NAME_WIDTH = 200;
+		private static final int NAME_HEIGHT = 30;
+		private static final int NAME_SHIFT = 10;
+		private boolean twoPlayers;
+		private JButton play;
+		private JLabel signUp;
+		private ImageIcon signUpIcon;
+		private ImageIcon playIcon;
 
-	private void setInfoTwoPlayer(JPanel current) {
-		JLabel name = new JLabel("Player1, Enter your name");
-		name.setBounds(60, 40, 250, 30);
-		userName = new JTextField();
-		userName.setBounds(60, 80, 250, 30);
-		JLabel name2 = new JLabel("Player2, Enter your name");
-		name2.setBounds(60, 120, 250, 30);
-		userName2 = new JTextField();
-		userName2.setBounds(60, 160, 250, 30);
-		y = 200;
-		current.add(name);
-		current.add(userName);
-		current.add(name2);
-		current.add(userName2);
-	}
+		private PlayerInfoPanel(boolean twoPlayers) {
+			this.setBackground(new Color(241, 196, 15));
+			this.twoPlayers = twoPlayers;
+			this.setLayout(null);
+			this.setBounds(frameWidth() / 3 + 30, frameHeight() / 12, WIDTH, HEIGHT);
+			try {
+				signUpIcon = new ImageIcon(ImageIO.read(ResourceLoader.loadStream(SIGNUP_BUTTON)));
+				signUp = new JLabel(signUpIcon);
+				signUp.setOpaque(false);
+				signUp.setBounds(WIDTH / 2 - signUpIcon.getIconWidth() / 2, 0, signUpIcon.getIconWidth(),
+						signUpIcon.getIconHeight());
+				this.add(signUp);
+				playIcon = new ImageIcon(ImageIO.read(ResourceLoader.loadStream(PLAY_BUTTON)));
+				play = new JButton(playIcon);
+				play.setOpaque(false);
+				play.setContentAreaFilled(false);
+				play.setBorderPainted(false);
+				play.setBounds(WIDTH / 2 - playIcon.getIconWidth() / 2, HEIGHT - playIcon.getIconHeight() - 20,
+						playIcon.getIconWidth(), playIcon.getIconHeight());
+				this.add(play);
+				play.addActionListener(this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			if (twoPlayers) {
+				setInfoTwoPlayer(this);
+			} else {
+				setInfoOnePlayer(this);
 
-	private class PlayerMenuController implements ActionListener {
-		private Controller controller;
-
-		public PlayerMenuController(Controller controller) {
-			this.controller = controller;
+			}
+			if (!savedGame) {
+				JLabel difficultyLevel = new JLabel("DIFFICULTY LEVEL");
+				difficultyLevel.setFont(new Font("AR DARLING", Font.BOLD, 24));
+				difficultyLevel.setBounds(NAME_SHIFT, signUpIcon.getIconHeight() + (NAME_HEIGHT * 3),
+						NAME_WIDTH + 8 * NAME_SHIFT, NAME_HEIGHT);
+				final DefaultComboBoxModel<String> levels = new DefaultComboBoxModel<>();
+				levels.addElement("Easy");
+				levels.addElement("Medium");
+				levels.addElement("Hard");
+				levelsList = new JComboBox<>(levels);
+				levelsList.setSelectedIndex(-1);
+				levelsList.setBounds(NAME_WIDTH + 8 * NAME_SHIFT, signUpIcon.getIconHeight() + (NAME_HEIGHT * 3),
+						NAME_WIDTH, NAME_HEIGHT);
+				levelsList.addActionListener(this);
+				this.add(difficultyLevel);
+				this.add(levelsList);
+			}
 		}
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			JButton buttonPressed = (JButton) e.getSource();
-			twoPLayers = false;
-			if (buttonPressed.getName().equals(ONEPLAYER_BUTTON))
-				twoPLayers = false;
-			if (buttonPressed.getName().equals(TWOPLAYERS_BUTTON))
-				twoPLayers = true;
-
-			this.controller.popMessage(ChoosePlayerMenu.this, setPlayerInfoPanel(twoPLayers), savedGame);
+		private void setInfoOnePlayer(JPanel current) {
+			JLabel name = new JLabel("PLAYER NAME");
+			name.setFont(new Font("AR DARLING", Font.BOLD, 24));
+			name.setBounds(NAME_SHIFT, signUpIcon.getIconHeight(), NAME_WIDTH, NAME_HEIGHT);
+			userName = new JTextField();
+			userName.setBounds(NAME_SHIFT + NAME_WIDTH, signUpIcon.getIconHeight(), NAME_WIDTH, NAME_HEIGHT);
+			current.add(name);
+			current.add(userName);
 		}
-	}
 
-	private class InfoMenuController implements ActionListener {
-		protected InfoMenuController() {
+		private void setInfoTwoPlayer(JPanel current) {
+			JLabel name = new JLabel("PLAYER_ONE NAME");
+			name.setFont(new Font("AR DARLING", Font.BOLD, 24));
+			name.setBounds(NAME_SHIFT, signUpIcon.getIconHeight(), NAME_WIDTH + 5 * NAME_SHIFT, NAME_HEIGHT);
+			userName = new JTextField();
+			userName.setBounds(6 * NAME_SHIFT + NAME_WIDTH, signUpIcon.getIconHeight(), NAME_WIDTH, NAME_HEIGHT);
+			JLabel name2 = new JLabel("PLAYER_TWO NAME");
+			name2.setBounds(NAME_SHIFT, signUpIcon.getIconHeight() + NAME_HEIGHT, NAME_WIDTH + 6 * NAME_SHIFT,
+					NAME_HEIGHT);
+			name2.setFont(new Font("AR DARLING", Font.BOLD, 24));
+			userName2 = new JTextField();
+			userName2.setBounds(6 * NAME_SHIFT + NAME_WIDTH, signUpIcon.getIconHeight() + NAME_HEIGHT, NAME_WIDTH,
+					NAME_HEIGHT);
+			current.add(name);
+			current.add(userName);
+			current.add(name2);
+			current.add(userName2);
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == levelsList)
 				dataLevel = levelsList.getItemAt(levelsList.getSelectedIndex());
+			if (e.getSource() == play) {
+				if (dataLevel == null || userName == null || (twoPlayers && userName2 ==null)){
+					JOptionPane.showMessageDialog(this, "PLease Refill the items left empty", "Warning",
+							JOptionPane.PLAIN_MESSAGE);
+				} else {
+				ChoosePlayerMenu.this.remove(this);
+				ChoosePlayerMenu.this.repaint();
+				ChoosePlayerMenu.this.controller.popMessage(ChoosePlayerMenu.this, twoPlayers);
+				}
+			}
+			
 		}
 	}
+
 }

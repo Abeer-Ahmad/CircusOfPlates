@@ -52,7 +52,10 @@ public class Controller {
     public void popMessage(JPanel container, JPanel message, boolean savedGame) {
         viewer.popMessage(container, message, savedGame);
     }
-
+    
+    public void popMessage(JPanel container, boolean savedGame) {
+    viewer.popMessage(container, savedGame);
+}
     public void changeDisplay(String namePanel) {
         viewer.setCurrentPanel(namePanel);
     }

@@ -22,6 +22,8 @@ public final class Properties {
 	public static final String PLAYAGAIN_BUTTON = "imgs" + RESOURCE_SEPARATOR + "buttons" + RESOURCE_SEPARATOR + "play_again.png";
 	public static final String ONEPLAYER_BUTTON = "imgs" + RESOURCE_SEPARATOR + "buttons" + RESOURCE_SEPARATOR + "one_player.png";
 	public static final String TWOPLAYERS_BUTTON = "imgs" + RESOURCE_SEPARATOR + "buttons" + RESOURCE_SEPARATOR + "two_players.png";
+	public static final String SIGNUP_BUTTON = "imgs" + RESOURCE_SEPARATOR + "buttons" + RESOURCE_SEPARATOR + "sign_up.png";
+	public static final String PLAY_BUTTON = "imgs" + RESOURCE_SEPARATOR + "buttons" + RESOURCE_SEPARATOR + "play.png";
 	public static final String BACK_BUTTON = "imgs" + RESOURCE_SEPARATOR + "buttons" + RESOURCE_SEPARATOR + "back.png";
 
 	public static final String MAIN_MENU = "mainMenu";

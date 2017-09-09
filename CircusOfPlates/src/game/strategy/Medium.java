@@ -6,7 +6,7 @@ import plateGenerator.PlateGenerator;
 public class Medium implements GameStrategy {
 	
 	public static final int CORRUPTED_LIMIT = 20;
-	private static final int NEWSHAPE_SPEED = 2200;
+	private static final int NEWSHAPE_SPEED = 2500;
 	private static final int UPDATE_SPEED = 100;
 
 	@Override

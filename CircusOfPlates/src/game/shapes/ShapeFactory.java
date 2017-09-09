@@ -10,9 +10,10 @@ import java.util.Properties;
 import utilities.DynamicLinkage;
 
 public class ShapeFactory extends IShapeFactory {
-	
-	private static final String configurationFile = "/configurations/gameConfiguration.properties";
-	
+
+	private static final String configurationFile = "resources" + File.separator + "configurations" + File.separator
+			+ "gameConfiguration.properties";
+
 	private DynamicLinkage loader;
 	private String[] shapeNames;
 	private HashMap<String, Constructor<?>> shapes;
@@ -20,34 +21,35 @@ public class ShapeFactory extends IShapeFactory {
 
 	public ShapeFactory() {
 		super();
-		shapeNames = readConfigurationFiles ();
+		shapeNames = readConfigurationFiles();
 		loader = new DynamicLinkage();
 		loadShapes();
 		initializeIDs();
 	}
-	
-	private String[] readConfigurationFiles () {
-	
-		File configFile = new File(ShapeFactory.class.getResource(configurationFile).toString());
+
+	private String[] readConfigurationFiles() {
+
+		File configFile = new File(configurationFile);
 		String[] shapesLoaded;
 		try {
 			FileReader reader = new FileReader(configFile);
 			Properties prop = new Properties();
 			prop.load(reader);
-			shapesLoaded =  prop.getProperty("Shapes").split("\\s*,\\s*");
-			
+			shapesLoaded = prop.getProperty("Shapes").split("\\s*,\\s*");
+
 		} catch (Exception e) {
 			throw new RuntimeException("Error in Configuration File!" + e.getMessage());
 		}
 		return shapesLoaded;
 	}
+
 	private void loadShapes() {
-		
+
 		Class<?> shapeClass;
 		Constructor<?> constructor;
 		shapes = new HashMap<>();
 		for (String shapeName : shapeNames) {
-			shapeClass = loader.loadClass("game.shapes", shapeName); 
+			shapeClass = loader.loadClass("game.shapes", shapeName);
 			try {
 				constructor = shapeClass.getConstructors()[0];
 				shapes.put(shapeName, constructor);
@@ -56,27 +58,31 @@ public class ShapeFactory extends IShapeFactory {
 			}
 		}
 	}
-	
+
 	private void initializeIDs() {
-		shapeID = new HashMap<String, Integer>();		
+		shapeID = new HashMap<String, Integer>();
 		for (int i = 0; i < shapeNames.length; i++) {
 			shapeID.put(shapeNames[i], i);
 		}
 	}
-	
+
 	@Override
-	public Shape getRandomShape(final int x, final int y, final int beltLength, int randomshape, final Color randomColor) {
+	public Shape getRandomShape(final int x, final int y, final int beltLength, int randomshape,
+			final Color randomColor) {
 		randomshape %= shapeNames.length;
 		try {
 			if (randomshape == shapeID.get("Plate"))
-				// return (Shape) shapes.get("Plate").newInstance(x, y, beltLength, randomColor);
-				return new Plate(x, y, beltLength, randomColor);
+				return (Shape) shapes.get("Plate").newInstance(x, y,
+				 beltLength, randomColor);
+				//return new Plate(x, y, beltLength, randomColor);
 			if (randomshape == shapeID.get("Box"))
-				// return (Shape) shapes.get("Box").newInstance(x, y, beltLength, randomColor);
-				return new Box(x, y, beltLength, randomColor);
+				return (Shape) shapes.get("Box").newInstance(x, y,
+				  beltLength, randomColor);
+				//return new Box(x, y, beltLength, randomColor);
 			if (randomshape == shapeID.get("Oval"))
-				// return (Shape) shapes.get("Oval").newInstance(x, y, beltLength, randomColor);
-				return new Oval(x, y, beltLength, randomColor);
+				return (Shape) shapes.get("Oval").newInstance(x, y,
+				 beltLength, randomColor);
+				//return new Oval(x, y, beltLength, randomColor);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

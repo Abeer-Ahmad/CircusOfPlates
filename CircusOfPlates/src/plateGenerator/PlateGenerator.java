@@ -106,16 +106,12 @@ public class PlateGenerator {
  
     public int getRandomSpeed() {
         int randomNum = 10;
+        
         while (randomNum <= 10) {
             randomNum = getRandomNumber();
-            randomNum %= 30;
+            randomNum %= 40;
         }
-        /* int randomNum = minSpeed;
-        while (randomNum == minSpeed) {
-            randomNum = getRandomNumber();
-            // randomNum %= 60;
-            randomNum %= maxSpeed;
-        } */
+        
         return randomNum;
     }
 }
