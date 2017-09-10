@@ -25,6 +25,7 @@ public class ChoosePlayerMenu extends JPanel implements ActionListener, IViewer 
     private BufferedImage backGroundImage;
     private Map<String, JButton> buttons;
     private Controller controller;
+    private JPanel playerInfoPanel;
     private JTextField userName;
     private JTextField userName2;
     private JComboBox<String> levelsList;
@@ -63,7 +64,6 @@ public class ChoosePlayerMenu extends JPanel implements ActionListener, IViewer 
     }
 
     private void setButtons() {
-
         javax.swing.Box box = javax.swing.Box.createHorizontalBox();
         ImageIcon onePlayerIcon = null;
         ImageIcon twoPlayerIcon = null;
@@ -96,9 +96,7 @@ public class ChoosePlayerMenu extends JPanel implements ActionListener, IViewer 
         this.add(buttons.get(MAINMENU_BUTTON));
         box.setBounds(topLeftBoxXAlignment, topLeftBoxYAlignment, 4 * twoPlayerIcon.getIconWidth(),
                 twoPlayerIcon.getIconHeight());
-
         this.add(box);
-
     }
 
     @Override
@@ -113,15 +111,14 @@ public class ChoosePlayerMenu extends JPanel implements ActionListener, IViewer 
             twoPLayers = true;
             buttons.get(ONEPLAYER_BUTTON).setEnabled(false);
         }
+
         if (buttonPressed.getName().equals(MAINMENU_BUTTON)) {
             controller.changeDisplay(MAIN_MENU);
-            // added
-            for (JButton button : buttons.values())
-                button.setEnabled(true);
-            // done
+            reset();
             return;
         }
-        ChoosePlayerMenu.this.add(new PlayerInfoPanel(twoPLayers));
+        playerInfoPanel = new PlayerInfoPanel(twoPLayers);
+        ChoosePlayerMenu.this.add(playerInfoPanel);
         ChoosePlayerMenu.this.repaint();
     }
 
@@ -136,6 +133,15 @@ public class ChoosePlayerMenu extends JPanel implements ActionListener, IViewer 
         settings.put("level", dataLevel);
         settings.put("names", names);
         return settings;
+    }
+
+    private void reset() {
+        for (JButton button : buttons.values())
+            button.setEnabled(true);
+        userName = null;
+        userName2 = null;
+        levelsList.setSelectedIndex(-1);
+        remove(playerInfoPanel);
     }
 
     private class PlayerInfoPanel extends JPanel implements ActionListener {
@@ -246,6 +252,7 @@ public class ChoosePlayerMenu extends JPanel implements ActionListener, IViewer 
                     ChoosePlayerMenu.this.remove(this);
                     ChoosePlayerMenu.this.repaint();
                     ChoosePlayerMenu.this.controller.popMessage(ChoosePlayerMenu.this, savedGame);
+                    reset();
                 }
             }
         }

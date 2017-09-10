@@ -179,7 +179,6 @@ public class Model extends Observable {
 			isRunning = false;
 			setChanged();
 			notifyObservers(scoreManager.getWinner());
-			System.out.println("game over after notify");
 		}
 	}
 

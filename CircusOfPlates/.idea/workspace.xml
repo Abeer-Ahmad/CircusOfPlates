@@ -1,27 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f3679f3d-efcd-41b4-8b29-c667b76d27a0" name="Default" comment="re-commit">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/imgs/icons/check.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/imgs/icons/info.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/imgs/icons/trophy.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/imgs/icons/warning.png" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/savedGames/1.ser" afterPath="" />
+    <list default="true" id="f3679f3d-efcd-41b4-8b29-c667b76d27a0" name="Default" comment="Score Label modified + JOptionPane modified + (Save, Load) fixed after new player info panel">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/GameThread.java" afterPath="$PROJECT_DIR$/src/game/GameThread.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/shapes/Box.java" afterPath="$PROJECT_DIR$/src/game/shapes/Box.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/shapes/Oval.java" afterPath="$PROJECT_DIR$/src/game/shapes/Oval.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/shapes/Plate.java" afterPath="$PROJECT_DIR$/src/game/shapes/Plate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/shapes/ShapeFactory.java" afterPath="$PROJECT_DIR$/src/game/shapes/ShapeFactory.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/panels/ChoosePlayerMenu.java" afterPath="$PROJECT_DIR$/src/gui/panels/ChoosePlayerMenu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/panels/GameGrid.java" afterPath="$PROJECT_DIR$/src/gui/panels/GameGrid.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/panels/WinnerView.java" afterPath="$PROJECT_DIR$/src/gui/panels/WinnerView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mvc/Controller.java" afterPath="$PROJECT_DIR$/src/mvc/Controller.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mvc/Model.java" afterPath="$PROJECT_DIR$/src/mvc/Model.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mvc/Viewer.java" afterPath="$PROJECT_DIR$/src/mvc/Viewer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/plateGenerator/PlateGenerator.java" afterPath="$PROJECT_DIR$/src/plateGenerator/PlateGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utilities/DynamicLinkage.java" afterPath="$PROJECT_DIR$/src/utilities/DynamicLinkage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utilities/Properties.java" afterPath="$PROJECT_DIR$/src/utilities/Properties.java" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -94,7 +80,7 @@
         <entry file="file://$PROJECT_DIR$/src/mvc/Model.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
-              <caret line="199" column="0" lean-forward="false" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
+              <caret line="198" column="0" lean-forward="false" selection-start-line="198" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -119,8 +105,18 @@
       <file leaf-file-name="ChoosePlayerMenu.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui/panels/ChoosePlayerMenu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2017">
-              <caret line="235" column="113" lean-forward="false" selection-start-line="235" selection-start-column="113" selection-end-line="235" selection-end-column="113" />
+            <state relative-caret-position="272">
+              <caret line="143" column="30" lean-forward="false" selection-start-line="143" selection-start-column="15" selection-end-line="143" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainMenu.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gui/panels/MainMenu.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="452">
+              <caret line="76" column="37" lean-forward="false" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -147,13 +143,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>l</find>
-      <find>loa</find>
-      <find>load</find>
-      <find>load c</find>
-      <find>load cl</find>
-      <find>load cla</find>
-      <find>load clas</find>
       <find>load class</find>
       <find>j</find>
       <find>jo</find>
@@ -169,13 +158,20 @@
       <find>setSav</find>
       <find>setSave</find>
       <find>setSaved</find>
-      <find>s</find>
       <find>save</find>
       <find>saved</find>
       <find>savedG</find>
       <find>savedGa</find>
       <find>savedGam</find>
       <find>savedGame</find>
+      <find>s</find>
+      <find>syst</find>
+      <find>syste</find>
+      <find>system</find>
+      <find>system.</find>
+      <find>system.o</find>
+      <find>system.ou</find>
+      <find>system.out</find>
       <find>popMessage</find>
     </findStrings>
   </component>
@@ -318,7 +314,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Parsers" />
+              <option name="myItemId" value="gui" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -336,7 +332,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="panels" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -838,11 +842,19 @@
       <option name="project" value="LOCAL" />
       <updated>1504845125932</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Score Label modified + JOptionPane modified + (Save, Load) fixed after new player info panel">
+      <created>1505005764260</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1505005764260</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -859,7 +871,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.185" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.185" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985657" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -919,7 +931,8 @@
     <MESSAGE value="re-push" />
     <MESSAGE value="rules added" />
     <MESSAGE value="re-commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="re-commit" />
+    <MESSAGE value="Score Label modified + JOptionPane modified + (Save, Load) fixed after new player info panel" />
+    <option name="LAST_COMMIT_MESSAGE" value="Score Label modified + JOptionPane modified + (Save, Load) fixed after new player info panel" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1113,16 +1126,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/panels/MainMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="76" column="37" lean-forward="false" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/utilities/ResourceLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -1264,6 +1267,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Parsers/Stream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/panels/MainMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="452">
+          <caret line="76" column="37" lean-forward="false" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/mvc/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -1281,23 +1300,15 @@
     <entry file="file://$PROJECT_DIR$/src/mvc/Model.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
-          <caret line="199" column="0" lean-forward="false" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Parsers/Stream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <caret line="198" column="0" lean-forward="false" selection-start-line="198" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/panels/ChoosePlayerMenu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2017">
-          <caret line="235" column="113" lean-forward="false" selection-start-line="235" selection-start-column="113" selection-end-line="235" selection-end-column="113" />
+        <state relative-caret-position="272">
+          <caret line="143" column="30" lean-forward="false" selection-start-line="143" selection-start-column="15" selection-end-line="143" selection-end-column="30" />
           <folding />
         </state>
       </provider>
