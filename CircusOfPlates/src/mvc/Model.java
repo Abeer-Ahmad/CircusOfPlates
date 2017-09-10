@@ -179,7 +179,6 @@ public class Model extends Observable {
 			isRunning = false;
 			setChanged();
 			notifyObservers(scoreManager.getWinner());
-			System.out.println("game over after notify");
 		}
 	}
 
@@ -231,7 +230,6 @@ public class Model extends Observable {
 						shapes.add(belt.addShape());
 					}
 				}
-				//System.out.println("model" + shapes.size());
 				setChanged();
 				notifyObservers(shapes);
 				Thread.sleep(timerDelay);

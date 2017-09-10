@@ -1,6 +1,6 @@
 package gui.panels;
 
-import java.awt.Graphics;
+import java.awt.*;
 
 
 import java.awt.event.ActionEvent;
@@ -33,18 +33,21 @@ public class WinnerView extends JPanel implements ActionListener,IViewer {
 	public WinnerView(Player player) {
 		setSize(frameWidth(), frameHeight());
 		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			backGroundImage = ImageIO.read(ResourceLoader.loadStream(NEW_GAME));
 		} catch (IOException e) {
 			throw new RuntimeException("Image Not Found!");
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		this.setLayout(null);
 		this.setFocusable(true);
-		JOptionPane.showMessageDialog(null, player.getName() + " wins with "
-				+ Integer.toString(player.getScore()) + " points", "Warning",
-				JOptionPane.PLAIN_MESSAGE);
+		try {
+			JLabel message = new JLabel(player.getName() + " wins with "
+					+ Integer.toString(player.getScore()) + " points");
+			message.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+			JOptionPane.showMessageDialog(null, message, "Game Over",
+                    JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageIO.read(ResourceLoader.loadStream(TROPHY))));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		topLeftBoxXAlignment = frameWidth() / 10;
 		topLeftBoxYAlignment = frameWidth() / 10;
 		buttons = new LinkedHashMap<>();

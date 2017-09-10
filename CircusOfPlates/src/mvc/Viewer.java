@@ -10,7 +10,7 @@ import utilities.ResourceLoader;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import java.awt.Color;
+import java.awt.*;
 import java.io.IOException;
 import java.util.*;
 
@@ -67,7 +67,6 @@ public class Viewer implements Observer {
                     gameGrid.updateBelts((ArrayList<Belt>) valueChanged);
             }
         } else if (valueChanged instanceof Player) {
-            System.out.println("winner notified");
             WinnerView winView = new WinnerView((Player) valueChanged);
             winView.setController(controller);
             mainFrame.changeScene(winView);
@@ -88,19 +87,12 @@ public class Viewer implements Observer {
     public void exitGame() {
         mainFrame.close();
     }
-
-    public void popMessage(JPanel container,JPanel message, boolean savedGame) {		
-         if (JOptionPane.showConfirmDialog(container, message, "New Game", JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
-         	
-         }
-     	intializeGrid(container, savedGame);
-     }
     
     public void popMessage(JPanel container, boolean savedGame) {		
-    	intializeGrid(container, savedGame);
+    	initializeGrid(container, savedGame);
     }
 
-    public void intializeGrid (JPanel container, boolean savedGame) {
+    public void initializeGrid (JPanel container, boolean savedGame) {
     	if (savedGame) {
             ((ChoosePlayerMenu) menuPanels.get(PLAYER_MENU)).setSaved(false);
             ArrayList<String> names = (ArrayList<String>) ((ChoosePlayerMenu) container).getConfigurations().get("names");
@@ -111,7 +103,15 @@ public class Viewer implements Observer {
         } else
             controller.startGame(((ChoosePlayerMenu) container).getConfigurations());
     }
+
     public void confirmSaving() {
-        JOptionPane.showMessageDialog(null, "Your game has been saved!");
+        try {
+            JLabel message = new JLabel("Your game has been saved!");
+            message.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+            JOptionPane.showMessageDialog(null, message, "",
+                    JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageIO.read(ResourceLoader.loadStream(CHECK))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -75,10 +75,12 @@ public class ShapeFactory extends IShapeFactory {
 						 beltLength, randomColor);
 			}
 			if (randomshape == shapeID.get("Oval")){				
+
+				 
 				return (Shape) shapes.get("Oval").newInstance(x, y,
+
 						 beltLength, randomColor);				 
 			}
-		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

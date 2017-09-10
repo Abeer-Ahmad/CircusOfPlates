@@ -6,11 +6,17 @@ import java.awt.*;
 public final class Properties {
 
 	private static final String RESOURCE_SEPARATOR = "/";
+
 	public static final String PLAYER1 = "imgs" + RESOURCE_SEPARATOR + "player1.png";
 	public static final String PLAYER2 = "imgs" + RESOURCE_SEPARATOR + "player2.png";
 	public static final String NEW_GAME = "imgs" + RESOURCE_SEPARATOR + "newgame.jpg";
 	public static final String BACK_GROUND = "imgs" + RESOURCE_SEPARATOR + "background.jpg";
 	public static final String GAME_RULES = "imgs" + RESOURCE_SEPARATOR + "game rules.png";
+
+	public static final String INFO = "imgs" + RESOURCE_SEPARATOR + "icons" + RESOURCE_SEPARATOR  + "info.png";
+	public static final String TROPHY = "imgs" + RESOURCE_SEPARATOR + "icons" + RESOURCE_SEPARATOR  + "trophy.png";
+	public static final String CHECK = "imgs" + RESOURCE_SEPARATOR + "icons" + RESOURCE_SEPARATOR  + "check.png";
+	public static final String WARNING = "imgs" + RESOURCE_SEPARATOR + "icons" + RESOURCE_SEPARATOR  + "warning.png";
 
 	public static final String NEW_GAME_BUTTON = "imgs" + RESOURCE_SEPARATOR + "buttons" + RESOURCE_SEPARATOR + "new_game.png";
 	public static final String LOAD_BUTTON = "imgs" + RESOURCE_SEPARATOR + "buttons" + RESOURCE_SEPARATOR + "load_game.png";
@@ -30,10 +36,13 @@ public final class Properties {
 	public static final String PLAYER_MENU = "playerMenu";
 	public static final String PAUSE_MENU = "pauseMenu";
 	public static final String RULES = "rules";
-	public static final Color Corrupt_Color = Color.black;
 
-	public static final int SHIFT = 100; // shifting clowns from the center at
-											// the beginning
+	public static final int HORIZONTAL_MARGIN = 15;
+	public static final int VERTICAL_MARGIN = 150;
+	public static final int SCORE_SHIFT = 95;
+	public static final int SCORE_HEIGHT = 25;
+
+	public static final int SHIFT = 100; // shifting clowns from the center at the beginning
 	public static final int EXTRA_POINTS = 5;
 	public static final int SHAPE_WIDTH = 80;
 	public static final int SHAPE_HEIGHT = 20;
@@ -41,7 +50,7 @@ public final class Properties {
 
 	public static int GENERATION_SHAPES_SPEED;
 	public static int UPDATED_SHAPES_SPEED;
-	public static int COLOR_LIMIT;
+	public static final Color Corrupt_Color = Color.black;
 
 	public static final int frameWidth() {
 		return Toolkit.getDefaultToolkit().getScreenSize().width;

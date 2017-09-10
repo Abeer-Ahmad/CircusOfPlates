@@ -55,7 +55,6 @@ public class PlateGenerator {
         strategy.setGameStrategy(this);
     }
    
-   
     public void setColorLimit(int colorLimit, int limitCorrupt) {
         this.colorLimit = colorLimit;
         this.limitCorrupt = limitCorrupt;

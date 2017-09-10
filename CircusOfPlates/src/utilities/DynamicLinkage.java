@@ -4,15 +4,13 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 import javax.swing.JOptionPane;
 
 import org.apache.commons.io.FileUtils;
  
 public class DynamicLinkage implements IDynamicLinkage {
-   
+
     private static final String shapeJarPath = "jars/shapes";
     private URL url;
     private URLClassLoader classLoader;
@@ -40,3 +38,4 @@ public class DynamicLinkage implements IDynamicLinkage {
         return loadedClass;
     }
 }
+
