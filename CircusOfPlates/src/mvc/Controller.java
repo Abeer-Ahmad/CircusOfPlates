@@ -3,11 +3,11 @@ package mvc;
 
 import game.player.PlayerUI;
 
-
 import javax.swing.*;
 import java.util.LinkedHashMap;
 
-import static utilities.Properties.*;
+import static utilities.Properties.MAIN_MENU;
+import static utilities.Properties.PAUSE_MENU;
 
 public class Controller {
 
@@ -49,13 +49,10 @@ public class Controller {
         viewer.readInfo();
     }
 
-    public void popMessage(JPanel container, JPanel message, boolean savedGame) {
-        viewer.popMessage(container, message, savedGame);
-    }
-    
     public void popMessage(JPanel container, boolean savedGame) {
-    viewer.popMessage(container, savedGame);
-}
+        viewer.popMessage(container, savedGame);
+    }
+
     public void changeDisplay(String namePanel) {
         viewer.setCurrentPanel(namePanel);
     }
@@ -69,7 +66,7 @@ public class Controller {
     }
 
     public void playAgain() {
-	    viewer.goToGame();
-	    model.playAgain();
-	}
+        viewer.goToGame();
+        model.playAgain();
+    }
 }

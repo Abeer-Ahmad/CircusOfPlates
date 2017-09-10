@@ -25,7 +25,6 @@ public class DynamicLinkage implements IDynamicLinkage {
 	@Override
 	public Class<?> loadClass(String packageName, String className) {
 		try {
-			
 			file = new File(shapeJarPath + File.separator + className + ".jar"); 
 			url = file.toURI().toURL();
 			classLoader = new URLClassLoader(new URL[] { url });

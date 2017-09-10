@@ -1,7 +1,6 @@
 package gui.panels;
 
 import game.player.Player;
-
 import game.player.PlayerUI;
 import game.shapes.LaserBeam;
 import game.shapes.Shape;
@@ -38,16 +37,15 @@ public class GameGrid extends JPanel {
     private ArrayList<Shape> shapes;
     private HashMap<Integer, Pair<JComponent, Integer>> keyBoardMoveMap;
     private boolean twoPlayers;
-    private JLabel player1Name;
-    private JLabel player2Name;
+
+    private BufferedImage info;;
     private JLabel player1_score;
     private JLabel player2_score;
-
-    // remove static dimensions in all class!!!
 
     public GameGrid(boolean twoPlayers, ArrayList<Player> modelPlayers) {
         try {
             backGroundImage = ImageIO.read(ResourceLoader.loadStream(BACK_GROUND));
+            info = ImageIO.read(ResourceLoader.loadStream(INFO));
         } catch (IOException e) {
             throw new RuntimeException("Image Not Found!");
         }
@@ -75,31 +73,35 @@ public class GameGrid extends JPanel {
     }
 
     private void declarePlayer1() {
-        player1Name = new JLabel(playersUI.get(0).getPlayer().getName());
-        player1Name.setFont(player1Name.getFont().deriveFont(22.0f));
-        player1Name.setBounds(30, 150, 200, 50);
-
-        player1_score = new JLabel(Integer.toString(playersUI.get(0).getPlayer().getScore()));
-        player1_score.setFont(player1Name.getFont().deriveFont(22.0f));
-        player1_score.setBounds(30, 180, 150, 50);
-
-        this.add(player1Name);
-        this.add(player1_score);
+        ImageIcon infoIcon = (new ImageIcon(info));
+        JLabel player1 = new JLabel(infoIcon);
+        player1_score = new JLabel(Integer.toString(playersUI.get(0).getPlayer().getScore()), SwingConstants.CENTER);
+        setInfo(playersUI.get(0).getPlayer(), player1, player1_score, HORIZONTAL_MARGIN);
     }
 
     private void declarePlayer2() {
-        player2Name = new JLabel(playersUI.get(1).getPlayer().getName());
-        player2Name.setFont(player1Name.getFont().deriveFont(22.0f));
-        player2Name.setBounds(1300, 150, 200, 50);
-
-        player2_score = new JLabel(Integer.toString(playersUI.get(1).getPlayer().getScore()));
-        player2_score.setFont(player1Name.getFont().deriveFont(22.0f));
-        player2_score.setBounds(1300, 180, 150, 50);
-
-        this.add(player2Name);
-        this.add(player2_score);
+        ImageIcon infoIcon = (new ImageIcon(info));
+        JLabel player2 = new JLabel(infoIcon);
+        player2_score = new JLabel(Integer.toString(playersUI.get(1).getPlayer().getScore()), SwingConstants.CENTER);
+        setInfo(playersUI.get(1).getPlayer(), player2, player2_score, frameWidth() - (HORIZONTAL_MARGIN + infoIcon.getIconWidth()));
     }
 
+
+    private void setInfo(Player player, JLabel playerLabel, JLabel score, int x) {
+        playerLabel.setBounds(x, VERTICAL_MARGIN, info.getWidth(), info.getHeight());
+        playerLabel.setText(player.getName());
+        playerLabel.setFont(new Font("Times New Roman", Font.BOLD, 24));
+        playerLabel.setForeground(new Color(245,245,220)); // beige
+        playerLabel.setHorizontalTextPosition(JLabel.CENTER);
+        playerLabel.setVerticalTextPosition(JLabel.CENTER);
+
+        score.setBounds(playerLabel.getX(), playerLabel.getY() + SCORE_SHIFT, playerLabel.getWidth(), SCORE_HEIGHT);
+        score.setFont(new Font("Times New Roman", Font.BOLD, 24));
+        score.setForeground(new Color(245,245,220)); // beige
+
+        add(score);
+        add(playerLabel);
+    }
 
     private void setKeyBoardMoveMap(final boolean twoPlayers) {
         keyBoardMoveMap.put(KeyEvent.VK_LEFT, new Pair(playersUI.get(0), leftDirection * playerStep));
@@ -112,9 +114,7 @@ public class GameGrid extends JPanel {
     }
 
     public void setController(Controller controller) {
-
         this.addKeyListener(new MultiKeyPressListener(controller));
-
     }
 
     private void drawBelts(Graphics2D graphics2d) {
@@ -143,7 +143,6 @@ public class GameGrid extends JPanel {
         drawShapes(graphics2d);
         drawPlayers(graphics2d);
         drawBelts(graphics2d);
-
     }
 
     public void updateBelts(ArrayList<Belt> belts) {
@@ -203,7 +202,6 @@ public class GameGrid extends JPanel {
 
         @Override
         public void keyTyped(KeyEvent arg0) {
-            // TODO Auto-generated method stub
 
         }
     }

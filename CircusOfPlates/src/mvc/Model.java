@@ -226,13 +226,11 @@ public class Model extends Observable {
 		protected Void doInBackground() throws Exception {
 
 			while (isRunning()) {
-				System.out.println("Running add newShape");
 				synchronized (shapes) {
 					for (Belt belt : belts) {
 						shapes.add(belt.addShape());
 					}
 				}
-				System.out.println("model" + shapes.size());
 				setChanged();
 				notifyObservers(shapes);
 				Thread.sleep(timerDelay);

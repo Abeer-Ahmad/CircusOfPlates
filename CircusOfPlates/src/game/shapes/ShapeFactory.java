@@ -73,15 +73,12 @@ public class ShapeFactory extends IShapeFactory {
 			if (randomshape == shapeID.get("Plate"))
 				return (Shape) shapes.get("Plate").newInstance(x, y,
 				 beltLength, randomColor);
-				//return new Plate(x, y, beltLength, randomColor);
 			if (randomshape == shapeID.get("Box"))
 				return (Shape) shapes.get("Box").newInstance(x, y,
 				  beltLength, randomColor);
-				//return new Box(x, y, beltLength, randomColor);
 			if (randomshape == shapeID.get("Oval"))
 				return (Shape) shapes.get("Oval").newInstance(x, y,
 				 beltLength, randomColor);
-				//return new Oval(x, y, beltLength, randomColor);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
