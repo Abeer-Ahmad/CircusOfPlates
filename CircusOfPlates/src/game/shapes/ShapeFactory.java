@@ -2,9 +2,6 @@ package game.shapes;
 
 import java.awt.Color;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Properties;
@@ -31,7 +28,6 @@ public class ShapeFactory extends IShapeFactory {
 	private String[] readConfigurationFiles() {
 		String[] shapesLoaded;
 		try {
-	
 			Properties prop = new Properties();
 			prop.load(ResourceLoader.loadStream(configurationFile));
 			shapesLoaded = prop.getProperty("Shapes").split("\\s*,\\s*");
@@ -70,20 +66,21 @@ public class ShapeFactory extends IShapeFactory {
 			final Color randomColor) {
 		randomshape %= shapeNames.length;
 		try {
-			if (randomshape == shapeID.get("Plate"))
-				return (Shape) shapes.get("Plate").newInstance(x, y,
-				 beltLength, randomColor);
-				//return new Plate(x, y, beltLength, randomColor);
-			if (randomshape == shapeID.get("Box"))
+			if (randomshape == shapeID.get("Plate")) {
+				 return (Shape) shapes.get("Plate").newInstance(x, y,
+				 beltLength, randomColor);	 
+			}
+			if (randomshape == shapeID.get("Box")){
 				return (Shape) shapes.get("Box").newInstance(x, y,
-				  beltLength, randomColor);
-				//return new Box(x, y, beltLength, randomColor);
-			if (randomshape == shapeID.get("Oval"))
+						 beltLength, randomColor);
+			}
+			if (randomshape == shapeID.get("Oval")){				
 				return (Shape) shapes.get("Oval").newInstance(x, y,
-				 beltLength, randomColor);
-				//return new Oval(x, y, beltLength, randomColor);
+						 beltLength, randomColor);				 
+			}
+		
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		return null;
 	}

@@ -55,18 +55,6 @@ public class PlateGenerator {
         strategy.setGameStrategy(this);
     }
    
-    /* private void setSpeedLimit() {
-        if (difficultyLevel.equals("Easy")) {
-            minSpeed = 8;
-            maxSpeed = 40;
-        } else if (difficultyLevel.equals("Medium")) {
-            minSpeed = 15;
-            maxSpeed = 50;
-        } else if (difficultyLevel.equals("Hard")) {
-            minSpeed = 20;
-            maxSpeed = 60;
-        }
-    } */
    
     public void setColorLimit(int colorLimit, int limitCorrupt) {
         this.colorLimit = colorLimit;

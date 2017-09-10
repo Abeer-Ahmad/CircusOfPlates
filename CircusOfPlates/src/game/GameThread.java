@@ -17,7 +17,6 @@ public class GameThread implements Runnable {
 			try {
 				if (game.isRunning())
 						game.updateGameItems();
-						System.out.println("runnung gameThread");
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
