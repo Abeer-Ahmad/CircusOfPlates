@@ -1,6 +1,6 @@
 # CircusOfPlates
 
-Circus of Plates is a Desktop game built by SwingUtilities that supports one / two players.
+Circus of Plates is a desktop game that supports one/two players.
 
 ## Rules
 
