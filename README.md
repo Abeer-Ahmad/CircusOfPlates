@@ -1,4 +1,4 @@
-# CircusOfPlates
+# circus-of-plates
 
 Circus of Plates is a desktop game that supports one/two players.
 
